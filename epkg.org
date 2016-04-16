@@ -1,0 +1,504 @@
+#+TITLE: Epkg User Manual
+#+AUTHOR: Jonas Bernoulli
+#+EMAIL: jonas@bernoul.li
+#+DATE: 2016
+#+LANGUAGE: en
+
+#+TEXINFO_DIR_CATEGORY: Emacs
+#+TEXINFO_DIR_TITLE: Epkg: (epkg).
+#+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
+#+SUBTITLE: for version 1.0
+
+#+OPTIONS: H:4 num:3 toc:2
+
+* Copying
+:PROPERTIES:
+:COPYING:    t
+:END:
+
+#+BEGIN_TEXINFO
+@ifnottex
+With @code{epkg} you can browse the Emacsmirror package database
+using an interface similar to that of @code{package.el}.
+@end ifnottex
+
+@quotation
+Copyright (C) 2016 Jonas Bernoulli <jonas@@bernoul.li>
+
+You can redistribute this document and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+This document is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+@end quotation
+#+END_TEXINFO
+
+* Introduction
+
+Epkg is a package that provides access to a local copy of the
+Emacsmirror package database.  It provides low-level functions for
+querying the database and a ~package.el~-like user interface for
+browsing the database.  Epkg itself is not a package manager.
+
+The Emacsmirror is a growing collection of Emacs Lisp packages.  All
+mirrored packages are available as Git repositories.  In most cases
+this is done by mirroring the upstream Git repository, but if upstream
+uses something else, then the mirror nevertheless makes the package
+available as a Git repository.
+
+One primary purpose of the Emacsmirror is to provide a comprehensive
+list of available Emacs packages, including packages which have gone
+out of fashion (but might later prove to be useful still).
+
+Older efforts attempting to provide a comprehensive list of available
+packages, such as the Emacs Lisp List, over time collected an
+impressive list of dead links to packages which were no longer
+available anywhere.
+
+With the Emacsmirror this won't happen.  If a package's upstream
+disappears, then a copy remains available on the mirror.  Once its
+upstream has disappeared a package is usually moved from the
+Emacsmirror to the Emacsattic, where it is no longer updated. (The
+Emacsattic is a Github "organization" separate from the Emacsmirror
+organization, but it is considered part of the Emacsmirror project.)
+
+For more information about the Emacsmirror see
+https://emacsmirror.net.
+
+* Installation
+
+Epkg currently requires an Emacs pre-release, at least ~25.0.92~.  In
+the future at least the latest stable release will be supported.
+Emacs ~24.5~ cannot be supported because some build-in libraries that
+are essential to Epkg have changed drastically since that was
+released.
+
+Epkg is available from Melpa and Melpa-Stable.  To install it and its
+dependencies run ~M-x install-package RET epkg RET~.
+
+The Epkg database is stored in an SQLite database, which it accesses
+using the EmacSQL package.
+
+Because the command line tool that comes with SQLite is unreliable,
+EmacSQL uses its own binary.  By default that binary is compiled every
+time EmacSQL is updated, and if that fails, then EmacSQL asks whether
+you want to download a pre-build binary.
+
+The SQLite database file is stored in a Git repository.  If Epkg
+cannot find your local clone of that repository, then it offers to
+clone it to the location specified by the option ~epkg-repository~.  It
+isn't necessary but preferable to clone the repository manually before
+loading ~epkg~.
+
+#+BEGIN_SRC shell
+  git clone https://github.com/emacsmirror/epkgs.git ~/.emacs.d/epkgs
+#+END_SRC
+
+If you cloned the repository to a different location, then you have to
+set the value of ~epkg-repository~ accordingly.  Add the following to
+your init file and don't forget to evaluate that form so that it also
+takes effect in the current session.  To do so place the cursor after
+the closing parentheses and type ~C-M-x~.
+
+#+BEGIN_SRC shell
+  (setq epkg-repository "/path/to/epkgs/")
+#+END_SRC
+
+- User Option: epkg-repository
+
+  This option specifies the location of the local Emacsmirror
+  repository.
+
+  This repository contains the Epkg SQLite database and, if they have
+  been initialized, all package repositories from the Emacsmirror and
+  Emacsattic as submodules.
+
+  If you change the value of this option, then you should also
+  manually move the repository.  Otherwise it would be cloned again.
+
+The local clone of the Epkg repository is not updated automatically,
+so you should periodically use ~M-x epkg-update RET~ to update the
+database.
+
+* Listing Packages
+
+Epkg provides several commands for listing packages.
+
+In the buffer which lists packages, typing ~RET~ displays information
+about the package at point in another buffer.
+
+- User Option: epkg-list-packages-omit-shelved
+
+  This option controls whether commands that list Epkg packages omit
+  shelved packages.  By default that is the case.
+
+  Shelved packages are those that are no longer updated, and which are
+  available from the Emacsattic instead of the Emacsmirror.
+
+  The command ~epkg-list-packages-of-type~ is not affected by this
+  option, and neither is ~epkg-describe-package~.
+
+- User Option: epkg-list-columns
+
+  This option lists the columns used in buffers that list packages.
+
+  Each element has the form ~(HEADER WIDTH SORTP PROPS SLOT FORMAT)~.
+  HEADER is the string displayed in the header.  WIDTH is the width
+  of the column.  If SORTP is ~t~, then the column can be sorted, if
+  it is ~nil~ then it can not.  PROPS is an alist, supported keys are
+  ~:right-align~ and ~:pad-right~.  Slot is an Epkg object slot or ~type~.
+  FORMAT is a function, which is called with one argument the slot
+  value and has to return a representation of that.  If FORMAT is ~nil~,
+  then the value is inserted as-is.
+
+- User Option: epkg-list-mode-hook
+
+  This hook is run after entering Epkg-List mode, the mode used in
+  buffers which list packages.
+
+- Command: epkg-list-packages
+
+  This command displays a list of packages.
+
+- Command: epkg-list-matching-packages
+
+  This command displays a list of packages whose summaries match a
+  regular expression, which is read in the minibuffer.
+
+- Command: epkg-list-keyworded-packages
+
+  This command displays a list of packages that have a keyword set,
+  which is read in the minibuffer.
+
+  Only keywords that are members of ~finder-known-keywords~ are offered
+  as completion candidates, but you can also enter other keywords.
+
+- Command: epkg-list-packages-by-author
+
+  This command displays a list of packages which are authored or
+  maintained by a person.  The person, a name or email address, is
+  read in the minibuffer.
+
+By default all of the above commands omit shelved
+packages from their output.  With a prefix argument or when
+~epkg-list-packages-omit-shelved~ is ~nil~, then they don't omit any
+packages.  However the following command ignores this option and
+always lists shelved packages when appropriate.
+
+- Command: epkg-list-packages-of-type
+
+  This command displays a list of packages of a certain type.  The
+  type is read in the minibuffer.  To list all packages of a certain
+  type and its subtypes use ~TYPE*~ instead of just ~TYPE~.
+
+* Describing a Package
+
+To display details about a single package in a buffer use the command
+~epkg-describe-package~.  In buffers which list packages ~RET~ is bound
+to ~epkg-list-describe-package~, which displays the package at point in
+another buffer.
+
+By default the description buffer shows a tree of the packages the
+described package depends on.  Click on a square before the package
+name to expand the node to show the dependencies of that dependency.
+
+The first column lists the names of package which provide the
+feature(s) in the third column.  The second column shows the type of
+the package in the first column.
+
+The features in the third column are displayed in bold or using the
+regular font weight to indicate whether it is a hard (mandatory) or
+soft (optional) dependency.
+
+Note that dependencies are determined automatically and even when a
+feature is shown using a bold face it might actually be optional.
+This could for example be the case when a feature is only required by
+one library that isn't required by any of the other libraries of the
+package it belongs to.  Or a feature might even only be required by a
+single command, and the respective ~require~ form is only evaluated when
+that command is called.
+
+Reverse dependencies are also displayed in a second tree.  Here the
+first column lists the names of packages which depend on features from
+the described package and the third column shows which of these
+libraries are required.
+
+- Command: epkg-describe-package
+
+  This command displays information about a package in a separate
+  buffer.  The name of the package to be displayed is read in the
+  minibuffer.
+
+- Command: epkg-list-describe-package
+
+  This command displays information about the package at point in
+  a separate buffer.
+
+  It is only intended to be used in buffers which list packages.
+  In other buffers, or in a list buffer when you want to display a
+  package other than the one at point use ~epkg-describe-package~.
+
+- User Option: epkg-describe-package-slots
+
+  The value of this option is a list of slots to be displayed when
+  displaying information about an Epkg package in a help buffer.
+
+  Each element of the list can be a slot symbol, a function, or ~nil~.
+  Functions are called with one argument, the Epkg object, and should
+  insert a representation of the value at point.  Raw slot symbols
+  cause its non-nil value to be inserted as-is.  If a slot's value is
+  ~nil~, then nothing is inserted.  Elements that are ~nil~ stand for
+  empty lines.
+
+- User Option: epkg-describe-package-slots-width
+
+  The value of this option specifies the width used to display slot
+  names in buffers displaying information about an Epkg package.
+
+* Package Types
+
+Each package has a "type", which specifies how the package is
+distributed and mirrored.
+
+Packages are implemented using the Eieio (CLOS) object system.  A TYPE
+corresponds to the class ~epkg-TYPE-package~.  The ~epkg~ package makes
+little use of methods, but ~emir~, the package used to maintain the
+Emacsmirror, makes extensive use of them.  There exist five abstract
+classes (there are no instances of abstract classes, only of its
+subclasses): ~epkg-package~, ~epkg-mirrored-package~, ~epkg-gitish-package~,
+~epkg-subset-package~, and ~epkg-mocking-package~.  Except for the second
+these classes are mostly an implementation detail and not relevant
+when merely using Epkg to browse the packages.
+
+- ~mirrored~
+
+  This is an abstract type.  Unlike other abstract types it is also
+  useful on the client side, e.g. when you want to list mirrored
+  packages, but not built-in and shelved packages.
+
+  Packages that are available as a repository on the Emacsmirror
+  (https://github.com/emacsmirror).
+
+  - ~file~
+
+    Packages that are distributed as plain files.
+
+  - ~gitish~
+
+    This is an abstract type, useful when maintaining the mirror.
+
+    Git and Mercurial packages.  The name is due to an implementation
+    detail: ~hg~ is never run directly, instead ~git-remote-hg~ is used.
+
+    - ~git~
+
+      Git packages.
+
+      - ~github~
+
+        Packages hosted on https://github.com.
+
+        - ~orphaned~
+
+          Packages that are no longer maintained, but which still have
+          to be mirrored because other packages depend on them.
+          Please consider adopting an orphaned package.
+
+      - ~gitlab~
+
+        Packages hosted on https://gitlab.com.
+
+      - ~subtree~
+
+	Packages that are located in a subtree of a Git repository.
+        The repository on the Emacsmirror limits the history to just
+        that directory using ~git subtree~.
+
+      - ~subset~
+
+        This is an abstract type, useful when maintaining the mirror.
+
+        - ~wiki~
+
+          Packages hosted as plain files on https://emacswiki.org.
+
+        - ~elpa~
+
+          Packages hosted in a directory inside the ~master~ branch of
+          the GNU Elpa repository.
+
+        - ~elpa-branch~
+
+          Packages hosted in the GNU Elpa repository, using a
+          dedicated branch.
+
+    - ~hg~
+
+      Mercurial packages.
+
+      - ~bitbucket~
+
+        Packages hosted on https://bitbucket.org in a Mercurial
+        repository.  Packages hosted in a Git repository on Bitbucket
+        have the type ~git~.
+
+- ~mocking~
+
+  This is an abstract type, useful when maintaining the mirror.
+
+  Packages that are /not/ available as a repository on the Emacsmirror
+  (https://github.com/emacsmirror).
+
+  - ~builtin~
+
+    Packages that are part of GNU Emacs version 25.0.92 (in the future
+    the latest stable release will be targeted).  ~emacs~ is on of the
+    packages that are "part of Emacs"; it contains all libraries that
+    are not explicitly declared to be part of some built-in package.
+
+  - ~shelved~
+
+    Packages that are available as a repository on the Emacsattic
+    (https://github.com/emacsattic).
+
+    These repository are not being updated anymore, because upstream
+    has disappeared or because the package has issues which have to be
+    resolved before it can be moved back to the Emacsmirror.
+
+* Updating the Database
+
+- Command: epkg-update
+
+  This command updates the Epkg database by pulling the ~master~ branch
+  in the ~epkg-repository~ and then reloading the Epkg database.  It
+  returns the database connection.
+
+* Querying the Database
+
+- Function: epkg-db
+
+  This function returns the connection to the Epkg database.
+
+  If the ~epkg-repository~, which contains the SQLite database file,
+  does not exist yet, then this function first asks the user whether
+  they want to clone the repository.
+
+- Function: epkg-sql sql &rest args
+
+  This function sends the SQL s-expression to the Epkg database and
+  returns the result.  This is a wrapper around ~emacsql~ that lacks the
+  CONNECTION argument.  Instead it uses the connection returned by
+  ~epkg-db~.
+
+- Function: epkg name
+
+  This function returns an ~epkg-package~ object for the package named
+  NAME.  NAME is the name of a package, a string.
+
+- Function: epkgs &optional select predicates
+
+  This function returns a list of ~epkg-package~ objects or a list of
+  database rows.  The list is ordered by the package names in
+  ascending order.
+
+  If optional SELECT is non-nil, then it has to be a list of columns
+  of the ~packages~ table.  In that case the returned value is a list of
+  database rows.
+
+  If optional PREDICATES is non-nil, then it has to be a list of
+  package class predicate functions, or a single such function.
+  Valid functions are named either ~epkg-TYPE-package-p~ or
+  ~epkg-TYPE-package--eieio-childp~.  Only packages are returned
+  for which one of these predicates returns non-nil.
+
+  This function is more limited than ~epkg-sql~ but it's often much less
+  verbose.  For example ~(epkgs nil 'epkg-gitlab-package-p)~ returns the
+  same value as:
+
+  #+BEGIN_SRC emacs-lisp
+    (mapcar (apply-partially #'closql--remake-instance (epkg-db))
+              (epkg-sql [:select * :from packages
+                         :where class :in $v1
+                         :order-by [(asc name)]]
+                        (closql--where-class-in (epkg-db)
+                                                'epkg-gitlab-package-p)))
+  #+END_SRC
+
+While it is possible to get a list of provided or required features,
+or a package's type using ~oref~, the values of these slots contains
+additional information, which is mostly useful when maintaining the
+Emacsmirror, but not in a client.  And the ~required~ slot only lists
+features but not the packages that provide them.  The following
+functions return these values in a form that is generally more useful.
+
+- Function: epkg-provided package
+
+  This function returns a list of features provided by the package
+  PACKAGE.  PACKAGE is an ~epkg-package~ object or a package name, a
+  string.
+
+- Function: epkg-required package
+
+  This function returns a list of packages and features required by
+  the package PACKAGE.  PACKAGE is an ~epkg-package~ object or a package
+  name, a string.
+
+  Each element has the form ~(PACKAGE FEATURE...)~, where PACKAGE is the
+  name of a package, a string, and FEATURE is a feature provided by
+  that package.  If FEATURE is a symbol, then it is a hard (mandatory)
+  dependency; if it is a string, then it is a soft (optional)
+  dependency.
+
+  PACKAGE is ~nil~ if it is unknown which package provides the FEATURE.
+  When a dependency cannot be resolved then this function in some
+  cases uses a heuristic to guess the correct package or to ignore a
+  self-referential dependency.  This is the case when the FEATURE is
+  one of ~NAME-autoloads~, ~NAME-loaddefs~, ~NAME-version~, ~NAME-test~, and
+  ~NAME-tests~.
+
+- Function: epkg-reverse-dependencies package
+
+  This function returns a list of packages which depend on PACKAGE.
+
+  Each element has the form ~(PACKAGE FEATURE...)~, where PACKAGE is the
+  name of a package, a string, and FEATURE is a feature required by
+  that package.  If FEATURE is a symbol, then it is a hard (mandatory)
+  dependency; if it is a string, then it is a soft (optional)
+  dependency.
+
+- Function: epkg-type pkg
+
+  This function returns the type of the ~epkg-package~ object PKG.
+
+  A package's type is a short representation of its class, as in
+  ~epkg-TYPE-package~.  The argument may also be a class symbol, in
+  which case the respective type is returned. The type of ~epkg-package~
+  itself is ~all~.
+
+- Function: epkg-package-types subtypes
+
+  This function returns a list of all package types.
+
+  If optional SUBTYPES is non-nil, then it also returns symbols of the
+  form ~TYPE*~, which stands for "~TYPE~ and its subtypes".
+
+- Function: epkg-read-type prompt &optional default subtypes
+
+  This function reads an Epkg type in the minibuffer and returns it as
+  a symbol.
+
+  If optional DEFAULT is non-nil, then that is offered as default
+  choice.  If optional CHILDP is non-nil, then entries of the form
+  ~TYPE*~, which stands for "~TYPE~ and its subtypes", are also offered
+  as completion candidates.
+
+- Function: epkg-read-package prompt &optional default
+
+  This function reads the name of an Epkg package in the minibuffer
+  and returns it as a string.
+
+  Optional DEFAULT, if non-nil, is offered as default choice.
