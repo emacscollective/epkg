@@ -116,7 +116,7 @@ are nil stand for empty lines."
 
 ;;; Inserters
 
-(defun epkg-describe-package-1 (pkg)
+(defun epkg-describe-package-1 (pkg &optional slots)
   (with-slots (name commentary) pkg
     (insert (propertize (capitalize (oref pkg name)) 'face 'epkg-help-name))
     (insert " is a ")
@@ -125,7 +125,7 @@ are nil stand for empty lines."
               ('epkg-shelved-package "shelved")
               (_ "mirrored")))
     (insert " package.\n\n")
-    (dolist (slot epkg-describe-package-slots)
+    (dolist (slot (or slots epkg-describe-package-slots))
       (unless (= (char-before) ?\n)
         (insert ?\n))
       (cl-typecase slot
