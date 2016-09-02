@@ -4,7 +4,7 @@
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://gitlab.com/tarsius/epkg
-;; Package-Requires: ((closql "0.1.0") (dash "2.12.1") (emacs "25.0.92"))
+;; Package-Requires: ((closql "0.2.0") (dash "2.13.0") (emacs "25.1"))
 ;; Keywords: tools
 
 ;; This file is not part of GNU Emacs.
