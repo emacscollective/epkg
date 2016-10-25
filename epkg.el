@@ -132,12 +132,12 @@ database."
       (switch-to-buffer-other-window (current-buffer))
       (apply #'call-process "git" nil t t args))))
 
-(cl-defmethod closql--class-to-sql ((_db closql-database) value)
+(cl-defmethod closql--class-to-sql ((_db epkg-database) value)
   (intern (substring (setq value (symbol-name value))
                      (if (string-prefix-p "eieio-class-tag--" value) 22 5)
                      -8)))
 
-(cl-defmethod closql--sql-to-class ((_db closql-database) value)
+(cl-defmethod closql--sql-to-class ((_db epkg-database) value)
   (intern (format "eieio-class-tag--epkg-%s-package" value)))
 
 ;;; Superclass
