@@ -190,6 +190,8 @@ database."
 
 (defclass epkg-file-package (epkg-mirrored-package) ())
 
+(defclass epkg-minority-package (epkg-file-package) ())
+
 (defclass epkg-gitish-package (epkg-mirrored-package) () :abstract t)
 
 (defclass epkg-git-package (epkg-gitish-package) ())
