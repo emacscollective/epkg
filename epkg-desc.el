@@ -203,20 +203,27 @@ are nil stand for empty lines."
     (insert ?\n it)))
 
 (defun epkg-insert-provided (pkg)
-  (--when-let (oref pkg provided)
+  (-when-let (provided (oref pkg provided))
     (epkg--insert-slot 'provided)
     (require 'find-func)
-    (while it
-      (let ((library (symbol-name (car (pop it)))))
+    (while provided
+      (-let* (((library drop join) (pop provided))
+              (face (cond (drop 'font-lock-warning-face)
+                          (join 'font-lock-constant-face)
+                          (t    'default))))
+        (setq library (symbol-name library))
         (when (> (+ (- (point) (line-beginning-position)) (length library) 2)
                  (window-width))
           (insert ?\n)
           (insert (make-string (+ epkg-describe-package-slots-width 2) ?\s)))
         (if (ignore-errors (find-library-name library))
-            (insert-button library 'type 'epkg-library
-                           'help-args (list library))
-          (insert library))
-        (when it (insert ", "))))
+            (insert-button library
+                           'type 'epkg-library
+                           'help-args (list library)
+                           'face (list 'button face))
+          (insert (propertize library 'face face)))
+        (when provided
+          (insert ", "))))
     (insert ?\n)))
 
 (defun epkg-insert-dependencies (pkg)
