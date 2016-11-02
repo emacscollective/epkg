@@ -41,7 +41,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 1)
+(defconst epkg-db-version 2)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
@@ -178,7 +178,17 @@ database."
    (authors           :initarg :authors
                       :columns [package name email])
    (maintainers       :initarg :maintainers
-                      :columns [package name email]))
+                      :columns [package name email])
+   (melpa-recipes     :initarg :melpa-recipes
+                      :columns [closql-id name fetcher status
+                                url repo repopage files
+                                branch commit module
+                                version-regexp old-names])
+   (gelpa-recipes     :initarg :gelpa-recipes
+                      :columns [closql-id name type status
+                                method released url])
+   (builtin-libraries :initarg :builtin-libraries
+                      :columns [closql-id library feature name]))
   :abstract t)
 
 ;;; Subclasses
