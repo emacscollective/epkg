@@ -416,8 +416,9 @@ PACKAGE is the name of a package, a string."
   (if (eq class 'epkg-package)
       'all
     (setq class (symbol-name class))
-    (when (string-match "\\`epkg-\\(.+\\)-package\\'" class)
-      (intern (match-string 1 class)))))
+    (save-match-data
+      (and (string-match "\\`epkg-\\(.+\\)-package\\'" class)
+           (intern (match-string 1 class))))))
 
 (cl-defun epkg-package-types (&optional subtypes)
   "Return a list of all package types.
