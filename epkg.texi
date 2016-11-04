@@ -597,9 +597,9 @@ This function reads an Epkg type in the minibuffer and returns it as
 a symbol.
 
 If optional DEFAULT is non-nil, then that is offered as default
-choice.  If optional CHILDP is non-nil, then the returned value also
-contains entries of the form @code{TYPE*}, which stands for "@code{TYPE} and its
-subtypes".
+choice.  If optional CHILDP is non-nil, then entries of the form
+@code{TYPE*}, which stands for "@code{TYPE} and its subtypes", are also offered
+as completion candidates.
 @end defun
 
 @defun epkg-read-package prompt &optional default

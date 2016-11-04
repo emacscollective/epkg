@@ -15,7 +15,7 @@ LOADDEFS = epkg-autoloads.el
 EMACS  ?= emacs
 EFLAGS ?=
 DFLAGS ?= $(addprefix -L ../,$(DEPS))
-MFLAGS ?= -L ../org/lisp -L ../ox-texinfo+
+OFLAGS ?= -L ../dash -L ../org/lisp -L ../ox-texinfo+
 
 INFOPAGES     = epkg.info
 MAKEINFO     ?= makeinfo --no-split
@@ -81,7 +81,7 @@ info: $(INFOPAGES) dir
 
 texi:
 	@printf "Generating epkg.texi\n"
-	@$(EMACS) -Q --batch $(EFLAGS) $(DFLAGS)
+	@$(EMACS) -Q --batch $(EFLAGS) $(OFLAGS) \
 	-l ox-texinfo+.el epkg.org \
 	-f org-texinfo+export-to-texinfo
 	@echo >> epkg.texi
