@@ -1,1 +1,4 @@
-*.info
+/epkg
+/epkg.html
+/epkg.info
+/epkg.pdf
