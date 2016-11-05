@@ -1,5 +1,23 @@
 # -*- mode: org -*-
 
-* 1.0.0    20160415
+* v2.0.0    2016/11/05
 
-  Reincarnation release.
+- Store Melpa recipes, GNU Elpa specs and lists of built-in libraries
+  which belong to a package in Epkg objects.  The respective object
+  slots and database columns and tables are named ~melpa-recipes~,
+  ~gelpa-recipes and ~builtin-libraries~.
+
+- Add new package type ~minority~, which is used for packages that are
+  mirrored using ~curl~ even though upstream uses some vcs repository.
+  This is necessary for unsupported vcs (everything except Git and
+  Mercurial) and for extremely messy Git repositories.
+
+- Repository moved to https://gitlab.com/emacscollective/epkg.
+
+- Updated manual and made made source compatible with Org v9.0.
+
+- Improved and extended ~make~ targets.
+
+* v1.0.0    2016/04/15
+
+- Reincarnation release.
