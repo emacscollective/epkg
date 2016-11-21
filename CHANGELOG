@@ -14,7 +14,7 @@
 
 - Repository moved to https://gitlab.com/emacscollective/epkg.
 
-- Updated manual and made made source compatible with Org v9.0.
+- Updated manual and made source compatible with Org v9.0.
 
 - Improved and extended ~make~ targets.
 
