@@ -1,5 +1,9 @@
 # -*- mode: org -*-
 
+* v2.1.0    UNRELEASED
+
+- Repository moved to https://github.com/emacscollective/epkg.
+
 * v2.0.0    2016/11/05
 
 - Store Melpa recipes, GNU Elpa specs and lists of built-in libraries

@@ -3,7 +3,7 @@
 ;; Copyright (C) 2016  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
-;; Homepage: https://gitlab.com/emacscollective/epkg
+;; Homepage: https://github.com/emacscollective/epkg
 ;; Package-Requires: ((closql "0.3.1") (dash "2.13.0") (emacs "25.1"))
 ;; Keywords: tools
 
@@ -28,7 +28,7 @@
 ;; the database and a `package.el'-like user interface for browsing
 ;; the database.  Epkg itself is not a package manager.
 
-;; For more information see https://gitlab.com/emacscollective/epkg
+;; For more information see https://github.com/emacscollective/epkg
 ;; and https://emacsmirror.net.
 
 ;;; Code:
