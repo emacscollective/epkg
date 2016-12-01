@@ -98,12 +98,6 @@ For more information about the Emacsmirror see
 @node Installation
 @chapter Installation
 
-Epkg currently requires an Emacs pre-release, at least @code{25.0.92}.  In
-the future at least the latest stable release will be supported.
-Emacs @code{24.5} cannot be supported because some build-in libraries that
-are essential to Epkg have changed drastically since that was
-released.
-
 Epkg is available from Melpa and Melpa-Stable.  To install it and its
 dependencies run @code{M-x install-package RET epkg RET}.
 
@@ -444,10 +438,10 @@ Packages that are @emph{not} available as a repository on the Emacsmirror
 @item
 @code{builtin}
 
-Packages that are part of GNU Emacs version 25.0.92 (in the future
-the latest stable release will be targeted).  @code{emacs} is on of the
-packages that are "part of Emacs"; it contains all libraries that
-are not explicitly declared to be part of some built-in package.
+Packages that are part of the latest stable GNU Emacs releases.
+@code{emacs} is one of the packages that are "part of Emacs"; it contains
+all libraries that are not explicitly declared to be part of some
+other built-in package.
 
 
 @item
