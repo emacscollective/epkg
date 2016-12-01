@@ -151,15 +151,15 @@ about the package at point in another buffer.
   HEADER is the string displayed in the header.  WIDTH is the width
   of the column.  If SORTP is ~t~, then the column can be sorted, if
   it is ~nil~ then it can not.  PROPS is an alist, supported keys are
-  ~:right-align~ and ~:pad-right~.  Slot is an Epkg object slot or ~type~.
-  FORMAT is a function, which is called with one argument the slot
-  value and has to return a representation of that.  If FORMAT is ~nil~,
-  then the value is inserted as-is.
+  ~:right-align~ and ~:pad-right~.  SLOT is an Epkg object slot or ~type~.
+  FORMAT is a function, which is called with one argument, the slot
+  value, and has to return a representation of that.  If FORMAT is
+  ~nil~, then the value is inserted as-is.
 
 - User Option: epkg-list-mode-hook
 
   This hook is run after entering Epkg-List mode, the mode used in
-  buffers which list packages.
+  buffers that list packages.
 
 - Command: epkg-list-packages
 
@@ -204,10 +204,10 @@ to ~epkg-list-describe-package~, which displays the package at point in
 another buffer.
 
 By default the description buffer shows a tree of the packages the
-described package depends on.  Click on a square before the package
+described package depends on.  Click on the symbol before the package
 name to expand the node to show the dependencies of that dependency.
 
-The first column lists the names of package which provide the
+The first column lists the names of package that provide the
 feature(s) in the third column.  The second column shows the type of
 the package in the first column.
 
@@ -248,7 +248,7 @@ libraries are required.
   The value of this option is a list of slots to be displayed when
   displaying information about an Epkg package in a help buffer.
 
-  Each element of the list can be a slot symbol, a function, or ~nil~.
+  Each element of the list can be a function, a slot symbol, or ~nil~.
   Functions are called with one argument, the Epkg object, and should
   insert a representation of the value at point.  Raw slot symbols
   cause its non-nil value to be inserted as-is.  If a slot's value is
@@ -262,18 +262,19 @@ libraries are required.
 
 * Package Types
 
-Each package has a "type", which specifies how the package is
+Each package has a *type*, which specifies how the package is
 distributed and mirrored.
 
-Packages are implemented using the Eieio (CLOS) object system.  A TYPE
-corresponds to the class ~epkg-TYPE-package~.  The ~epkg~ package makes
-little use of methods, but ~emir~, the package used to maintain the
-Emacsmirror, makes extensive use of them.  There exist five abstract
-classes (there are no instances of abstract classes, only of its
-subclasses): ~epkg-package~, ~epkg-mirrored-package~, ~epkg-gitish-package~,
-~epkg-subset-package~, and ~epkg-mocking-package~.  Except for the second
-these classes are mostly an implementation detail and not relevant
-when merely using Epkg to browse the packages.
+Packages are implemented using the Eieio object system (more or less
+in implementation of CLOS).  A TYPE corresponds to the class
+~epkg-TYPE-package~.  The ~epkg~ package makes little use of methods, but
+~emir~, the package used to maintain the Emacsmirror, makes extensive
+use of them.  There exist five abstract classes (there are no
+instances of abstract classes, only of its subclasses): ~epkg-package~,
+~epkg-mirrored-package~, ~epkg-gitish-package~, ~epkg-subset-package~, and
+~epkg-mocking-package~.  Except for the second these classes are mostly
+an implementation detail and not relevant when merely using Epkg to
+browse the packages.
 
 - ~mirrored~
 
@@ -390,7 +391,7 @@ when merely using Epkg to browse the packages.
 
 - Function: epkg-sql sql &rest args
 
-  This function sends the SQL s-expression to the Epkg database and
+  This function sends the SQL S-expression to the Epkg database and
   returns the result.  This is a wrapper around ~emacsql~ that lacks the
   CONNECTION argument.  Instead it uses the connection returned by
   ~epkg-db~.
@@ -463,7 +464,7 @@ functions return these values in a form that is generally more useful.
 
 - Function: epkg-reverse-dependencies package
 
-  This function returns a list of packages which depend on PACKAGE.
+  This function returns a list of packages that depend on PACKAGE.
 
   Each element has the form ~(PACKAGE FEATURE...)~, where PACKAGE is the
   name of a package, a string, and FEATURE is a feature required by
