@@ -512,11 +512,11 @@ same value as:
 
 @lisp
 (mapcar (apply-partially #'closql--remake-instance (epkg-db))
-	  (epkg-sql [:select * :from packages
-		     :where class :in $v1
-		     :order-by [(asc name)]]
-		    (closql--where-class-in (epkg-db)
-					    'epkg-gitlab-package-p)))
+          (epkg-sql [:select * :from packages
+                     :where class :in $v1
+                     :order-by [(asc name)]]
+                    (closql--where-class-in (epkg-db)
+                                            'epkg-gitlab-package-p)))
 @end lisp
 @end defun
 
