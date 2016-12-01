@@ -56,7 +56,6 @@ General Public License for more details.
 * Listing Packages::
 * Describing a Package::
 * Package Types::
-* Updating the Database::
 * Querying the Database::
 @end menu
 
@@ -149,6 +148,14 @@ manually move the repository.  Otherwise it would be cloned again.
 The local clone of the Epkg repository is not updated automatically,
 so you should periodically use @code{M-x epkg-update RET} to update the
 database.
+
+@cindex epkg-update
+@deffn Command epkg-update
+
+This command updates the Epkg database by pulling the @code{master} branch
+in the @code{epkg-repository} and then reloading the Epkg database.  It
+returns the database connection.
+@end deffn
 
 @node Listing Packages
 @chapter Listing Packages
@@ -462,17 +469,6 @@ has disappeared or because the package has issues which have to be
 resolved before it can be moved back to the Emacsmirror.
 @end itemize
 @end itemize
-
-@node Updating the Database
-@chapter Updating the Database
-
-@cindex epkg-update
-@deffn Command epkg-update
-
-This command updates the Epkg database by pulling the @code{master} branch
-in the @code{epkg-repository} and then reloading the Epkg database.  It
-returns the database connection.
-@end deffn
 
 @node Querying the Database
 @chapter Querying the Database

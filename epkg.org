@@ -127,6 +127,12 @@ The local clone of the Epkg repository is not updated automatically,
 so you should periodically use ~M-x epkg-update RET~ to update the
 database.
 
+- Command: epkg-update
+
+  This command updates the Epkg database by pulling the ~master~ branch
+  in the ~epkg-repository~ and then reloading the Epkg database.  It
+  returns the database connection.
+
 * Listing Packages
 
 Epkg provides several commands for listing packages.
@@ -375,14 +381,6 @@ browse the packages.
     These repository are not being updated anymore, because upstream
     has disappeared or because the package has issues which have to be
     resolved before it can be moved back to the Emacsmirror.
-
-* Updating the Database
-
-- Command: epkg-update
-
-  This command updates the Epkg database by pulling the ~master~ branch
-  in the ~epkg-repository~ and then reloading the Epkg database.  It
-  returns the database connection.
 
 * Querying the Database
 
