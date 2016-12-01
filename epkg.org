@@ -43,7 +43,10 @@ General Public License for more details.
 Epkg is a package that provides access to a local copy of the
 Emacsmirror package database.  It provides low-level functions for
 querying the database and a ~package.el~-like user interface for
-browsing the database.  Epkg itself is not a package manager.
+browsing the database.
+
+Epkg itself is not a package manager, but the closely related
+Borg [fn:1] package manager makes use of it.
 
 The Emacsmirror is a growing collection of Emacs Lisp packages.  All
 mirrored packages are available as Git repositories.  In most cases
@@ -67,8 +70,13 @@ Emacsmirror to the Emacsattic, where it is no longer updated. (The
 Emacsattic is a Github "organization" separate from the Emacsmirror
 organization, but it is considered part of the Emacsmirror project.)
 
-For more information about the Emacsmirror see
-https://emacsmirror.net.
+For more information about the Emacsmirror visit its homepage [fn:2]
+and the blog post in which the current incarnation was
+announced [fn:3].
+
+[fn:1] https://emacsair.me/2016/05/17/assimilate-emacs-packages-as-git-submodules
+[fn:2] https://emacsmirror.net
+[fn:3] https://emacsair.me/2016/04/16/re-introducing-the-emacsmirror
 
 * Installation
 
@@ -157,7 +165,8 @@ about the package at point in another buffer.
 
 - Command: epkg-list-packages
 
-  This command displays a list of packages.
+  This command displays a list of all mirrored (and possibly also
+  shelved) packages.
 
 - Command: epkg-list-matching-packages
 
@@ -325,12 +334,14 @@ browse the packages.
         - ~elpa~
 
           Packages hosted in a directory inside the ~master~ branch of
-          the GNU Elpa repository.
+          the GNU Elpa repository.  These package are available from
+          https://elpa.gnu.org.
 
         - ~elpa-branch~
 
           Packages hosted in the GNU Elpa repository, using a
-          dedicated branch.
+          dedicated branch.  These package are available from
+          https://elpa.gnu.org.
 
     - ~hg~
 
