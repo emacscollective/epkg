@@ -382,22 +382,17 @@ browse the packages.
     has disappeared or because the package has issues which have to be
     resolved before it can be moved back to the Emacsmirror.
 
-* Querying the Database
+* Using Epkg Objects
 
-- Function: epkg-db
+Most users won't have to access the Epkg objects directly and can just
+use the commands described in the preceding sections, but if you would
+like to extend Epkg, then you should know about the following
+functions.
 
-  This function returns the connection to the Epkg database.
-
-  If the ~epkg-repository~, which contains the SQLite database file,
-  does not exist yet, then this function first asks the user whether
-  they want to clone the repository.
-
-- Function: epkg-sql sql &rest args
-
-  This function sends the SQL S-expression to the Epkg database and
-  returns the result.  This is a wrapper around ~emacsql~ that lacks the
-  CONNECTION argument.  Instead it uses the connection returned by
-  ~epkg-db~.
+Epkg objects are implemented using Eieio, which more or less is an
+implementation of CLOS.  It's useful to learn about that, but to get
+started you may just use ~oref~ to optain information about a package,
+e.g. ~(oref (epkg "magit") url)~.
 
 - Function: epkg name
 
@@ -507,6 +502,43 @@ functions return these values in a form that is generally more useful.
   and returns it as a string.
 
   Optional DEFAULT, if non-nil, is offered as default choice.
+
+* Querying the Database
+
+If you are more interested in information about all or a subset of
+mirrored packages, as opposed to individual packages, then you should
+query the database directly instead of using the functions ~epkg~ and
+~epkgs~.
+
+This is usually much more efficient, but requires that you know a bit
+about SQL, specifically SQLite [fn:4], and that you make yourself
+familiar with the syntax used by EmacSQL [fn:5] to express SQL
+statements.
+
+The statistics about the Emacsmirror and related package
+archives [fn:6] for the most part use ~epkg-sql~, you might find the
+tools [fn:7] used to create those statistics useful when getting
+started with that function.
+
+- Function: epkg-db
+
+  This function returns the connection to the Epkg database.
+
+  If the ~epkg-repository~, which contains the SQLite database file,
+  does not exist yet, then this function first asks the user whether
+  they want to clone the repository.
+
+- Function: epkg-sql sql &rest args
+
+  This function sends the SQL S-expression to the Epkg database and
+  returns the result.  This is a wrapper around ~emacsql~ that lacks the
+  CONNECTION argument.  Instead it uses the connection returned by
+  ~epkg-db~.
+
+[fn:4] https://sqlite.org/lang.html
+[fn:5] https://github.com/skeeto/emacsql
+[fn:6] https://emacsmirror.net/stats
+[fn:7] https://github.com/emacsmirror/epkg-reports
 
 # Local Variables:
 # eval: (require 'ox-texinfo+ nil t)

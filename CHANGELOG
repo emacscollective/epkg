@@ -4,6 +4,8 @@
 
 - Repository moved to https://github.com/emacscollective/epkg.
 
+- The manual was updated heavily.
+
 * v2.0.0    2016/11/05
 
 - Store Melpa recipes, GNU Elpa specs and lists of built-in libraries

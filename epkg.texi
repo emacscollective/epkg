@@ -56,6 +56,7 @@ General Public License for more details.
 * Listing Packages::
 * Describing a Package::
 * Package Types::
+* Using Epkg Objects::
 * Querying the Database::
 @end menu
 
@@ -470,25 +471,18 @@ resolved before it can be moved back to the Emacsmirror.
 @end itemize
 @end itemize
 
-@node Querying the Database
-@chapter Querying the Database
+@node Using Epkg Objects
+@chapter Using Epkg Objects
 
-@defun epkg-db
+Most users won't have to access the Epkg objects directly and can just
+use the commands described in the preceding sections, but if you would
+like to extend Epkg, then you should know about the following
+functions.
 
-This function returns the connection to the Epkg database.
-
-If the @code{epkg-repository}, which contains the SQLite database file,
-does not exist yet, then this function first asks the user whether
-they want to clone the repository.
-@end defun
-
-@defun epkg-sql sql &rest args
-
-This function sends the SQL S-expression to the Epkg database and
-returns the result.  This is a wrapper around @code{emacsql} that lacks the
-CONNECTION argument.  Instead it uses the connection returned by
-@code{epkg-db}.
-@end defun
+Epkg objects are implemented using Eieio, which more or less is an
+implementation of CLOS.  It's useful to learn about that, but to get
+started you may just use @code{oref} to optain information about a package,
+e.g. @code{(oref (epkg "magit") url)}.
 
 @defun epkg name
 
@@ -606,6 +600,41 @@ This function reads the name of an Epkg package in the minibuffer
 and returns it as a string.
 
 Optional DEFAULT, if non-nil, is offered as default choice.
+@end defun
+
+@node Querying the Database
+@chapter Querying the Database
+
+If you are more interested in information about all or a subset of
+mirrored packages, as opposed to individual packages, then you should
+query the database directly instead of using the functions @code{epkg} and
+@code{epkgs}.
+
+This is usually much more efficient, but requires that you know a bit
+about SQL, specifically SQLite @footnote{@uref{https://sqlite.org/lang.html}}, and that you make yourself
+familiar with the syntax used by EmacSQL @footnote{@uref{https://github.com/skeeto/emacsql}} to express SQL
+statements.
+
+The statistics about the Emacsmirror and related package
+archives @footnote{@uref{https://emacsmirror.net/stats}} for the most part use @code{epkg-sql}, you might find the
+tools @footnote{@uref{https://github.com/emacsmirror/epkg-reports}} used to create those statistics useful when getting
+started with that function.
+
+@defun epkg-db
+
+This function returns the connection to the Epkg database.
+
+If the @code{epkg-repository}, which contains the SQLite database file,
+does not exist yet, then this function first asks the user whether
+they want to clone the repository.
+@end defun
+
+@defun epkg-sql sql &rest args
+
+This function sends the SQL S-expression to the Epkg database and
+returns the result.  This is a wrapper around @code{emacsql} that lacks the
+CONNECTION argument.  Instead it uses the connection returned by
+@code{epkg-db}.
 @end defun
 
 @bye
