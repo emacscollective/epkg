@@ -67,8 +67,6 @@ the value is inserted as-is."
                          (const epkg-list-format-name)
                          (function)))))
 
-(unless (find-lisp-object-file-name 'epkg-list-mode-hook 'defvar)
-  (add-hook 'epkg-list-mode-hook 'hl-line-mode))
 (defcustom epkg-list-mode-hook '(hl-line-mode)
   "Hook run after entering Epkg-List mode."
   :group 'epkg
