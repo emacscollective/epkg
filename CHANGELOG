@@ -1,8 +1,12 @@
 # -*- mode: org -*-
 
-* v2.1.0    UNRELEASED
+* v2.1.0    2016/12/31
 
 - Repository moved to https://github.com/emacscollective/epkg.
+
+- A misguided kludge was removed from ~epkg-list-mode-hook~, which
+  prevented customizations that were loaded before to ~epkg~ to have
+  an effect.
 
 - The manual was updated heavily.
 
