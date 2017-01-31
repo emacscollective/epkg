@@ -327,43 +327,20 @@ PACKAGE is the name of a package, a string."
                      package)
       (-lambda ((feature hard))
         (let ((feature* (if hard feature (symbol-name feature))))
-          (if-let ((package* (epkg--required package feature)))
-              (unless (equal package* package)
-                (if-let ((elt (assoc package* deps)))
+          (if-let ((provider (epkg-provided-by feature)))
+              (unless (equal provider package)
+                (if-let ((elt (assoc provider deps)))
                     (push feature* (cdr elt))
-                  (push (list package* feature*) deps)))
+                  (push (list provider feature*) deps)))
             (push (list nil feature*) deps)))))
     (cl-sort (mapcar (-lambda ((package . features))
                        (cons package (sort features #'string<)))
                      deps)
              #'string< :key #'car)))
 
-(cl-defmethod epkg--required ((package string) feature)
-  (or (epkg--required (if (symbolp feature) feature (intern feature)))
-      (let ((string (if (stringp feature) feature (symbol-name feature))))
-        ;; Some packages require `NAME-autoloads' or `NAME-loaddefs',
-        ;; others require `OTHER-autoloads' or `OTHER-loaddefs'.  Assume
-        ;; that building the package which provides `NAME' or `OTHER'
-        ;; also generates a file which provides the autoloads feature.
-        (or (and (string-equal string (concat package "-autoloads")) package)
-            (and (string-equal string (concat package "-loaddefs")) package)
-            (and (string-suffix-p "-autoloads" string)
-                 (epkg--required (intern (substring string 0 -10))))
-            (and (string-suffix-p "-loaddefs" string)
-                 (epkg--required (intern (substring string 0 -9))))
-            ;; Some packages require `NAME-version'.  Assume that when
-            ;; `NAME' is build, a file which provides `NAME-version' is
-            ;; also generated.
-            (and (string-equal string (concat package "-version")) package)
-            ;; We ignore files ending with `-test' or `-tests' to avoid
-            ;; dependencies that are only required to run the tests.  In
-            ;; rare cases `NAME' does require `NAME-test', which might
-            ;; then lead to unsatisfied, because unlisted, dependencies.
-            ;; Nevertheless we assume that `NAME-test' is part of `NAME'.
-            (and (string-equal string (concat package "-test"))  package)
-            (and (string-equal string (concat package "-tests")) package)))))
-
-(cl-defmethod epkg--required ((feature symbol))
+(cl-defmethod epkg-provided-by ((feature symbol))
+  "Return the package providing FEATURE.
+FEATURE has to be a symbol.  The returned value is a string."
   (let ((packages (mapcar #'car
                           (epkg-sql [:select package :from provided
                                      :where (= feature $s1)
