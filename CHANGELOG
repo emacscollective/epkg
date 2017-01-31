@@ -1,5 +1,11 @@
 # -*- mode: org -*-
 
+* v2.2.0    UNRELEASED
+
+- ~epkg-required~ is now defined as a generic function.  Previously,
+  due to a copy-paste error, ~epkg-provided~ was instead defined as
+  such twice.
+
 * v2.1.0    2016/12/31
 
 - Repository moved to https://github.com/emacscollective/epkg.

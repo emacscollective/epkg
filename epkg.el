@@ -1,6 +1,6 @@
 ;;; epkg.el --- browse the Emacsmirror package database  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016  Jonas Bernoulli
+;; Copyright (C) 2016-2017  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
@@ -309,7 +309,7 @@ PACKAGE is the name of a package, a string."
                            :where (= package $s1)
                            :order-by [(asc feature)]] package)))
 
-(cl-defgeneric epkg-provided (package)
+(cl-defgeneric epkg-required (package)
   "Return a list of packages and features required by PACKAGE.")
 
 (cl-defmethod  epkg-required ((pkg epkg-package))
