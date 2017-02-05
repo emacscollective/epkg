@@ -290,36 +290,35 @@ NAME is the name of a package, a string."
 
 (cl-defgeneric epkg-provided (package)
   "Return a list of features provided by PACKAGE.
-
-Each element has the form (PACKAGE FEATURE...), where PACKAGE
-is the name of a package, a string, and FEATURE is a feature
-provided by that package.  If FEATURE is a symbol, then it is
-a hard (mandatory) dependency; if it is a string, then it is
-a soft (optional) dependency.")
+\n(fn PACKAGE)")
 
 (cl-defmethod  epkg-provided ((pkg epkg-package))
-  "Return a list of features provided by the package PKG.
-PKG is an `epkg-package' object."
   (epkg-provided (oref pkg name)))
 
 (cl-defmethod  epkg-provided ((package string))
-  "Return a list of features provided by PACKAGE.
-PACKAGE is the name of a package, a string."
   (mapcar #'car (epkg-sql [:select feature :from provided
                            :where (= package $s1)
                            :order-by [(asc feature)]] package)))
 
 (cl-defgeneric epkg-required (package)
-  "Return a list of packages and features required by PACKAGE.")
+  "Return a list of packages and features required by PACKAGE.
+
+Each element has the form (DEPENDENCY FEATURES), where DEPENDENCY
+is the name of a required package, a string, and FEATURES is a
+list of features provided by DEPENDENCY and required by PACKAGE.
+
+If a feature is represented using a symbol, then that indicates
+that it is a mandatory dependency; if a string is used, then it
+is an optional dependency.
+
+There may be a single element (nil FEATURES), which means that
+it is unknown which package or packages provide the feature or
+features listed in FEATURES.")
 
 (cl-defmethod  epkg-required ((pkg epkg-package))
-  "Return a list of packages and features required by the package PKG.
-PKG is an `epkg-package' object."
   (epkg-required (oref pkg name)))
 
 (cl-defmethod  epkg-required ((package string))
-  "Return a list of packages and features required by PACKAGE.
-PACKAGE is the name of a package, a string."
   (let (deps)
     (-each (epkg-sql [:select [feature hard] :from required
                       :where (= package $s1)
