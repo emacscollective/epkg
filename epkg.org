@@ -435,11 +435,14 @@ Emacsmirror, but not in a client.  And the ~required~ slot only lists
 features but not the packages that provide them.  The following
 functions return these values in a form that is generally more useful.
 
-- Function: epkg-provided package
+- Function: epkg-provided package &optional include-bundled
 
   This function returns a list of features provided by the package
   PACKAGE.  PACKAGE is an ~epkg-package~ object or a package name, a
   string.
+
+  Bundled features are excluded from the returned list unless
+  optional INCLUDE-BUNDLED is non-nil.
 
 - Function: epkg-required package
 

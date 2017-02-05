@@ -288,17 +288,26 @@ for which one of these predicates returns non-nil."
 NAME is the name of a package, a string."
   (closql-get (epkg-db) name))
 
-(cl-defgeneric epkg-provided (package)
+(cl-defgeneric epkg-provided (package &optional include-bundled)
   "Return a list of features provided by PACKAGE.
-\n(fn PACKAGE)")
 
-(cl-defmethod  epkg-provided ((pkg epkg-package))
-  (epkg-provided (oref pkg name)))
+Bundled features are excluded from the returned list unless
+optional INCLUDE-BUNDLED is non-nil.
 
-(cl-defmethod  epkg-provided ((package string))
-  (mapcar #'car (epkg-sql [:select feature :from provided
-                           :where (= package $s1)
-                           :order-by [(asc feature)]] package)))
+\(fn PACKAGE &optional include-bundled)")
+
+(cl-defmethod  epkg-provided ((pkg epkg-package) &optional include-bundled)
+  (epkg-provided (oref pkg name) include-bundled))
+
+(cl-defmethod  epkg-provided ((package string) &optional include-bundled)
+  (mapcar #'car (if include-bundled
+                    (epkg-sql [:select feature :from provided
+                               :where (= package $s1)
+                               :order-by [(asc feature)]] package)
+                  (epkg-sql [:select feature :from provided
+                             :where (and (= package $s1)
+                                         (isnull drop))
+                             :order-by [(asc feature)]] package))))
 
 (cl-defgeneric epkg-required (package)
   "Return a list of packages and features required by PACKAGE.

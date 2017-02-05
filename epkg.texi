@@ -527,11 +527,14 @@ Emacsmirror, but not in a client.  And the @code{required} slot only lists
 features but not the packages that provide them.  The following
 functions return these values in a form that is generally more useful.
 
-@defun epkg-provided package
+@defun epkg-provided package &optional include-bundled
 
 This function returns a list of features provided by the package
 PACKAGE.  PACKAGE is an @code{epkg-package} object or a package name, a
 string.
+
+Bundled features are excluded from the returned list unless
+optional INCLUDE-BUNDLED is non-nil.
 @end defun
 
 @defun epkg-required package
