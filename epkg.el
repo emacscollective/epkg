@@ -358,22 +358,23 @@ features listed in FEATURES.")
                  (car alist)))))))
 
 (cl-defgeneric epkg-reverse-dependencies (package)
-  "Return a list of packages which depend on PACKAGE.
+  "Return a list of packages that depend on PACKAGE.
 
-Each element has the form (PACKAGE FEATURE...), where PACKAGE
-is the name of a package, a string, and FEATURE is a feature
-required by that package.  If FEATURE is a symbol, then it is
-a hard (mandatory) dependency; if it is a string, then it is
-a soft (optional) dependency.")
+Each element has the form (DEPENDANT FEATURES), where DEPENDANT
+is the name of a package that depends on PACKAGE, a string, and
+FEATURES is a list of features provided by PACKAGE and required
+by DEPENDANT.
+
+If a feature is represented using a symbol, then that indicates
+that it is a mandatory dependency; if a string is used, then it
+is an optional dependency.
+
+\(fn package)")
 
 (cl-defmethod  epkg-reverse-dependencies ((pkg epkg-package))
-  "Return a list of packages which depend on PKG.
-PKG is an `epkg-package' object."
   (epkg-reverse-dependencies (oref pkg name)))
 
 (cl-defmethod  epkg-reverse-dependencies ((package string))
-  "Return a list of packages which depend on PACKAGE.
-PACKAGE is the name of a package, a string."
   (mapcar (-lambda ((package . required))
             (cons package (mapcar (-lambda ((_ feature hard))
                                     (if hard feature (symbol-name feature)))

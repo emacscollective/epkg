@@ -562,12 +562,16 @@ to be a symbol.
 @defun epkg-reverse-dependencies package
 
 This function returns a list of packages that depend on PACKAGE.
+PACKAGE is an @code{epkg-package} object or a package name, a string.
 
-Each element has the form @code{(PACKAGE FEATURE...)}, where PACKAGE is the
-name of a package, a string, and FEATURE is a feature required by
-that package.  If FEATURE is a symbol, then it is a hard (mandatory)
-dependency; if it is a string, then it is a soft (optional)
-dependency.
+Each element has the form @code{(DEPENDANT FEATURES)}, where DEPENDANT
+is the name of a package that depends on PACKAGE, a string, and
+FEATURES is a list of features provided by PACKAGE and required
+by DEPENDANT.
+
+If a feature is represented using a symbol, then that indicates
+that it is a mandatory dependency; if a string is used, then it
+is an optional dependency.
 @end defun
 
 @defun epkg-type pkg
