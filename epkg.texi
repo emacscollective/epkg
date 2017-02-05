@@ -574,14 +574,15 @@ that it is a mandatory dependency; if a string is used, then it
 is an optional dependency.
 @end defun
 
-@defun epkg-type pkg
+@defun epkg-type arg
 
-This function returns the type of the @code{epkg-package} object PKG.
+This function returns the type of the object or class ARG.
 
-A package's type is a short representation of its class, as in
-@code{epkg-TYPE-package}.  The argument may also be a class symbol, in
-which case the respective type is returned. The type of @code{epkg-package}
-itself is @code{all}.
+ARG has to be the class @code{epkg-package}, a subclass of that, an
+@code{epkg-package} object, or an object of a subclass.  The type
+represents the class and is used in the user interface, where
+it would be inconvenient to instead use the actual class name,
+because the latter is longer and an implementation detail.
 @end defun
 
 @defun epkg-package-types subtypes

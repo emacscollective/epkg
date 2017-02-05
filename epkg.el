@@ -385,12 +385,19 @@ is an optional dependency.
                                 :order-by [(asc package) (asc feature)]]
                                (vconcat (epkg-provided package))))))
 
-(cl-defmethod epkg-type ((pkg epkg-package))
-  "Return the type of the Epkg object PKG."
+(cl-defgeneric epkg-type (ARG)
+  "Return the type of the object or class ARG.
+
+ARG has to be the class `epkg-package', a subclass of that, an
+`epkg-package' object, or an object of a subclass.  The type
+represents the class and is used in the user interface, where
+it would be inconvenient to instead use the actual class name,
+because the latter is longer and an implementation detail.")
+
+(cl-defmethod  epkg-type ((pkg epkg-package))
   (epkg-type (eieio-object-class pkg)))
 
-(cl-defmethod epkg-type ((class (subclass epkg-package)))
-  "Return a short representation of CLASS."
+(cl-defmethod  epkg-type ((class (subclass epkg-package)))
   (if (eq class 'epkg-package)
       'all
     (setq class (symbol-name class))
