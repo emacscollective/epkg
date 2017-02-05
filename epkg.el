@@ -378,12 +378,11 @@ PACKAGE is the name of a package, a string."
             (cons package (mapcar (-lambda ((_ feature hard))
                                     (if hard feature (symbol-name feature)))
                                   required)))
-          (cl-sort
-           (-group-by #'car
-                      (epkg-sql [:select [package feature hard] :from required
-                                 :where feature :in $v1]
-                                (vconcat (epkg-provided package))))
-           #'string< :key #'car)))
+          (-group-by #'car
+                     (epkg-sql [:select [package feature hard] :from required
+                                :where feature :in $v1
+                                :order-by [(asc package) (asc feature)]]
+                               (vconcat (epkg-provided package))))))
 
 (cl-defmethod epkg-type ((pkg epkg-package))
   "Return the type of the Epkg object PKG."
