@@ -553,6 +553,12 @@ it is unknown which package or packages provide the feature or
 features listed in FEATURES.
 @end defun
 
+@defun epkg-provided-by feature
+
+Return the name of the package provided by FEATURE.  FEATURE has
+to be a symbol.
+@end defun
+
 @defun epkg-reverse-dependencies package
 
 This function returns a list of packages that depend on PACKAGE.

@@ -459,6 +459,11 @@ functions return these values in a form that is generally more useful.
   it is unknown which package or packages provide the feature or
   features listed in FEATURES.
 
+- Function: epkg-provided-by feature
+
+  Return the name of the package provided by FEATURE.  FEATURE has
+  to be a symbol.
+
 - Function: epkg-reverse-dependencies package
 
   This function returns a list of packages that depend on PACKAGE.

@@ -337,9 +337,11 @@ features listed in FEATURES.")
                      deps)
              #'string< :key #'car)))
 
-(cl-defmethod epkg-provided-by ((feature symbol))
-  "Return the package providing FEATURE.
-FEATURE has to be a symbol.  The returned value is a string."
+(cl-defgeneric epkg-provided-by (feature)
+  "Return the name of the package providing FEATURE.
+\n(fn FEATURE).")
+
+(cl-defmethod  epkg-provided-by ((feature symbol))
   (let ((packages (mapcar #'car
                           (epkg-sql [:select package :from provided
                                      :where (= feature $s1)
