@@ -1,12 +1,23 @@
 # -*- mode: org -*-
 
+* v2.3.0    2017/03/01
+
+- The function ~epkg-provided~ no longer returns bundles libraries,
+  unless its new ~include-bundled~ argument is non-nil.
+
+- The function ~epkg-reverse-dependencies~ now sorts not only the
+  packages it returns, but also the features belonging to each
+  of those package.
+
+- Various documentation updates and improvements.
+
 * v2.2.0    2017/01/31
 
 - The new function ~epkg-provided-by~ returns the package that provides
   a given feature.  It replaces ~epkg--required~, which did the same
-  thing, but also also guessed the package for certain features, those
-  involving autoload, version, and test libraries, in case the Epkg
-  database did not contain any information on the feature.  The new
+  thing, but also guessed the package for certain features (those
+  involving autoload, version, and test libraries) in case the Epkg
+  database did not contain any information about the feature.  The new
   function doesn't do that because this is no longer necessary now
   that all those features are accounted for in the database.
 
