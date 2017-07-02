@@ -283,7 +283,7 @@ for which one of these predicates returns non-nil."
           value))
     (closql-entries (epkg-db) predicates)))
 
-(cl-defmethod epkg ((name string))
+(defun epkg (name)
   "Return an `epkg-package' object for the package named NAME.
 NAME is the name of a package, a string."
   (closql-get (epkg-db) name))
