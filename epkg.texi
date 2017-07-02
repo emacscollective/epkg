@@ -1,17 +1,12 @@
 \input texinfo    @c -*- texinfo -*-
 @c %**start of header
-@setfilename ./epkg.info
+@setfilename epkg.info
 @settitle Epkg User Manual
 @documentencoding UTF-8
 @documentlanguage en
 @c %**end of header
 
 @copying
-@ifnottex
-With @code{epkg} you can browse the Emacsmirror package database
-using an interface similar to that of @code{package.el}.
-@end ifnottex
-
 @quotation
 Copyright (C) 2016-2017 Jonas Bernoulli <jonas@@bernoul.li>
 
@@ -47,7 +42,23 @@ General Public License for more details.
 @ifnottex
 @node Top
 @top Epkg User Manual
-@insertcopying
+
+With Epkg you can browse the Emacsmirror package database using an
+interface similar to that of @code{package.el}.
+
+@quotation
+Copyright (C) 2016-2017 Jonas Bernoulli <jonas@@bernoul.li>
+
+You can redistribute this document and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+This document is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+@end quotation
 @end ifnottex
 
 @menu
@@ -59,8 +70,6 @@ General Public License for more details.
 * Using Epkg Objects::
 * Querying the Database::
 @end menu
-
-
 
 @node Introduction
 @chapter Introduction
