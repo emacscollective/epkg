@@ -1,5 +1,11 @@
 # -*- mode: org -*-
 
+* v3.0.0    UNRELEASED
+
+- Added new library ~epkg-utils.el~ containing some utilities that are
+  intended for use elsewhere but not by Epkg itself.  Currently this
+  is limited to tools useful when generating Org tables.
+
 * v2.3.0    2017/03/01
 
 - The function ~epkg-provided~ no longer returns bundles libraries,
