@@ -142,53 +142,44 @@ database."
 
 ;;; Superclass
 
-(defclass epkg-package  (closql-object)
-  ((repopage-format   :allocation :class        :initform nil)
-   (homepage-format   :allocation :class        :initform nil)
-   (mirrorpage-format :allocation :class        :initform nil)
-   (mirror-url-format :allocation :class        :initform nil)
-   (url-format        :allocation :class        :initform nil)
-   (name              :initarg :name            :initform nil)
-   (hash              :initarg :hash            :initform nil)
-   (url               :initarg :url             :initform nil)
-   (mirror-url        :initarg :mirror-url      :initform nil)
-   (mirror-name       :initarg :mirror-name     :initform nil)
-   (upstream-user     :initarg :upstream-user   :initform nil)
-   (upstream-name     :initarg :upstream-name   :initform nil)
-   (upstream-branch   :initarg :upstream-branch :initform nil)
-   (upstream-tree     :initarg :upstream-tree   :initform nil)
-   (library           :initarg :library         :initform nil)
-   (repopage          :initarg :repopage        :initform nil)
-   (homepage          :initarg :homepage        :initform nil)
-   (mirrorpage        :initarg :mirrorpage      :initform nil)
-   (wikipage          :initarg :wikipage        :initform nil)
-   (license           :initarg :license         :initform nil)
-   (created           :initarg :created         :initform nil)
-   (updated           :initarg :updated         :initform nil)
-   (summary           :initarg :summary         :initform nil)
-   (commentary        :initarg :commentary      :initform nil)
-   (libraries         :initarg :libraries
-                      :columns [package library])
-   (provided          :initarg :provided
-                      :columns [package feature drop join])
-   (required          :initarg :required
-                      :columns [package feature hard ease drop])
-   (keywords          :initarg :keywords
-                      :columns [package keyword])
-   (authors           :initarg :authors
-                      :columns [package name email])
-   (maintainers       :initarg :maintainers
-                      :columns [package name email])
-   (melpa-recipes     :initarg :melpa-recipes
-                      :columns [closql-id name fetcher status
+(defclass epkg-package (closql-object)
+  ((repopage-format   :initform nil :allocation :class)
+   (homepage-format   :initform nil :allocation :class)
+   (mirrorpage-format :initform nil :allocation :class)
+   (mirror-url-format :initform nil :allocation :class)
+   (url-format        :initform nil :allocation :class)
+   (name              :initform nil :initarg :name)
+   (hash              :initform nil)
+   (url               :initform nil :initarg :url)
+   (mirror-url        :initform nil)
+   (mirror-name       :initform nil)
+   (upstream-user     :initform nil)
+   (upstream-name     :initform nil)
+   (upstream-branch   :initform nil :initarg :upstream-branch)
+   (upstream-tree     :initform nil :initarg :upstream-tree)
+   (library           :initform nil :initarg :library)
+   (repopage          :initform nil)
+   (homepage          :initform nil)
+   (mirrorpage        :initform nil)
+   (wikipage          :initform nil)
+   (license           :initform nil)
+   (created           :initform nil)
+   (updated           :initform nil)
+   (summary           :initform nil)
+   (commentary        :initform nil)
+   (libraries         :columns [package library])
+   (provided          :columns [package feature drop join])
+   (required          :columns [package feature hard ease drop])
+   (keywords          :columns [package keyword])
+   (authors           :columns [package name email])
+   (maintainers       :columns [package name email])
+   (melpa-recipes     :columns [closql-id name fetcher status
                                 url repo repopage files
                                 branch commit module
                                 version-regexp old-names])
-   (gelpa-recipes     :initarg :gelpa-recipes
-                      :columns [closql-id name type status
+   (gelpa-recipes     :columns [closql-id name type status
                                 method released url])
-   (builtin-libraries :initarg :builtin-libraries
-                      :columns [closql-id library feature name]))
+   (builtin-libraries :columns [closql-id library feature name]))
   :abstract t)
 
 ;;; Subclasses
