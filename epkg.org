@@ -7,16 +7,19 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 2.3.0
+#+SUBTITLE: for version 2.3.0 (v2.3.0-6-g125c0a8+1)
 
 #+TEXINFO_DEFFN: t
 #+TEXINFO_CLASS: info+
 #+OPTIONS: H:4 num:nil toc:2
+#+BIND: ox-texinfo+-before-export-hook ox-texinfo+-update-version-strings
 
 With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+BEGIN_QUOTE
+This manual is for Epkg version 2.3.0 (v2.3.0-6-g125c0a8+1).
+
 Copyright (C) 2016-2017 Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
