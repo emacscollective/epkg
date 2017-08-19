@@ -174,14 +174,16 @@ To list all packages of a certain type as well as its subtypes
 use `TYPE*' instead of just `TYPE'."
   (interactive (list (epkg-read-type "List packages of type: " nil t)))
   (epkg--list-packages
-   (epkgs (epkg--list-columns-vector)
-          (if (eq type 'all*)
-              'epkg-package
-            (setq type (symbol-name type))
-            (intern (if (string-suffix-p "*" type)
-                        (format "epkg-%s-package--eieio-childp"
-                                (substring type 0 -1))
-                      (format "epkg-%s-package" type)))))))
+   (epkg-sql [:select $i1 :from packages :where class :in $v2]
+             (epkg--list-columns-vector)
+             (closql-where-class-in
+              (if (eq type 'all*)
+                  'epkg-package-p
+                (setq type (symbol-name type))
+                (intern (if (string-suffix-p "*" type)
+                            (format "epkg-%s-package--eieio-childp"
+                                    (substring type 0 -1))
+                          (format "epkg-%s-package-p" type))))))))
 
 (defun epkg--list-packages (rows)
   (with-current-buffer (get-buffer-create "*Epkgs*")
