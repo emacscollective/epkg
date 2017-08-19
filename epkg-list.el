@@ -89,10 +89,9 @@ prefix argument or when `epkg-list-packages-omit-shelved' is nil,
 then no packages are omitted."
   (interactive (list current-prefix-arg))
   (epkg--list-packages
-   (epkgs (epkg--list-columns-vector)
-          (and (not all)
-               '(epkg-builtin-package-p
-                 epkg-mirrored-package--eieio-childp)))))
+   (epkg-sql [:select $i1 :from packages :where class :in $v2]
+             (epkg--list-columns-vector)
+             (epkg--list-where-class-in all))))
 
 ;;;###autoload
 (defun epkg-list-matching-packages (pattern &optional all)
