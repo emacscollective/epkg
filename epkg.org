@@ -546,9 +546,6 @@ started with that function.
 [fn:6] https://emacsmirror.net/stats
 [fn:7] https://github.com/emacsmirror/epkg-reports
 
-# Local Variables:
-# eval: (require 'ox-texinfo+ nil t)
-# End:
 * Copying
 :PROPERTIES:
 :COPYING:    t
