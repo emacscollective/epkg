@@ -121,7 +121,7 @@ database."
     (emacsql-close epkg--db-connection))
   (let ((default-directory epkg-repository))
     (message "Pulling Epkg database...")
-    (epkg--call-git "pull" "--recurse-submodules" "origin" "master")
+    (epkg--call-git "pull" "--no-recurse-submodules" "origin" "master")
     (message "Pulling Epkg database...done"))
   (epkg-db))
 
