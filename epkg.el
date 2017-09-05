@@ -120,7 +120,9 @@ database."
   (when epkg--db-connection
     (emacsql-close epkg--db-connection))
   (let ((default-directory epkg-repository))
-    (epkg--call-git "pull" "--recurse-submodules" "origin" "master"))
+    (message "Pulling Epkg database...")
+    (epkg--call-git "pull" "--recurse-submodules" "origin" "master")
+    (message "Pulling Epkg database...done"))
   (epkg-db))
 
 (defvar magit-process-popup-time)
@@ -128,8 +130,7 @@ database."
 
 (defun epkg--call-git (&rest args)
   (if (require 'magit nil t)
-      (let ((magit-process-popup-time 0))
-        (magit-call-git args))
+      (magit-call-git args)
     (with-current-buffer (generate-new-buffer " *Epkg-Git*")
       (switch-to-buffer-other-window (current-buffer))
       (apply #'call-process "git" nil t t args))))
