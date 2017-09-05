@@ -85,9 +85,11 @@ file, does not exist yet, then first ask the user to clone it."
         (let ((dir (file-name-directory (directory-file-name epkg-repository))))
           (make-directory dir t)
           (let ((default-directory dir))
+            (message "Cloning epkg repository...")
             (epkg--call-git "clone"
                             epkg-origin-url
-                            epkg-repository)))
+                            epkg-repository)
+            (message "Cloning epkg repository...done")))
       (user-error "Aborted.  Epkg requires the Epkgs repository")))
   (unless (and epkg--db-connection (emacsql-live-p epkg--db-connection))
     (closql-db 'epkg-database 'epkg--db-connection
