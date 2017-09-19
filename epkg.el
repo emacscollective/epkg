@@ -170,10 +170,7 @@ database."
    (keywords            :closql-columns [package keyword])
    (authors             :closql-columns [package name email])
    (maintainers         :closql-columns [package name email])
-   (melpa-recipes       :closql-columns [closql-id name fetcher status
-                                         url repo repopage files
-                                         branch commit module
-                                         version-regexp old-names])
+   (melpa-recipes       :closql-class melpa-recipe)
    (gelpa-recipes       :closql-columns [closql-id name type status
                                          method released url])
    (builtin-libraries   :closql-columns [closql-id library feature name]))
@@ -404,4 +401,5 @@ Optional DEFAULT, if non-nil, is offered as default choice."
 (provide 'epkg)
 (require 'epkg-desc)
 (require 'epkg-list)
+(require 'epkg-melpa)
 ;;; epkg.el ends here

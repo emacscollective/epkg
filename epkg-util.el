@@ -51,6 +51,11 @@
       (--when-let (oref pkg homepage)
         (format "[[%s]]" it)))))
 
+(defun melpa-org-link (name)
+  (let ((rcp (melpa-get name)))
+    (--when-let (oref rcp repopage)
+      (format "[[%s][%s]]" it (oref rcp repo)))))
+
 (provide 'epkg-util)
 ;;; epkg-util.el ends here
 
