@@ -41,7 +41,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 2)
+(defconst epkg-db-version 3)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")

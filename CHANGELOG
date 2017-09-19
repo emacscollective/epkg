@@ -1,6 +1,6 @@
 # -*- mode: org -*-
 
-* v3.0.0    UNRELEASED
+* v3.0.0    2017/09/19
 
 - Melpa and GNU Elpa recipes are now stored as objects.  These recipes
   can still be accessed as slots of Epkg objects, but they can also be
