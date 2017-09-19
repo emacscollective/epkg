@@ -2,9 +2,10 @@
 
 * v3.0.0    UNRELEASED
 
-- Melpa recipes are now stored as objects.  These recipes
+- Melpa and GNU Elpa recipes are now stored as objects.  These recipes
   can still be accessed as slots of Epkg objects, but they can also be
-  accessed using the functions ~melpa-recipes~ and ~melpa-get~.
+  accessed using the functions ~melpa-recipes~, ~melpa-get~, ~gelpa-recipes~,
+  and ~gelpa-get~.
 
 - Added new library ~epkg-utils.el~ containing some utilities that are
   intended for use elsewhere but not by Epkg itself.  Currently this

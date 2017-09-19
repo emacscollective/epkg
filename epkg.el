@@ -171,8 +171,7 @@ database."
    (authors             :closql-columns [package name email])
    (maintainers         :closql-columns [package name email])
    (melpa-recipes       :closql-class melpa-recipe)
-   (gelpa-recipes       :closql-columns [closql-id name type status
-                                         method released url])
+   (gelpa-recipes       :closql-class gelpa-recipe)
    (builtin-libraries   :closql-columns [closql-id library feature name]))
   :abstract t)
 
@@ -401,5 +400,6 @@ Optional DEFAULT, if non-nil, is offered as default choice."
 (provide 'epkg)
 (require 'epkg-desc)
 (require 'epkg-list)
+(require 'epkg-gelpa)
 (require 'epkg-melpa)
 ;;; epkg.el ends here
