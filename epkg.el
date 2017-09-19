@@ -377,51 +377,19 @@ is an optional dependency.
                                 :order-by [(asc package) (asc feature)]]
                                (vconcat (epkg-provided package))))))
 
-(cl-defgeneric epkg-type (ARG)
-  "Return the type of the object or class ARG.
-
-ARG has to be the class `epkg-package', a subclass of that, an
-`epkg-package' object, or an object of a subclass.  The type
-represents the class and is used in the user interface, where
-it would be inconvenient to instead use the actual class name,
-because the latter is longer and an implementation detail.")
-
-(cl-defmethod  epkg-type ((pkg epkg-package))
-  (epkg-type (eieio-object-class pkg)))
-
-(cl-defmethod  epkg-type ((class (subclass epkg-package)))
-  (if (eq class 'epkg-package)
-      'all
-    (setq class (symbol-name class))
-    (save-match-data
-      (and (string-match "\\`epkg-\\(.+\\)-package\\'" class)
-           (intern (match-string 1 class))))))
-
-(cl-defun epkg-package-types (&optional subtypes)
-  "Return a list of all package types.
-
-If optional SUBTYPES is non-nil, then also return symbols of
-the form `TYPE*', which stands for `TYPE' and its subtypes."
-  (cl-labels
-      ((types (class)
-              (let ((children (eieio--class-children (cl--find-class class)))
-                    (type (epkg-type class)))
-                (nconc (and (not (class-abstract-p class)) (list type))
-                       (and subtypes children
-                            (list (intern (format "%s*" type))))
-                       (cl-mapcan #'types children)))))
-    (sort (types 'epkg-package) #'string<)))
+;;; Utilities
 
 (defvar epkg-type-history nil)
 
-(defun epkg-read-type (prompt &optional default subtypes)
+(defun epkg-read-type (prompt &optional default childp)
   "Read an Epkg type and return it as a symbol.
 
 If optional DEFAULT is non-nil, then that is offered as default
 choice.  If optional CHILDP is non-nil, then entries of the form
 `TYPE*', which stands for \"`TYPE' and its subtypes\", are also
 offered as completion candidates."
-  (intern (completing-read prompt (epkg-package-types subtypes)
+  (intern (completing-read prompt
+                           (closql--list-subabbrevs 'epkg-package childp)
                            nil t nil 'epkg-type-history default)))
 
 (defvar epkg-package-history nil)

@@ -132,7 +132,7 @@ are nil stand for empty lines."
         (null (insert ?\n))
         (function (funcall slot pkg))
         (t (--when-let (if (eq slot 'type)
-                           (epkg-type pkg)
+                           (closql--abbrev-class (eieio-object-class pkg))
                          (slot-value pkg slot))
              (epkg--insert-slot slot)
              (insert (format "%s\n" it))))))))
@@ -329,10 +329,12 @@ are nil stand for empty lines."
                                   'font-lock-warning-face)))))
       (?T (insert (propertize " " 'display '(space :align-to 30)))
           (insert (if pkg
-                      (let ((type (symbol-name (epkg-type pkg))))
+                      (let ((abbrev (symbol-name
+                                     (closql--abbrev-class
+                                      (eieio-object-class pkg)))))
                         (if (epkg-shelved-package-p pkg)
-                            (propertize type 'face 'font-lock-warning-face)
-                          type))
+                            (propertize abbrev 'face 'font-lock-warning-face)
+                          abbrev))
                     (propertize "unknown" 'face 'font-lock-warning-face))))
       (?H (insert (propertize " " 'display '(space :align-to 43)))
           (while features
