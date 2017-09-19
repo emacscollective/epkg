@@ -172,7 +172,7 @@ database."
    (maintainers         :closql-columns [package name email])
    (melpa-recipes       :closql-class melpa-recipe)
    (gelpa-recipes       :closql-class gelpa-recipe)
-   (builtin-libraries   :closql-columns [closql-id library feature name]))
+   (builtin-libraries   :closql-columns [package library feature]))
   :abstract t)
 
 ;;; Subclasses
