@@ -231,11 +231,11 @@ use `TYPE*' instead of just `TYPE'."
     (vconcat (if qualify (-replace 'name 'packages:name lst) lst))))
 
 (defun epkg--list-where-class-in (all)
-  (closql--where-class-in (epkg-db)
-                          (if (or all (not epkg-list-packages-omit-shelved))
-                              'epkg-package--eieio-childp
-                            '(epkg-builtin-package-p
-                              epkg-mirrored-package--eieio-childp))))
+  (closql-where-class-in
+   (if (or all (not epkg-list-packages-omit-shelved))
+       'epkg-package--eieio-childp
+     '(epkg-builtin-package-p
+       epkg-mirrored-package--eieio-childp))))
 
 (provide 'epkg-list)
 ;;; epkg-list.el ends here

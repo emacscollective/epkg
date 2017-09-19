@@ -4,7 +4,7 @@
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
-;; Package-Requires: ((closql "0.3.3") (dash "2.13.0") (emacs "25.1"))
+;; Package-Requires: ((closql "0.4.0") (dash "2.13.0") (emacs "25.1"))
 ;; Keywords: tools
 
 ;; This file is not part of GNU Emacs.
@@ -66,9 +66,7 @@ again."
 ;;; Database
 
 (defclass epkg-database (closql-database)
-  ((primary-table :initform packages)
-   (primary-key   :initform name)
-   (object-class  :initform epkg-package)))
+  ((object-class :initform epkg-package)))
 
 (defvar epkg--db-connection nil
   "The EmacSQL database connection.")
@@ -135,54 +133,50 @@ database."
       (switch-to-buffer-other-window (current-buffer))
       (apply #'call-process "git" nil t t args))))
 
-(cl-defmethod closql--class-to-sql ((_db epkg-database) value)
-  (intern (substring (setq value (symbol-name value))
-                     (if (string-prefix-p "eieio-class-tag--" value) 22 5)
-                     -8)))
-
-(cl-defmethod closql--sql-to-class ((_db epkg-database) value)
-  (intern (format "eieio-class-tag--epkg-%s-package" value)))
-
 ;;; Superclass
 
 (defclass epkg-package (closql-object)
-  ((repopage-format   :initform nil :allocation :class)
-   (homepage-format   :initform nil :allocation :class)
-   (mirrorpage-format :initform nil :allocation :class)
-   (mirror-url-format :initform nil :allocation :class)
-   (url-format        :initform nil :allocation :class)
-   (name              :initform nil :initarg :name)
-   (hash              :initform nil)
-   (url               :initform nil :initarg :url)
-   (mirror-url        :initform nil)
-   (mirror-name       :initform nil)
-   (upstream-user     :initform nil)
-   (upstream-name     :initform nil)
-   (upstream-branch   :initform nil :initarg :upstream-branch)
-   (upstream-tree     :initform nil :initarg :upstream-tree)
-   (library           :initform nil :initarg :library)
-   (repopage          :initform nil)
-   (homepage          :initform nil)
-   (mirrorpage        :initform nil)
-   (wikipage          :initform nil)
-   (license           :initform nil)
-   (created           :initform nil)
-   (updated           :initform nil)
-   (summary           :initform nil)
-   (commentary        :initform nil)
-   (libraries         :columns [package library])
-   (provided          :columns [package feature drop join])
-   (required          :columns [package feature hard ease drop])
-   (keywords          :columns [package keyword])
-   (authors           :columns [package name email])
-   (maintainers       :columns [package name email])
-   (melpa-recipes     :columns [closql-id name fetcher status
-                                url repo repopage files
-                                branch commit module
-                                version-regexp old-names])
-   (gelpa-recipes     :columns [closql-id name type status
-                                method released url])
-   (builtin-libraries :columns [closql-id library feature name]))
+  ((closql-class-prefix :initform "epkg-")
+   (closql-class-suffix :initform "-package")
+   (closql-table        :initform packages)
+   (closql-primary-key  :initform name)
+   (repopage-format     :initform nil :allocation :class)
+   (homepage-format     :initform nil :allocation :class)
+   (mirrorpage-format   :initform nil :allocation :class)
+   (mirror-url-format   :initform nil :allocation :class)
+   (url-format          :initform nil :allocation :class)
+   (name                :initform nil :initarg :name)
+   (hash                :initform nil)
+   (url                 :initform nil :initarg :url)
+   (mirror-url          :initform nil)
+   (mirror-name         :initform nil)
+   (upstream-user       :initform nil)
+   (upstream-name       :initform nil)
+   (upstream-branch     :initform nil :initarg :upstream-branch)
+   (upstream-tree       :initform nil :initarg :upstream-tree)
+   (library             :initform nil :initarg :library)
+   (repopage            :initform nil)
+   (homepage            :initform nil)
+   (mirrorpage          :initform nil)
+   (wikipage            :initform nil)
+   (license             :initform nil)
+   (created             :initform nil)
+   (updated             :initform nil)
+   (summary             :initform nil)
+   (commentary          :initform nil)
+   (libraries           :closql-columns [package library])
+   (provided            :closql-columns [package feature drop join])
+   (required            :closql-columns [package feature hard ease drop])
+   (keywords            :closql-columns [package keyword])
+   (authors             :closql-columns [package name email])
+   (maintainers         :closql-columns [package name email])
+   (melpa-recipes       :closql-columns [closql-id name fetcher status
+                                         url repo repopage files
+                                         branch commit module
+                                         version-regexp old-names])
+   (gelpa-recipes       :closql-columns [closql-id name type status
+                                         method released url])
+   (builtin-libraries   :closql-columns [closql-id library feature name]))
   :abstract t)
 
 ;;; Subclasses
@@ -270,12 +264,7 @@ package class predicate functions, or a single such function.
 Valid functions are named either `epkg-TYPE-package-p' or
 `epkg-TYPE-package--eieio-childp'.  Only packages are returned
 for which one of these predicates returns non-nil."
-  (if select
-      (let ((value (closql-select (epkg-db) select predicates)))
-        (if (and select (symbolp select))
-            (mapcar #'car value)
-          value))
-    (closql-entries (epkg-db) predicates)))
+  (closql-query (epkg-db) select predicates 'epkg-package))
 
 (defun epkg (name)
   "Return an `epkg-package' object for the package named NAME.

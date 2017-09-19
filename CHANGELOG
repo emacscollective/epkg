@@ -6,6 +6,9 @@
   intended for use elsewhere but not by Epkg itself.  Currently this
   is limited to tools useful when generating Org tables.
 
+- The functions ~epkg-type~ and ~epkg-package-types~ were removed.
+  Use ~closql--class-abbrevs~ and ~closql--list-subabbrevs~ instead.
+
 * v2.3.0    2017/03/01
 
 - The function ~epkg-provided~ no longer returns bundles libraries,

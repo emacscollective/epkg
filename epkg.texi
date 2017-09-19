@@ -522,12 +522,12 @@ verbose.  For example @code{(epkgs nil 'epkg-gitlab-package-p)} returns the
 same value as:
 
 @lisp
-(mapcar (apply-partially #'closql--remake-instance (epkg-db))
-          (epkg-sql [:select * :from packages
-                     :where class :in $v1
-                     :order-by [(asc name)]]
-                    (closql--where-class-in (epkg-db)
-                                            'epkg-gitlab-package-p)))
+(mapcar (apply-partially #'closql--remake-instance
+                         'epkg-package (epkg-db))
+        (epkg-sql [:select * :from packages
+                   :where class :in $v1
+                   :order-by [(asc name)]]
+                  (closql-where-class-in 'epkg-gitlab-package)))
 @end lisp
 @end defun
 

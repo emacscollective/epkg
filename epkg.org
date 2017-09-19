@@ -414,12 +414,12 @@ e.g. ~(oref (epkg "magit") url)~.
   same value as:
 
   #+BEGIN_SRC emacs-lisp
-    (mapcar (apply-partially #'closql--remake-instance (epkg-db))
-              (epkg-sql [:select * :from packages
-                         :where class :in $v1
-                         :order-by [(asc name)]]
-                        (closql--where-class-in (epkg-db)
-                                                'epkg-gitlab-package-p)))
+    (mapcar (apply-partially #'closql--remake-instance
+                             'epkg-package (epkg-db))
+            (epkg-sql [:select * :from packages
+                       :where class :in $v1
+                       :order-by [(asc name)]]
+                      (closql-where-class-in 'epkg-gitlab-package)))
   #+END_SRC
 
 While it is possible to get a list of provided or required features,
