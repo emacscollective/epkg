@@ -60,6 +60,7 @@
                         ;; (melpa-recipes :default eieio-unbound)
                         ;; (gelpa-recipes :default eieio-unbound)
                         ;; (builtin-libraries :default eieio-unbound)
+                        ;; patched
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -151,7 +152,9 @@
     (let ((add-column [:alter-table packages :add-column $i1 :default $s2]))
       (emacsql db add-column 'melpa-recipes     'eieio-unbound)
       (emacsql db add-column 'gelpa-recipes     'eieio-unbound)
-      (emacsql db add-column 'builtin-libraries 'eieio-unbound))))
+      (emacsql db add-column 'builtin-libraries 'eieio-unbound)
+      (emacsql db add-column 'patched           nil)
+      )))
 
 (provide 'epkg-schemata)
 ;;; epkg-schemata.el ends here
