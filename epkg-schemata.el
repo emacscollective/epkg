@@ -126,13 +126,12 @@
                        (:foreign-key
                         [epkg-package] :references packages [name]
                         :on-delete :set-null))
-    (builtin-libraries [(class :not-null)
-                        (package :not-null)
+    (builtin-libraries [(package :not-null)
                         (library :not-null)
                         feature]
                        (:foreign-key
                         [package] :references packages [name]
-                        :on-delete :set-null))
+                        :on-delete :cascade))
     ;; The above tables are linked to the `epkg-package' class.
     ;; The below tables are only accessible using `epkg-sql'.
     (pkg-homepages     [(package :not-null :primary-key)
