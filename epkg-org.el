@@ -30,7 +30,7 @@
 
 (defmacro epkg-with-org-header (header &rest body)
   (declare (indent defun))
-  `(-when-let (rows (progn ,@body))
+  `(when-let* ((rows (progn ,@body)))
      (let ((header ',header)
            (n 0) prev)
        (dolist (row rows)
@@ -44,17 +44,17 @@
 
 (defun epkg-org-link (name)
   (let ((pkg (epkg name)))
-    (--if-let (oref pkg repopage)
-        (format "[[%s][%s/%s]]" it
+    (if-let* ((repopage (oref pkg repopage)))
+        (format "[[%s][%s/%s]]" repopage
                 (oref pkg upstream-user)
                 (oref pkg upstream-name))
-      (--when-let (oref pkg homepage)
-        (format "[[%s]]" it)))))
+      (when-let* ((homepage (oref pkg homepage)))
+        (format "[[%s]]" homepage)))))
 
 (defun melpa-org-link (name)
   (let ((rcp (melpa-get name)))
-    (--when-let (oref rcp repopage)
-      (format "[[%s][%s]]" it (oref rcp repo)))))
+    (when-let* ((repopage (oref rcp repopage)))
+      (format "[[%s][%s]]" repopage (oref rcp repo)))))
 
 (provide 'epkg-org)
 ;;; epkg-org.el ends here
