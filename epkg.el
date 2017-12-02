@@ -401,6 +401,7 @@ Optional DEFAULT, if non-nil, is offered as default choice."
 (provide 'epkg)
 (require 'epkg-desc)
 (require 'epkg-list)
+(require 'epkg-utils)
 (require 'epkg-gelpa)
 (require 'epkg-melpa)
 ;;; epkg.el ends here

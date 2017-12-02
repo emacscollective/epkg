@@ -2,6 +2,12 @@
 
 * v3.1.0    UNRELEASED
 
+- Imported commands from Emir that visit files located inside
+  ~epkg-repository~.
+
+- Imported function ~epkg-repository~ and ~with-epkg-repository~
+  from Emir.
+
 - Renamed library ~epkg-util.el~ to ~epkg-org.el~.
 
 * v3.0.0    2017/09/19
