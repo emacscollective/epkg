@@ -207,6 +207,9 @@ use `TYPE*' instead of just `TYPE'."
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map tabulated-list-mode-map)
     (define-key map "\r" 'epkg-list-describe-package)
+    (define-key map (kbd "C-c C-f")   'epkg-find-file)
+    (define-key map (kbd "C-c 4 C-f") 'epkg-find-file-other-window)
+    (define-key map (kbd "C-c 5 C-f") 'epkg-find-file-other-frame)
     map)
   "Local keymap for Epkg-List mode buffers.")
 
