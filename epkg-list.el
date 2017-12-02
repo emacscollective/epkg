@@ -103,7 +103,8 @@ then no packages are omitted."
   (interactive (list (read-string "pattern: ") current-prefix-arg))
   (epkg--list-packages
    (epkg-sql [:select $i1 :from packages
-              :where (like summary $s2)
+              :where (or (like summary $s2)
+                         (like name $s2))
               :and class :in $v3]
              (epkg--list-columns-vector)
              (intern (if (string-match-p "%_" pattern)

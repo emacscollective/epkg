@@ -2,6 +2,9 @@
 
 * v3.1.0    UNRELEASED
 
+- Command ~epkg-list-matching-packages~ now also matches against
+  package names, not only their summary.
+
 - Imported commands from Emir that visit files located inside
   ~epkg-repository~.
 
