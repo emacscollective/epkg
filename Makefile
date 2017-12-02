@@ -7,8 +7,8 @@ ELS  += $(PKG)-desc.el
 ELS  += $(PKG)-list.el
 ELS  += $(PKG)-gelpa.el
 ELS  += $(PKG)-melpa.el
+ELS  += $(PKG)-org.el
 ELS  += $(PKG)-schemata.el
-ELS  += $(PKG)-util.el
 ELCS  = $(ELS:.el=.elc)
 
 DEPS  = closql

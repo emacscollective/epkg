@@ -1,5 +1,9 @@
 # -*- mode: org -*-
 
+* v3.1.0    UNRELEASED
+
+- Renamed library ~epkg-util.el~ to ~epkg-org.el~.
+
 * v3.0.0    2017/09/19
 
 - Melpa and GNU Elpa recipes are now stored as objects.  These recipes
@@ -7,7 +11,7 @@
   accessed using the functions ~melpa-recipes~, ~melpa-get~, ~gelpa-recipes~,
   and ~gelpa-get~.
 
-- Added new library ~epkg-utils.el~ containing some utilities that are
+- Added new library ~epkg-util.el~ containing some utilities that are
   intended for use elsewhere but not by Epkg itself.  Currently this
   is limited to tools useful when generating Org tables.
 

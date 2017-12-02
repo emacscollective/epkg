@@ -1,4 +1,4 @@
-;;; epkg-util.el --- various utilities            -*- lexical-binding: t -*-
+;;; epkg-org.el --- various Org mode utilities    -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2016-2017  Jonas Bernoulli
 
@@ -56,6 +56,6 @@
     (--when-let (oref rcp repopage)
       (format "[[%s][%s]]" it (oref rcp repo)))))
 
-(provide 'epkg-util)
-;;; epkg-util.el ends here
+(provide 'epkg-org)
+;;; epkg-org.el ends here
 
