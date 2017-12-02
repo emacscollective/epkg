@@ -116,10 +116,10 @@ are nil stand for empty lines."
   (with-slots (name commentary) pkg
     (insert (propertize (capitalize (oref pkg name)) 'face 'epkg-help-name))
     (insert " is a ")
-    (insert (pcase (eieio-object-class pkg)
-              ('epkg-builtin-package "built-in")
-              ('epkg-shelved-package "shelved")
-              (_ "mirrored")))
+    (insert (cl-typecase pkg
+              (epkg-builtin-package "built-in")
+              (epkg-shelved-package "shelved")
+              (t                    "mirrored")))
     (insert " package.\n\n")
     (dolist (slot (or slots epkg-describe-package-slots))
       (unless (= (char-before) ?\n)
@@ -128,7 +128,7 @@ are nil stand for empty lines."
         (null (insert ?\n))
         (function (funcall slot pkg))
         (t (--when-let (if (eq slot 'type)
-                           (closql--abbrev-class (eieio-object-class pkg))
+                           (closql--abbrev-class (type-of pkg))
                          (slot-value pkg slot))
              (epkg--insert-slot slot)
              (insert (format "%s\n" it))))))))
@@ -326,8 +326,7 @@ are nil stand for empty lines."
       (?T (insert (propertize " " 'display '(space :align-to 30)))
           (insert (if pkg
                       (let ((abbrev (symbol-name
-                                     (closql--abbrev-class
-                                      (eieio-object-class pkg)))))
+                                     (closql--abbrev-class (type-of pkg)))))
                         (if (epkg-shelved-package-p pkg)
                             (propertize abbrev 'face 'font-lock-warning-face)
                           abbrev))
