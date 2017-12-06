@@ -106,7 +106,7 @@ are nil stand for empty lines."
 (defun epkg-list-describe-package (&optional _button)
   "Display the full documentation of the package on the current line."
   (interactive)
-  (if-let* ((package (tabulated-list-get-id)))
+  (if-let ((package (tabulated-list-get-id)))
       (epkg-describe-package package)
     (call-interactively 'epkg-describe-package)))
 
