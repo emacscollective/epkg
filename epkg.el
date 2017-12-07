@@ -210,16 +210,16 @@ database."
 (defclass epkg-wiki-package (epkg-subset-package)
   ((url-format      :initform "git@github:emacsmirror/emacswiki.org.git")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
-   (homepage-format :initform "http://emacswiki.org/emacs/download/%n.el")))
+   (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
 
 (defclass epkg-elpa-package (epkg-subset-package)
-  ((url-format      :initform "git://git.savannah.gnu.org/emacs/elpa.git")
-   (repopage-format :initform "http://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/%n")
+  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/elpa.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/%n")
    (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
 
 (defclass epkg-elpa-branch-package (epkg-subset-package)
-  ((url-format      :initform "git://git.savannah.gnu.org/emacs/elpa.git")
-   (repopage-format :initform "http://git.savannah.gnu.org/cgit/emacs/elpa.git/log/?h=externals/%n")
+  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/elpa.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/elpa.git/log/?h=externals/%n")
    (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
 
 (defclass epkg-hg-package (epkg-gitish-package) ())
@@ -231,9 +231,9 @@ database."
 (defclass epkg-mocking-package (epkg-package) () :abstract t)
 
 (defclass epkg-builtin-package (epkg-mocking-package)
-  ((url-format      :initform "git://git.savannah.gnu.org/emacs.git")
-   (repopage-format :initform "http://git.savannah.gnu.org/cgit/emacs.git")
-   (homepage-format :initform "http://www.gnu.org/software/emacs")))
+  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs.git")
+   (homepage-format :initform "https://www.gnu.org/software/emacs")))
 
 (defclass epkg-shelved-package (epkg-mocking-package)
   ((mirrorpage-format :initform "https://github.com/emacsattic/%m")
