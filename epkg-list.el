@@ -26,10 +26,18 @@
 
 ;;; Options
 
-(defcustom epkg-list-packages-omit-shelved t
-  "Whether shelved packages are omitted when listing packages."
+(defcustom epkg-list-exclude-types '(shelved)
+  "Package types that are excluded from most package lists.
+
+Most commands that list packages exclude any package whose
+type matches one of the types listed here.  The command
+`epkg-list-packages-of-type' does not respect this option,
+and you can tell the other commands to ignore it as well
+by using a prefix argument."
   :group 'epkg
-  :type 'boolean)
+  :type `(repeat (choice :tag "Type"
+                         ,@(--map (list 'const it)
+                                  (closql--list-subabbrevs 'epkg-package)))))
 
 (defcustom epkg-list-columns
   '(("Package"     25 t   nil name    epkg-list-format-name)
@@ -84,9 +92,8 @@ the value is inserted as-is."
 (defun epkg-list-packages (&optional all)
   "Display a list of packages.
 
-By default shelved packages are omitted from the output.  With a
-prefix argument or when `epkg-list-packages-omit-shelved' is nil,
-then no packages are omitted."
+Respect option `epkg-list-exclude-types' unless a prefix argument
+is used."
   (interactive (list current-prefix-arg))
   (epkg--list-packages
    (epkg-sql [:select $i1 :from packages :where class :in $v2]
@@ -97,9 +104,8 @@ then no packages are omitted."
 (defun epkg-list-matching-packages (pattern &optional all)
   "Display a list of packages whose summaries match REGEXP.
 
-By default shelved packages are omitted from the output.  With a
-prefix argument or when `epkg-list-packages-omit-shelved' is nil,
-then no packages are omitted."
+Respect option `epkg-list-exclude-types' unless a prefix argument
+is used."
   (interactive (list (read-string "pattern: ") current-prefix-arg))
   (epkg--list-packages
    (epkg-sql [:select $i1 :from packages
@@ -120,9 +126,8 @@ Only keywords that are members of `finder-known-keywords' are
 offered as completion candidates, but you can also enter other
 keywords.
 
-By default shelved packages are omitted from the output.  With a
-prefix argument or when `epkg-list-packages-omit-shelved' is nil,
-then no packages are omitted."
+Respect option `epkg-list-exclude-types' unless a prefix argument
+is used."
   (interactive (list (intern (completing-read
                               "List packages with keyword: "
                               (progn (require 'finder nil t)
@@ -145,9 +150,8 @@ AUTHOR may be a name or an email address.  Packages whose
 Author(s) or Maintainer(s) header keywords contain that author
 are listed.
 
-By default shelved packages are omitted from the output.  With a
-prefix argument or when `epkg-list-packages-omit-shelved' is nil,
-then no packages are omitted."
+Respect option `epkg-list-exclude-types' unless a prefix argument
+is used."
   (interactive (list (read-string "List packages by author: ")
                      current-prefix-arg))
   (epkg--list-packages
@@ -236,10 +240,11 @@ use `TYPE*' instead of just `TYPE'."
 
 (defun epkg--list-where-class-in (all)
   (closql-where-class-in
-   (if (or all (not epkg-list-packages-omit-shelved))
+   (if all
        'epkg-package--eieio-childp
-     '(epkg-builtin-package-p
-       epkg-mirrored-package--eieio-childp))))
+     (--map (closql--expand-abbrev 'epkg-package it)
+            (cl-set-difference (closql--list-subabbrevs 'epkg-package)
+                               epkg-list-exclude-types)))))
 
 (provide 'epkg-list)
 ;;; epkg-list.el ends here

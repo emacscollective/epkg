@@ -7,7 +7,7 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.0.0 (v3.0.0-19-g54d7bb0+1)
+#+SUBTITLE: for version 3.0.0 (v3.0.0-22-gd08a4d0+1)
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -17,7 +17,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-19-g54d7bb0+1).
+This manual is for Epkg version 3.0.0 (v3.0.0-22-gd08a4d0+1).
 
 #+BEGIN_QUOTE
 Copyright (C) 2016-2017 Jonas Bernoulli <jonas@bernoul.li>
@@ -135,16 +135,13 @@ Epkg provides several commands for listing packages.
 In the buffer which lists packages, typing ~RET~ displays information
 about the package at point in another buffer.
 
-- User Option: epkg-list-packages-omit-shelved
+- User Option: epkg-list-exclude-types
 
-  This option controls whether commands that list Epkg packages omit
-  shelved packages.  By default that is the case.
-
-  Shelved packages are those that are no longer updated, and which are
-  available from the Emacsattic instead of the Emacsmirror.
-
-  The command ~epkg-list-packages-of-type~ is not affected by this
-  option, and neither is ~epkg-describe-package~.
+  The value of this option is a list of package types.  Most commands
+  that list packages exclude any package whose type matches one of the
+  types listed here.  The command ~epkg-list-packages-of-type~ does not
+  respect this option, and you can tell the other commands to ignore
+  it as well by using a prefix argument.
 
 - User Option: epkg-list-columns
 

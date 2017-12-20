@@ -2,6 +2,9 @@
 
 * v3.1.0    UNRELEASED
 
+- Added new option ~epkg-list-exclude-types~, generalizing and
+  replacing option ~epkg-list-packages-omit-shelved~.
+
 - The description created by ~epkg-describe-package~ now warns about
   package that are fetched over an insecure connection or from an
   insecure source.  (This is no guarantee that other packages are
