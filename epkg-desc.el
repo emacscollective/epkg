@@ -33,7 +33,8 @@
                 (eieio-class-slots (cl--find-class 'epkg-package)))))
 
 (defcustom epkg-describe-package-slots
-  '(summary
+  '(epkg-insert-unsafe-warning
+    summary
     epkg-insert-homepage
     epkg-insert-repopage
     epkg-insert-mirrorpage
@@ -247,6 +248,39 @@ are nil stand for empty lines."
                        :value (list pkg)
                        :format "%{Reverse dependencies:%}\n"
                        :sample-face 'epkg-help-slot)))))
+
+(defun epkg-insert-unsafe-warning (pkg)
+  (cond
+   ((epkg-wiki-package-p pkg)
+    (insert
+     (propertize
+      (concat
+       "WARNING: Anyone can edit any packages on the Emacswiki by\n"
+       "         design, making it trivial to inject malicious code.\n\n")
+      'face 'error)))
+   ((epkg-orphaned-package-p pkg)
+    (insert
+     (propertize
+      (concat
+       "WARNING: The Emacsorphanage might import this package over an\n"
+       "         insecure connection, in which case an attacker could\n"
+       "         inject malicious code.\n\n")
+      'face 'warning)))
+   ((epkg-shelved-package-p pkg)
+    (insert
+     (propertize
+      (concat
+       "WARNING: This shelved package might have been imported over an\n"
+       "         insecure connection or from an insecure source before\n"
+       "         it was moved to the Emacsattic.\n\n")
+      'face 'warning)))
+   ((string-match-p "\\`\\(http\\|git\\)://" (oref pkg url))
+    (insert
+     (propertize
+      (concat
+       "WARNING: This package is being mirrored over an insecure\n"
+       "         connection.  An attacker could inject malicious code.\n\n")
+      'face 'warning)))))
 
 ;;; Buttons
 

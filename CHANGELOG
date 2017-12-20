@@ -2,6 +2,11 @@
 
 * v3.1.0    UNRELEASED
 
+- The description created by ~epkg-describe-package~ now warns about
+  package that are fetched over an insecure connection or from an
+  insecure source.  (This is no guarantee that other packages are
+  safe.)
+
 - Command ~epkg-list-matching-packages~ now also matches against
   package names, not only their summary.
 
