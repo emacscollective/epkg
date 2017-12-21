@@ -59,9 +59,15 @@ $(PKG).elc:
 $(PKG)-desc.elc: $(PKG).elc
 $(PKG)-list.elc: $(PKG).elc
 
+# 26.1 doesn't want if-let and 25.3 doesn't have if-let*.
+SILENCIO  = --load subr-x
+SILENCIO += --eval "(put 'if-let 'byte-obsolete-info nil)"
+SILENCIO += --eval "(put 'when-let 'byte-obsolete-info nil)"
+
 %.elc: %.el
 	@printf "Compiling $<\n"
-	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) -f batch-byte-compile $<
+	@$(EMACS) -Q --batch $(EMACS_ARGS) $(SILENCIO) \
+	$(LOAD_PATH) --funcall batch-byte-compile $<
 
 info: $(PKG).info dir
 html: $(PKG).html
