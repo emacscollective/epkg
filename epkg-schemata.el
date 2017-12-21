@@ -61,6 +61,8 @@
                         ;; (gelpa-recipes :default eieio-unbound)
                         ;; (builtin-libraries :default eieio-unbound)
                         ;; patched
+                        ;; stars
+                        ;; downloads
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -153,6 +155,8 @@
       (emacsql db add-column 'gelpa-recipes     'eieio-unbound)
       (emacsql db add-column 'builtin-libraries 'eieio-unbound)
       (emacsql db add-column 'patched           nil)
+      (emacsql db add-column 'stars             nil)
+      (emacsql db add-column 'downloads         nil)
       )))
 
 (provide 'epkg-schemata)

@@ -40,20 +40,34 @@ by using a prefix argument."
                                   (closql--list-subabbrevs 'epkg-package)))))
 
 (defcustom epkg-list-columns
-  '(("Package"     25 t   nil name    epkg-list-format-name)
+  `(("Package"     25 t   nil name    epkg-list-format-name)
     ("Type"        12 t   nil class   nil)
+    (,(if (char-displayable-p ?\x2605) "\x2605 " "*")
+     4 epkg-list-sort-by-stars (:right-align t) stars nil)
+    ("Melpa"
+     6 epkg-list-sort-by-downloads (:right-align t) downloads nil)
     ("Description" 99 nil nil summary nil))
   "Slots displayed in the package menu.
 
 The value is a list of columns.  Each element has the form
-\(HEADER WIDTH SORTP PROPS SLOT FORMAT).  HEADER is the string
-displayed in the header.  WIDTH is the width of the column.  If
-SORTP is t, then the column can be sorted, if it is nil then it
-can not.  PROPS is an alist, supported keys are `:right-align'
-and `:pad-right'.  Slot is an Epkg object slot or `type'.  FORMAT
-is a function.  It is called with one argument the slot value and
-has to return a representation of that.  If FORMAT is nil, then
-the value is inserted as-is."
+\(HEADER WIDTH SORT PROPS SLOT FORMAT).
+
+HEADER is the string displayed in the header.
+WIDTH is the width of the column.
+SORT is a boolean or a function.  If it is t, then the column
+  can be sorted alphanumerically, if it is nil then it can not.
+  If it is a function then that is used as `sort's PREDICATE.
+PROPS is an alist, supported keys are `:right-align'
+  and `:pad-right'.
+SLOT is an Epkg object slot or `type'.
+FORMAT is a function.  It is called with one argument the slot
+  value and has to return a representation of that.  If FORMAT
+  is nil, then the value is inserted as-is.
+
+If an elements SLOT is `downloads', then the respective SORT
+should be `epkg-list-sort-by-downloads'.
+If an elements SLOT is `stars', then the respective SORT
+should be `epkg-list-sort-by-stars'."
   :group 'epkg
   :type `(repeat
           (list :tag "Column"
@@ -228,6 +242,8 @@ use `TYPE*' instead of just `TYPE'."
                                                 epkg-list-columns)))
   (tabulated-list-init-header))
 
+;; Utilities
+
 (defun epkg-list-format-name (name)
   (list name
         'face 'epkg-list-name
@@ -245,6 +261,28 @@ use `TYPE*' instead of just `TYPE'."
      (--map (closql--expand-abbrev 'epkg-package it)
             (cl-set-difference (closql--list-subabbrevs 'epkg-package)
                                epkg-list-exclude-types)))))
+
+(defvar-local epkg-list--download-column nil)
+
+(defun epkg-list-sort-by-downloads (a b)
+  (let ((col (or epkg-list--download-column
+                 (setq epkg-list--download-column
+                       (--find-index
+                        (eq (nth 2 it) 'epkg-list-sort-by-downloads)
+                        (append tabulated-list-format nil))))))
+    (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
+       (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))
+
+(defvar-local epkg-list--stars-column nil)
+
+(defun epkg-list-sort-by-stars (a b)
+  (let ((col (or epkg-list--stars-column
+                 (setq epkg-list--stars-column
+                       (--find-index
+                        (eq (nth 2 it) 'epkg-list-sort-by-stars)
+                        (append tabulated-list-format nil))))))
+    (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
+       (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))
 
 (provide 'epkg-list)
 ;;; epkg-list.el ends here

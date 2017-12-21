@@ -30,7 +30,7 @@ General Public License for more details.
 @finalout
 @titlepage
 @title Epkg User Manual
-@subtitle for version 3.0.0 (v3.0.0-22-gd08a4d0+1)
+@subtitle for version 3.0.0 (v3.0.0-23-g25f8c0d+1)
 @author Jonas Bernoulli
 @page
 @vskip 0pt plus 1filll
@@ -47,7 +47,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of @code{package.el}.
 
 @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-22-gd08a4d0+1).
+This manual is for Epkg version 3.0.0 (v3.0.0-23-g25f8c0d+1).
 
 @quotation
 Copyright (C) 2016-2017 Jonas Bernoulli <jonas@@bernoul.li>
@@ -191,14 +191,36 @@ it as well by using a prefix argument.
 
 This option lists the columns used in buffers that list packages.
 
-Each element has the form @code{(HEADER WIDTH SORTP PROPS SLOT FORMAT)}.
-HEADER is the string displayed in the header.  WIDTH is the width
-of the column.  If SORTP is @code{t}, then the column can be sorted, if
-it is @code{nil} then it can not.  PROPS is an alist, supported keys are
-@code{:right-align} and @code{:pad-right}.  SLOT is an Epkg object slot or @code{type}.
+Each element has the form @code{(HEADER WIDTH SORT PROPS SLOT FORMAT)}.
+
+@itemize
+@item
+HEADER is the string displayed in the header.
+
+@item
+WIDTH is the width of the column.
+
+@item
+SORT is a boolean or a function.  If it is t, then the column can
+be sorted alphanumerically, if it is nil then it can not.  If it
+is a function then that is used as @code{sort}'s PREDICATE.
+
+
+@item
+PROPS is an alist, supported keys are @code{:right-align} and @code{:pad-right}.
+
+@item
+SLOT is an Epkg object slot or @code{type}.
+
+@item
 FORMAT is a function, which is called with one argument, the slot
 value, and has to return a representation of that.  If FORMAT is
 @code{nil}, then the value is inserted as-is.
+@end itemize
+
+If an elements SLOT is @code{downloads}, then the respective SORT should be
+@code{epkg-list-sort-by-downloads}.  If an elements SLOT is @code{stars}, then the
+respective SORT should be @code{epkg-list-sort-by-stars}.
 @end defopt
 
 @defopt epkg-list-mode-hook

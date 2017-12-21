@@ -2,6 +2,10 @@
 
 * v3.1.0    UNRELEASED
 
+- Added Melpa download counts and Github stars to package objects.
+  By default this information is also displayed in package lists
+  and descriptions.
+
 - Added new option ~epkg-list-exclude-types~, generalizing and
   replacing option ~epkg-list-packages-omit-shelved~.
 

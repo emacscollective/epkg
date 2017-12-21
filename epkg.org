@@ -7,7 +7,7 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.0.0 (v3.0.0-22-gd08a4d0+1)
+#+SUBTITLE: for version 3.0.0 (v3.0.0-23-g25f8c0d+1)
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -17,7 +17,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-22-gd08a4d0+1).
+This manual is for Epkg version 3.0.0 (v3.0.0-23-g25f8c0d+1).
 
 #+BEGIN_QUOTE
 Copyright (C) 2016-2017 Jonas Bernoulli <jonas@bernoul.li>
@@ -147,14 +147,23 @@ about the package at point in another buffer.
 
   This option lists the columns used in buffers that list packages.
 
-  Each element has the form ~(HEADER WIDTH SORTP PROPS SLOT FORMAT)~.
-  HEADER is the string displayed in the header.  WIDTH is the width
-  of the column.  If SORTP is ~t~, then the column can be sorted, if
-  it is ~nil~ then it can not.  PROPS is an alist, supported keys are
-  ~:right-align~ and ~:pad-right~.  SLOT is an Epkg object slot or ~type~.
-  FORMAT is a function, which is called with one argument, the slot
-  value, and has to return a representation of that.  If FORMAT is
-  ~nil~, then the value is inserted as-is.
+  Each element has the form ~(HEADER WIDTH SORT PROPS SLOT FORMAT)~.
+
+  - HEADER is the string displayed in the header.
+  - WIDTH is the width of the column.
+  - SORT is a boolean or a function.  If it is t, then the column can
+    be sorted alphanumerically, if it is nil then it can not.  If it
+    is a function then that is used as ~sort~'s PREDICATE.
+
+  - PROPS is an alist, supported keys are ~:right-align~ and ~:pad-right~.
+  - SLOT is an Epkg object slot or ~type~.
+  - FORMAT is a function, which is called with one argument, the slot
+    value, and has to return a representation of that.  If FORMAT is
+    ~nil~, then the value is inserted as-is.
+
+  If an elements SLOT is ~downloads~, then the respective SORT should be
+  ~epkg-list-sort-by-downloads~.  If an elements SLOT is ~stars~, then the
+  respective SORT should be ~epkg-list-sort-by-stars~.
 
 - User Option: epkg-list-mode-hook
 

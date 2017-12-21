@@ -42,6 +42,8 @@
     type
     license
     updated
+    stars
+    downloads
     epkg-insert-authors
     epkg-insert-maintainers
     nil
