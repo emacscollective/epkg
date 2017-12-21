@@ -98,7 +98,7 @@ file, does not exist yet, then first ask the user to clone it."
         (emacsql-close epkg--db-connection)
         (user-error
          (concat "Please update the `epkg' package.  The installed "
-                 "version is to old for the current database scheme")))
+                 "version is too old for the current database scheme.")))
        ((< version epkg-db-version)
         (emacsql-close epkg--db-connection)
         (if (yes-or-no-p (concat "The installed `epkg' version requires a new "
