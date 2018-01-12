@@ -1,6 +1,6 @@
 ;;; epkg-desc.el --- show Epkg descriptions       -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016-2017  Jonas Bernoulli
+;; Copyright (C) 2016-2018  Jonas Bernoulli
 
 ;; This file contains code from GNU Emacs, which is
 ;; Copyright (C) 1976-2016 Free Software Foundation, Inc.

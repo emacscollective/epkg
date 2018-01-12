@@ -1,6 +1,6 @@
 ;;; epkg-utils.el --- auxiliary commands and utilities  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016-2017  Jonas Bernoulli
+;; Copyright (C) 2016-2018  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 
