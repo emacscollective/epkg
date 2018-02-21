@@ -40,7 +40,6 @@
    (files                :initform nil)
    (branch               :initform nil)
    (commit               :initform nil)
-   (module               :initform nil)
    (version-regexp       :initform nil)
    (old-names            :initform nil)
    (epkg-package         :initform nil))
@@ -63,16 +62,6 @@
 (defclass melpa-bitbucket-recipe (melpa-hg-recipe)
   ((url-format      :initform "hg::ssh://hg@bitbucket.org/%r")
    (repopage-format :initform "https://bitbucket.org/%r")))
-
-(defclass melpa-bzr-recipe (melpa-recipe) ())
-(defclass melpa-cvs-recipe (melpa-recipe) ())
-(defclass melpa-darcs-recipe (melpa-recipe) ())
-(defclass melpa-fossil-recipe (melpa-recipe) ())
-(defclass melpa-svn-recipe (melpa-recipe) ())
-
-(defclass melpa-wiki-recipe (melpa-recipe)
-  ((url-format      :initform "git@github:emacsmirror/emacswiki.org.git")
-   (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")))
 
 ;;; Interfaces
 
