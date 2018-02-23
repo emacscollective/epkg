@@ -40,6 +40,7 @@
    (files                :initform nil)
    (branch               :initform nil)
    (commit               :initform nil)
+   (module               :initform nil) ; obsolete
    (version-regexp       :initform nil)
    (old-names            :initform nil)
    (epkg-package         :initform nil))
