@@ -284,5 +284,6 @@ use `TYPE*' instead of just `TYPE'."
     (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
        (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))
 
+;;; _
 (provide 'epkg-list)
 ;;; epkg-list.el ends here

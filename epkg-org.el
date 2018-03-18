@@ -56,6 +56,7 @@
     (when-let (repopage (oref rcp repopage))
       (format "[[%s][%s]]" repopage (oref rcp repo)))))
 
+;;; _
 (provide 'epkg-org)
 ;;; epkg-org.el ends here
 

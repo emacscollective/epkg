@@ -93,6 +93,7 @@ inside the super-repository specified by `epkg-repository'."
 	  buffers)
       (funcall switch value))))
 
+;;; _
 (provide 'epkg-utils)
 ;;; epkg-utils.el ends here
 

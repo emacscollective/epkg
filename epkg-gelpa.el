@@ -46,6 +46,7 @@
 (defun gelpa-get (name)
   (closql-get (epkg-db) name 'gelpa-recipe))
 
+;;; _
 (provide 'epkg-gelpa)
 ;;; epkg-gelpa.el ends here
 

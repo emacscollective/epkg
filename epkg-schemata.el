@@ -159,5 +159,6 @@
       (emacsql db add-column 'downloads         nil)
       )))
 
+;;; _
 (provide 'epkg-schemata)
 ;;; epkg-schemata.el ends here

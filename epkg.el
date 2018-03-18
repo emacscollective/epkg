@@ -418,6 +418,7 @@ be used to provide an even better default choice, if possible."
          (--when-let (symbol-at-point)
            (symbol-name it))))))
 
+;;; _
 (provide 'epkg)
 (require 'epkg-desc)
 (require 'epkg-list)
