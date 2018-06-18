@@ -1,4 +1,5 @@
 #+TITLE: Epkg User Manual
+:PREAMBLE:
 #+AUTHOR: Jonas Bernoulli
 #+EMAIL: jonas@bernoul.li
 #+DATE: 2018
@@ -7,7 +8,7 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.0.0 (v3.0.0-26-g71ce3ff+1)
+#+SUBTITLE: for version 3.0.0 (v3.0.0-32-g432312b+1)
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -17,7 +18,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-26-g71ce3ff+1).
+This manual is for Epkg version 3.0.0 (v3.0.0-32-g432312b+1).
 
 #+BEGIN_QUOTE
 Copyright (C) 2016-2018 Jonas Bernoulli <jonas@bernoul.li>
@@ -32,7 +33,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 #+END_QUOTE
-
+:END:
 * Introduction
 
 Epkg is a package that provides access to a local copy of the

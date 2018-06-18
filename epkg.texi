@@ -17,7 +17,7 @@ later version.
 
 This document is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE@.  See the GNU
 General Public License for more details.
 @end quotation
 @end copying
@@ -30,7 +30,7 @@ General Public License for more details.
 @finalout
 @titlepage
 @title Epkg User Manual
-@subtitle for version 3.0.0 (v3.0.0-26-g71ce3ff+1)
+@subtitle for version 3.0.0 (v3.0.0-32-g432312b+1)
 @author Jonas Bernoulli
 @page
 @vskip 0pt plus 1filll
@@ -47,7 +47,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of @code{package.el}.
 
 @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-26-g71ce3ff+1).
+This manual is for Epkg version 3.0.0 (v3.0.0-32-g432312b+1).
 
 @quotation
 Copyright (C) 2016-2018 Jonas Bernoulli <jonas@@bernoul.li>
@@ -59,7 +59,7 @@ later version.
 
 This document is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE@.  See the GNU
 General Public License for more details.
 @end quotation
 @end ifnottex
@@ -203,7 +203,7 @@ WIDTH is the width of the column.
 @item
 SORT is a boolean or a function.  If it is t, then the column can
 be sorted alphanumerically, if it is nil then it can not.  If it
-is a function then that is used as @code{sort}'s PREDICATE.
+is a function then that is used as @code{sort}'s PREDICATE@.
 
 
 @item
@@ -511,14 +511,14 @@ like to extend Epkg, then you should know about the following
 functions.
 
 Epkg objects are implemented using Eieio, which more or less is an
-implementation of CLOS.  It's useful to learn about that, but to get
+implementation of CLOS@.  It's useful to learn about that, but to get
 started you may just use @code{oref} to optain information about a package,
 e.g. @code{(oref (epkg "magit") url)}.
 
 @defun epkg name
 
 This function returns an @code{epkg-package} object for the package named
-NAME.  NAME is the name of a package, a string.
+NAME@.  NAME is the name of a package, a string.
 @end defun
 
 @defun epkgs &optional select predicates
@@ -561,7 +561,7 @@ functions return these values in a form that is generally more useful.
 @defun epkg-provided package &optional include-bundled
 
 This function returns a list of features provided by the package
-PACKAGE.  PACKAGE is an @code{epkg-package} object or a package name, a
+PACKAGE@.  PACKAGE is an @code{epkg-package} object or a package name, a
 string.
 
 Bundled features are excluded from the returned list unless
@@ -571,12 +571,12 @@ optional INCLUDE-BUNDLED is non-nil.
 @defun epkg-required package
 
 This function returns a list of packages and features required by
-the package PACKAGE.  PACKAGE is an @code{epkg-package} object or a package
+the package PACKAGE@.  PACKAGE is an @code{epkg-package} object or a package
 name, a string.
 
 Each element has the form @code{(DEPENDENCY FEATURES)}, where DEPENDENCY
 is the name of a required package, a string, and FEATURES is a
-list of features provided by DEPENDENCY and required by PACKAGE.
+list of features provided by DEPENDENCY and required by PACKAGE@.
 
 If a feature is represented using a symbol, then that indicates
 that it is a mandatory dependency; if a string is used, then it
@@ -584,24 +584,24 @@ is an optional dependency.
 
 There may be a single element @code{(nil FEATURES)}, which means that
 it is unknown which package or packages provide the feature or
-features listed in FEATURES.
+features listed in FEATURES@.
 @end defun
 
 @defun epkg-provided-by feature
 
-Return the name of the package provided by FEATURE.  FEATURE has
+Return the name of the package provided by FEATURE@.  FEATURE has
 to be a symbol.
 @end defun
 
 @defun epkg-reverse-dependencies package
 
-This function returns a list of packages that depend on PACKAGE.
+This function returns a list of packages that depend on PACKAGE@.
 PACKAGE is an @code{epkg-package} object or a package name, a string.
 
 Each element has the form @code{(DEPENDANT FEATURES)}, where DEPENDANT
 is the name of a package that depends on PACKAGE, a string, and
 FEATURES is a list of features provided by PACKAGE and required
-by DEPENDANT.
+by DEPENDANT@.
 
 If a feature is represented using a symbol, then that indicates
 that it is a mandatory dependency; if a string is used, then it
@@ -610,7 +610,7 @@ is an optional dependency.
 
 @defun epkg-type arg
 
-This function returns the type of the object or class ARG.
+This function returns the type of the object or class ARG@.
 
 ARG has to be the class @code{epkg-package}, a subclass of that, an
 @code{epkg-package} object, or an object of a subclass.  The type
