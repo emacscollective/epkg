@@ -30,7 +30,7 @@ General Public License for more details.
 @finalout
 @titlepage
 @title Epkg User Manual
-@subtitle for version 3.0.0 (v3.0.0-32-g432312b+1)
+@subtitle for version 3.0.0 (v3.0.0-33-g81b1a33+1)
 @author Jonas Bernoulli
 @page
 @vskip 0pt plus 1filll
@@ -47,7 +47,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of @code{package.el}.
 
 @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-32-g432312b+1).
+This manual is for Epkg version 3.0.0 (v3.0.0-33-g81b1a33+1).
 
 @quotation
 Copyright (C) 2016-2018 Jonas Bernoulli <jonas@@bernoul.li>
@@ -115,7 +115,7 @@ announced @footnote{@uref{https://emacsair.me/2016/04/16/re-introducing-the-emac
 @chapter Installation
 
 Epkg is available from Melpa and Melpa-Stable.  To install it and its
-dependencies run @code{M-x install-package RET epkg RET}.
+dependencies run @code{M-x package-install RET epkg RET}.
 
 The Epkg database is stored in an SQLite database, which it accesses
 using the EmacSQL package.
