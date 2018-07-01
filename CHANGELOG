@@ -1,6 +1,5 @@
 # -*- mode: org -*-
-
-* v3.1.0    UNRELEASED
+* v3.1.0    2018/07/01
 
 - Added Melpa download counts and Github stars to package objects.
   By default this information is also displayed in package lists
@@ -14,7 +13,7 @@
   insecure source.  (This is no guarantee that other packages are
   safe.)
 
-- Command ~epkg-list-matching-packages~ now also matches against
+- The command ~epkg-list-matching-packages~ now also matches against
   package names, not only their summary.
 
 - Imported commands from Emir that visit files located inside
