@@ -1,4 +1,9 @@
 # -*- mode: org -*-
+* v3.1.1    2018/10/31
+
+- Use the ~:closql-table~ slot property of ~closql-1.0.0~ instead of
+  the ~:closql-columns~ property provided by older releases.
+
 * v3.1.0    2018/07/01
 
 - Added Melpa download counts and Github stars to package objects.

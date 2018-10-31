@@ -8,7 +8,7 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.0.0 (v3.0.0-33-g81b1a33+1)
+#+SUBTITLE: for version 3.1.1
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -18,7 +18,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.0.0 (v3.0.0-33-g81b1a33+1).
+This manual is for Epkg version 3.1.1.
 
 #+BEGIN_QUOTE
 Copyright (C) 2016-2018 Jonas Bernoulli <jonas@bernoul.li>
