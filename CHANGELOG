@@ -1,4 +1,8 @@
 # -*- mode: org -*-
+* v3.1.2    2018/11/27
+
+- Require ~subr-x~ only at compile-time.
+
 * v3.1.1    2018/10/31
 
 - Use the ~:closql-table~ slot property of ~closql-1.0.0~ instead of
