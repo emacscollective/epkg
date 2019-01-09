@@ -234,7 +234,7 @@ use `TYPE*' instead of just `TYPE'."
 
 (define-derived-mode epkg-list-mode tabulated-list-mode "Epkgs"
   "Major mode for browsing a list of packages."
-  (setq x-stretch-cursor        nil)
+  (setq-local x-stretch-cursor  nil)
   (setq tabulated-list-padding  0)
   (setq tabulated-list-sort-key (cons "Package" nil))
   (setq tabulated-list-format   (vconcat (--map `(,@(-take 3 it)
