@@ -191,6 +191,14 @@ database."
 
 (defclass epkg-minority-package (epkg-file-package) ())
 
+;; TODO Support multi-file packages.
+;; TODO Import actual history.
+;; See https://github.com/emacscollective/borg/issues/85.
+(defclass epkg-elpa-core-package (epkg-minority-package)
+  ((url-format      :initform "https://git.savannah.gnu.org/cgit/emacs.git/plain/%s")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/%n")
+   (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
+
 (defclass epkg-gitish-package (epkg-mirrored-package) () :abstract t)
 
 (defclass epkg-git-package (epkg-gitish-package) ())
