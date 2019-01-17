@@ -36,7 +36,7 @@
    (epkg-package         :initform nil))
   :abstract t)
 
-(defclass gelpa-builtin-recipe (gelpa-recipe) ())
+(defclass gelpa-core-recipe (gelpa-recipe) ())
 (defclass gelpa-subtree-recipe (gelpa-recipe) ())
 (defclass gelpa-external-recipe (gelpa-recipe) ())
 
