@@ -1,4 +1,16 @@
 # -*- mode: org -*-
+* v3.2.0    2019/01/18
+
+- Add the ~epkg-elpa-core-package~ class, making it possible to mirror
+  packages that GNU Elpa imports from the ~master~ branch of the Emacs
+  repository.
+
+- Rename the ~gelpa-builtin-recipe~ class to ~gelpa-core-recipe~, because
+  GNU Elpa itself uses the type ~core~ for such recipes.
+
+- No longer set ~x-strech-cursor~ globally when we only intended to set
+  it in an ~epkg-list-mode~ buffer.
+
 * v3.1.2    2018/11/27
 
 - Require ~subr-x~ only at compile-time.
