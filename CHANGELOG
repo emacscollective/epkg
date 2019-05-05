@@ -1,4 +1,9 @@
 # -*- mode: org -*-
+* v3.2.1    2019/05/05
+
+- Fix values of ~url-format~ and ~repopage-format~ slots of
+  ~epkg-minority-package~.
+
 * v3.2.0    2019/01/18
 
 - Add the ~epkg-elpa-core-package~ class, making it possible to mirror
