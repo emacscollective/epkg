@@ -147,6 +147,7 @@
 (cl-defmethod closql--db-init ((db epkg-database))
   (emacsql-enable-debugging db)
   (emacsql-with-transaction db
+    (emacsql db (format "PRAGMA user_version = %s" epkg-db-version))
     (pcase-dolist (`(,table . ,schema)
                    epkg--db-table-schemata)
       (emacsql db [:create-table $i1 $S2] table schema))
