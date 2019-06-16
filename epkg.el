@@ -217,7 +217,7 @@ database."
 
 (defclass epkg-subtree-package (epkg-git-package) ())
 
-(defclass epkg-subset-package (epkg-gitish-package) () :abstract t)
+(defclass epkg-subset-package (epkg-git-package) () :abstract t)
 
 (defclass epkg-wiki-package (epkg-subset-package)
   ((url-format      :initform "git@github:emacsmirror/emacswiki.org.git")
