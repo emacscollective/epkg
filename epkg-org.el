@@ -28,6 +28,9 @@
 
 (require 'epkg)
 
+(eval-when-compile
+  (require 'subr-x))                    ; `if-let', `when-let'
+
 (defmacro epkg-with-org-header (header &rest body)
   (declare (indent defun))
   `(when-let (rows (progn ,@body))

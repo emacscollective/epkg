@@ -24,6 +24,9 @@
 (require 'epkg)
 (require 'epkg-desc)
 
+(eval-when-compile
+  (require 'subr-x))                    ; `if-let'
+
 ;;; Options
 
 (defcustom epkg-list-exclude-types '(shelved)

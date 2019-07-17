@@ -24,6 +24,9 @@
 (require 'epkg)
 (require 'find-func)
 
+(eval-when-compile
+  (require 'subr-x))                    ; `if-let'
+
 ;;; Options
 
 (defconst epkg--custom-slot-choices
