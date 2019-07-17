@@ -35,11 +35,9 @@
 
 (require 'dash)
 (require 'seq)
+(require 'subr-x)
 
 (require 'closql)
-
-(eval-when-compile
-  (require 'subr-x))
 
 ;;; Options
 
