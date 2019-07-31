@@ -26,7 +26,6 @@
   ((closql-table         :initform gelpa-recipes)
    (closql-primary-key   :initform name)
    (closql-foreign-key   :initform epkg-package)
-   (closql-foreign-table :initform packages)
    (closql-class-prefix  :initform "gelpa-")
    (closql-class-suffix  :initform "-recipe")
    (name                 :initform nil :initarg :name)
