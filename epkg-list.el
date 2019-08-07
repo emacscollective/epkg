@@ -116,7 +116,7 @@ is used."
 
 ;;;###autoload
 (defun epkg-list-matching-packages (pattern &optional all)
-  "Display a list of packages whose summaries match PATTERN.
+  "Display a list of packages whose name or summary matches PATTERN.
 PATTERN should be a string with SQLite LIKE pattern syntax.
 If it does not contain any wildcards ('%' or '_'), it will be
 surrounded by '%' automatically.

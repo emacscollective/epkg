@@ -180,8 +180,8 @@ about the package at point in another buffer.
 
 - Command: epkg-list-matching-packages
 
-  This command displays a list of packages whose summaries match a
-  SQLite LIKE pattern, which is read in the minibuffer.
+  This command displays a list of packages whose name or summary
+  matches a SQLite LIKE pattern, which is read in the minibuffer.
 
 - Command: epkg-list-keyworded-packages
 

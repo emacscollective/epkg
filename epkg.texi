@@ -241,8 +241,8 @@ shelved) packages.
 @cindex epkg-list-matching-packages
 @deffn Command epkg-list-matching-packages
 
-This command displays a list of packages whose summaries match a
-SQLite LIKE pattern, which is read in the minibuffer.
+This command displays a list of packages whose name or summary
+matches a SQLite LIKE pattern, which is read in the minibuffer.
 @end deffn
 
 @cindex epkg-list-keyworded-packages
