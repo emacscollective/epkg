@@ -127,7 +127,7 @@ is used."
                          (like name $s2))
               :and class :in $v3]
              (epkg--list-columns-vector)
-             (intern (if (string-match-p "%_" pattern)
+             (intern (if (string-match-p "[%_]" pattern)
                          pattern
                        (concat "%" pattern "%")))
              (epkg--list-where-class-in all))))
