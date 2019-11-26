@@ -359,10 +359,10 @@ features listed in FEATURES.")
 (cl-defgeneric epkg-reverse-dependencies (package)
   "Return a list of packages that depend on PACKAGE.
 
-Each element has the form (DEPENDANT FEATURES), where DEPENDANT
+Each element has the form (DEPENDENT FEATURES), where DEPENDENT
 is the name of a package that depends on PACKAGE, a string, and
 FEATURES is a list of features provided by PACKAGE and required
-by DEPENDANT.
+by DEPENDENT.
 
 If a feature is represented using a symbol, then that indicates
 that it is a mandatory dependency; if a string is used, then it
