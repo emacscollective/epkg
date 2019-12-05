@@ -1,4 +1,8 @@
 # -*- mode: org -*-
+* v3.2.2    2019/12/05
+
+- Fix and properly document ~epkg-list-matching-packages~.
+
 * v3.2.1    2019/05/05
 
 - Fix values of ~url-format~ and ~repopage-format~ slots of
