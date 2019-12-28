@@ -134,14 +134,6 @@
                        (:foreign-key
                         [package] :references packages [name]
                         :on-delete :cascade))
-    ;; The above tables are linked to the `epkg-package' class.
-    ;; The below tables are only accessible using `epkg-sql'.
-    (pkg-homepages     [(package :not-null :primary-key)
-                        (page :not-null)])
-    (pkg-wikipages     [(package :not-null :primary-key)
-                        (page :not-null)])
-    (raw-wikipages     [(page :not-null :primary-key)
-                        (normalized :not-null)])
     ))
 
 (cl-defmethod closql--db-init ((db epkg-database))
