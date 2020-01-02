@@ -132,9 +132,9 @@ publish: html html-dir pdf
 	@printf "Generating CDN invalidation\n"
 	@aws cloudfront create-invalidation \
 	--distribution-id $(CFRONT_DIST) --paths "\
-/manual/$(PKG).html,\
-/manual/$(PKG).pdf,\
-/manual/$(PKG)/*" > /dev/null
+$(PUBLISH_PATH)$(PKG).html,\
+$(PUBLISH_PATH)$(PKG).pdf,\
+$(PUBLISH_PATH)$(PKG)/*" > /dev/null
 
 CLEAN  = $(ELCS) $(PKG)-autoloads.el $(PKG).info dir
 CLEAN += $(PKG) $(PKG).html $(PKG).pdf
