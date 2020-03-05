@@ -71,6 +71,26 @@
 (defun melpa-get (name)
   (closql-get (epkg-db) name 'melpa-recipe))
 
+;;; Utilities
+
+(defun melpa-json-recipes ()
+  (json-encode (mapcar #'melpa--recipe-plist (melpa-recipes))))
+
+(defun melpa--recipe-plist (rcp)
+  (let ((type (melpa--recipe-type rcp)))
+    `(,(intern (oref rcp name))
+      :fetcher ,type
+      ,@(if (memq type '(git hg))
+            (list :url (oref rcp url))
+          (list :repo (oref rcp repo)))
+      ,@(cl-mapcan (lambda (slot)
+                     (when-let ((value (eieio-oref rcp slot)))
+                       (list (intern (format ":%s" slot)) value)))
+                   '(files branch commit version-regexp old-names)))))
+
+(defun melpa--recipe-type (rcp)
+  (intern (substring (symbol-name (eieio-object-class-name rcp)) 6 -7)))
+
 ;;; _
 (provide 'epkg-melpa)
 ;;; epkg-melpa.el ends here
