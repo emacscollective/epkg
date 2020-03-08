@@ -424,7 +424,8 @@ be used to provide an even better default choice, if possible."
               (looking-at "^[ \t]*| \\([^ ]+\\)")
               (match-string 1))
          (--when-let (symbol-at-point)
-           (symbol-name it))))))
+           (string-trim-right (string-trim-left (symbol-name it) ".*/")
+                              "\\..*"))))))
 
 ;;; _
 (provide 'epkg)
