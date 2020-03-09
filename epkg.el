@@ -423,8 +423,8 @@ be used to provide an even better default choice, if possible."
          (and (derived-mode-p 'org-mode)
               (looking-at "^[ \t]*| \\([^ ]+\\)")
               (match-string 1))
-         (--when-let (symbol-at-point)
-           (string-trim-right (string-trim-left (symbol-name it) ".*/")
+         (when-let ((symbol (symbol-at-point)))
+           (string-trim-right (string-trim-left (symbol-name symbol) ".*/")
                               "\\..*"))))))
 
 ;;; _
