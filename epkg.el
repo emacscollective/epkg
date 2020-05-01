@@ -4,7 +4,7 @@
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
-;; Package-Requires: ((closql "1.0.1") (dash "2.16.0") (emacs "25.1"))
+;; Package-Requires: ((closql "1.0.1") (emacs "25.1"))
 ;; Keywords: tools
 
 ;; This file is not part of GNU Emacs.
@@ -33,7 +33,6 @@
 
 ;;; Code:
 
-(require 'dash)
 (require 'seq)
 (require 'subr-x)
 
@@ -319,19 +318,19 @@ features listed in FEATURES.")
 
 (cl-defmethod  epkg-required ((package string))
   (let (deps)
-    (-each (epkg-sql [:select [feature hard] :from required
-                      :where (= package $s1)
-                      :order-by [(asc feature)]]
-                     package)
-      (-lambda ((feature hard))
-        (let ((feature* (if hard feature (symbol-name feature))))
-          (if-let ((provider (epkg-provided-by feature)))
-              (unless (equal provider package)
-                (if-let ((elt (assoc provider deps)))
-                    (push feature* (cdr elt))
-                  (push (list provider feature*) deps)))
-            (push (list nil feature*) deps)))))
-    (cl-sort (mapcar (-lambda ((package . features))
+    (pcase-dolist (`(,feature ,hard)
+                   (epkg-sql [:select [feature hard] :from required
+                              :where (= package $s1)
+                              :order-by [(asc feature)]]
+                             package))
+      (let ((feature* (if hard feature (symbol-name feature))))
+        (if-let ((provider (epkg-provided-by feature)))
+            (unless (equal provider package)
+              (if-let ((elt (assoc provider deps)))
+                  (push feature* (cdr elt))
+                (push (list provider feature*) deps)))
+          (push (list nil feature*) deps))))
+    (cl-sort (mapcar (pcase-lambda (`(,package . ,features))
                        (cons package (sort features #'string<)))
                      deps)
              #'string< :key #'car)))
@@ -347,13 +346,20 @@ features listed in FEATURES.")
                                      :order-by [(asc package)]] feature))))
     (if (= (length packages) 1)
         (car packages)
-      (let ((alist (--map (cons it (epkg it)) packages)))
-        (car (or (--first (cl-typep (cdr it) 'epkg-builtin-package) alist)
-                 (--first (and (cl-typep (cdr it) 'epkg-mirrored-package)
-                               (equal    (car it) (symbol-name feature)))
-                          alist)
-                 (--first (cl-typep (cdr it) 'epkg-mirrored-package) alist)
-                 (--first (equal    (car it) (symbol-name feature)) alist)
+      (let ((alist (mapcar (lambda (name) (cons name (epkg name))) packages)))
+        (car (or (cl-find-if (pcase-lambda (`(,_ . ,pkg))
+                               (cl-typep pkg 'epkg-builtin-package))
+                             alist)
+                 (cl-find-if (pcase-lambda (`(,name . ,pkg))
+                               (and (cl-typep pkg 'epkg-mirrored-package)
+                                    (equal name (symbol-name feature))))
+                             alist)
+                 (cl-find-if (pcase-lambda (`(,_ . ,pkg))
+                               (cl-typep pkg 'epkg-mirrored-package))
+                             alist)
+                 (cl-find-if (pcase-lambda (`(,name . ,_))
+                               (equal name (symbol-name feature)))
+                             alist)
                  (car alist)))))))
 
 (cl-defgeneric epkg-reverse-dependencies (package)
@@ -374,15 +380,15 @@ is an optional dependency.
   (epkg-reverse-dependencies (oref pkg name)))
 
 (cl-defmethod  epkg-reverse-dependencies ((package string))
-  (mapcar (-lambda ((package . required))
-            (cons package (mapcar (-lambda ((_ feature hard))
+  (mapcar (pcase-lambda (`(,package . ,required))
+            (cons package (mapcar (pcase-lambda (`(,_ ,feature ,hard))
                                     (if hard feature (symbol-name feature)))
                                   required)))
-          (-group-by #'car
-                     (epkg-sql [:select [package feature hard] :from required
-                                :where feature :in $v1
-                                :order-by [(asc package) (asc feature)]]
-                               (vconcat (epkg-provided package))))))
+          (seq-group-by #'car
+                        (epkg-sql [:select [package feature hard] :from required
+                                   :where feature :in $v1
+                                   :order-by [(asc package) (asc feature)]]
+                                  (vconcat (epkg-provided package))))))
 
 ;;; Utilities
 

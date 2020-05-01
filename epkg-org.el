@@ -40,7 +40,9 @@
        (append (list (cons (format "%s (%s)" (car header) n)
                            (cdr header)))
                (list 'hline)
-               (--map (--map (or it "") it) rows)))))
+               (mapcar (lambda (row)
+                         (mapcar (lambda (elt) (or elt "")) row))
+                       rows)))))
 
 (defun epkg-org-link (name)
   (let ((pkg (epkg name)))

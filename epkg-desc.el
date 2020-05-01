@@ -29,8 +29,9 @@
 (defconst epkg--custom-slot-choices
   (nconc (list (list 'const 'type)
                (list 'const 'class))
-         (--map (list 'const (cl--slot-descriptor-name it))
-                (eieio-class-slots (cl--find-class 'epkg-package)))))
+         (mapcar (lambda (slot)
+                   (list 'const (cl--slot-descriptor-name slot)))
+                 (eieio-class-slots (cl--find-class 'epkg-package)))))
 
 (defcustom epkg-describe-package-slots
   '(epkg-insert-unsafe-warning
@@ -143,7 +144,7 @@ are nil stand for empty lines."
 
 (defun epkg-insert-person (value)
   (indent-to (+ epkg-describe-package-slots-width 2))
-  (-let [(name email) value]
+  (pcase-let ((`(,name ,email) value))
     (when name
       (insert-button name 'type 'epkg-author 'help-args (list name)))
     (when email
@@ -207,10 +208,11 @@ are nil stand for empty lines."
     (epkg--insert-slot 'provided)
     (require 'find-func)
     (while provided
-      (-let* (((library drop join) (pop provided))
-              (face (cond (drop 'font-lock-warning-face)
-                          (join 'font-lock-constant-face)
-                          (t    'default))))
+      (pcase-let* ((`(,library ,drop ,join)
+                    (pop provided))
+                   (face (cond (drop 'font-lock-warning-face)
+                               (join 'font-lock-constant-face)
+                               (t    'default))))
         (setq library (symbol-name library))
         (when (> (+ (- (point) (line-beginning-position)) (length library) 2)
                  (window-width))
@@ -334,13 +336,14 @@ are nil stand for empty lines."
 (defun epkg-dependency-tree-expander (widget)
   (let ((node (widget-get widget :node))
         (getter (widget-get widget :get-dependencies)))
-    (-when-let (pkg (car (widget-get node :value)))
-      (-map (-lambda ((name . features))
-              (list 'epkg-dependency-tree
-                    :get-dependencies getter
-                    :node (list (widget-type node)
-                                :value (cons (and name (epkg name)) features))))
-            (funcall getter pkg)))))
+    (when-let ((pkg (car (widget-get node :value))))
+      (mapcar (pcase-lambda (`(,name . ,features))
+                (list 'epkg-dependency-tree
+                      :get-dependencies getter
+                      :node (list (widget-type node)
+                                  :value (cons (and name (epkg name))
+                                               features))))
+              (funcall getter pkg)))))
 
 (define-widget 'epkg-dependency-node 'default
   "The Epkg Dependency Node widget."
@@ -350,11 +353,11 @@ are nil stand for empty lines."
   :keymap widget-keymap)
 
 (defun epkg-dependency-node-format-handler (widget escape)
-  (-let [(pkg . features) (widget-get widget :value)]
+  (pcase-let ((`(,pkg . ,features) (widget-get widget :value)))
     (pcase escape
       (?P (if pkg
               (insert-button (oref pkg name) 'type 'epkg-package
-                             'face (and (-any #'symbolp features) 'bold)
+                             'face (and (cl-find-if #'symbolp features) 'bold)
                              'help-args (list (oref pkg name)))
             (insert (propertize "unknown" 'face
                                 (if (symbolp (car features))

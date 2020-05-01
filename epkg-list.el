@@ -36,8 +36,9 @@ and you can tell the other commands to ignore it as well
 by using a prefix argument."
   :group 'epkg
   :type `(repeat (choice :tag "Type"
-                         ,@(--map (list 'const it)
-                                  (closql--list-subabbrevs 'epkg-package)))))
+                         ,@(mapcar (lambda (abbr)
+                                     (list 'const abbr))
+                                   (closql--list-subabbrevs 'epkg-package)))))
 
 (defcustom epkg-list-columns
   `(("Package"     25 t   nil name    epkg-list-format-name)
@@ -175,18 +176,19 @@ is used."
    (let ((email-p (string-match-p "@" author))
          (columns (epkg--list-columns-vector t))
          (classin (epkg--list-where-class-in all)))
-     (-union (epkg-sql [:select :distinct $i1 :from [packages authors]
-                        :where (= packages:name authors:package)
-                        :and (= $i2 $s3)
-                        :and class :in $v4]
-                       columns (if email-p 'email 'authors:name)
-                       author classin)
-             (epkg-sql [:select :distinct $i1 :from [packages maintainers]
-                        :where (= packages:name maintainers:package)
-                        :and (= $i2 $s3)
-                        :and class :in $v4]
-                       columns (if email-p 'email 'maintainers:name)
-                       author classin)))))
+     (cl-union (epkg-sql [:select :distinct $i1 :from [packages authors]
+                          :where (= packages:name authors:package)
+                          :and (= $i2 $s3)
+                          :and class :in $v4]
+                         columns (if email-p 'email 'authors:name)
+                         author classin)
+               (epkg-sql [:select :distinct $i1 :from [packages maintainers]
+                          :where (= packages:name maintainers:package)
+                          :and (= $i2 $s3)
+                          :and class :in $v4]
+                         columns (if email-p 'email 'maintainers:name)
+                         author classin)
+               :test #'equal))))
 
 ;;;###autoload
 (defun epkg-list-packages-of-type (type)
@@ -240,9 +242,10 @@ use `TYPE*' instead of just `TYPE'."
   (setq-local x-stretch-cursor  nil)
   (setq tabulated-list-padding  0)
   (setq tabulated-list-sort-key (cons "Package" nil))
-  (setq tabulated-list-format   (vconcat (--map `(,@(-take 3 it)
-                                                  ,@(-flatten (nth 3 it)))
-                                                epkg-list-columns)))
+  (setq tabulated-list-format
+        (vconcat (mapcar (pcase-lambda (`(,label ,width ,pred ,props ,_ ,_))
+                           `(,label ,width ,pred ,@props))
+                         epkg-list-columns)))
   (tabulated-list-init-header))
 
 ;; Utilities
@@ -254,24 +257,28 @@ use `TYPE*' instead of just `TYPE'."
         'action 'epkg-list-describe-package))
 
 (defun epkg--list-columns-vector (&optional qualify)
-  (let ((lst (--map (nth 4 it) epkg-list-columns)))
-    (vconcat (if qualify (-replace 'name 'packages:name lst) lst))))
+  (let ((lst (mapcar (pcase-lambda (`(,_ ,_ ,_ ,_ ,slot ,_)) slot)
+                     epkg-list-columns)))
+    (vconcat (if qualify
+                 (mapcar (lambda (e) (if (eq e 'name) 'package:name e)) lst)
+               lst))))
 
 (defun epkg--list-where-class-in (all)
   (closql-where-class-in
    (if all
        'epkg-package--eieio-childp
-     (--map (closql--expand-abbrev 'epkg-package it)
-            (cl-set-difference (closql--list-subabbrevs 'epkg-package)
-                               epkg-list-exclude-types)))))
+     (mapcar (lambda (abbr)
+               (closql--expand-abbrev 'epkg-package abbr))
+             (cl-set-difference (closql--list-subabbrevs 'epkg-package)
+                                epkg-list-exclude-types)))))
 
 (defvar-local epkg-list--download-column nil)
 
 (defun epkg-list-sort-by-downloads (a b)
   (let ((col (or epkg-list--download-column
                  (setq epkg-list--download-column
-                       (--find-index
-                        (eq (nth 2 it) 'epkg-list-sort-by-downloads)
+                       (cl-position-if
+                        (lambda (e) (eq (nth 2 e) 'epkg-list-sort-by-downloads))
                         (append tabulated-list-format nil))))))
     (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
        (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))
@@ -281,8 +288,8 @@ use `TYPE*' instead of just `TYPE'."
 (defun epkg-list-sort-by-stars (a b)
   (let ((col (or epkg-list--stars-column
                  (setq epkg-list--stars-column
-                       (--find-index
-                        (eq (nth 2 it) 'epkg-list-sort-by-stars)
+                       (cl-position-if
+                        (lambda (e) (eq (nth 2 e) 'epkg-list-sort-by-stars))
                         (append tabulated-list-format nil))))))
     (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
        (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))
