@@ -260,7 +260,7 @@ use `TYPE*' instead of just `TYPE'."
   (let ((lst (mapcar (pcase-lambda (`(,_ ,_ ,_ ,_ ,slot ,_)) slot)
                      epkg-list-columns)))
     (vconcat (if qualify
-                 (mapcar (lambda (e) (if (eq e 'name) 'package:name e)) lst)
+                 (mapcar (lambda (e) (if (eq e 'name) 'packages:name e)) lst)
                lst))))
 
 (defun epkg--list-where-class-in (all)
