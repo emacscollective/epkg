@@ -31,7 +31,7 @@ General Public License for more details.
 @finalout
 @titlepage
 @title Epkg User Manual
-@subtitle for version 3.2.2 (v3.2.2-3-g075f6af+1)
+@subtitle for version 3.2.2 (v3.2.2-11-gd987af4+1)
 @author Jonas Bernoulli
 @page
 @vskip 0pt plus 1filll
@@ -48,7 +48,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of @code{package.el}.
 
 @noindent
-This manual is for Epkg version 3.2.2 (v3.2.2-3-g075f6af+1).
+This manual is for Epkg version 3.2.2 (v3.2.2-11-gd987af4+1).
 
 @quotation
 Copyright (C) 2016-2020 Jonas Bernoulli <jonas@@bernoul.li>
@@ -514,7 +514,7 @@ functions.
 
 Epkg objects are implemented using Eieio, which more or less is an
 implementation of CLOS@.  It's useful to learn about that, but to get
-started you may just use @code{oref} to optain information about a package,
+started you may just use @code{oref} to obtain information about a package,
 e.g. @code{(oref (epkg "magit") url)}.
 
 @defun epkg name

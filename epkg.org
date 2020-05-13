@@ -8,7 +8,7 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.2.2 (v3.2.2-3-g075f6af+1)
+#+SUBTITLE: for version 3.2.2 (v3.2.2-11-gd987af4+1)
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -20,7 +20,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.2.2 (v3.2.2-3-g075f6af+1).
+This manual is for Epkg version 3.2.2 (v3.2.2-11-gd987af4+1).
 
 #+BEGIN_QUOTE
 Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
@@ -395,7 +395,7 @@ functions.
 
 Epkg objects are implemented using Eieio, which more or less is an
 implementation of CLOS.  It's useful to learn about that, but to get
-started you may just use ~oref~ to optain information about a package,
+started you may just use ~oref~ to obtain information about a package,
 e.g. ~(oref (epkg "magit") url)~.
 
 - Function: epkg name
