@@ -254,6 +254,16 @@ are nil stand for empty lines."
                        :format "%{Reverse dependencies:%}\n"
                        :sample-face 'epkg-help-slot)))))
 
+(defun epkg-insert-melpa-info (pkg)
+  (epkg--insert-slot 'melpa)
+  (if-let ((rcp (melpa-get (oref pkg name))))
+      (if-let ((url (oref rcp repopage)))
+          (insert-button url
+                         'type 'help-url
+                         'help-args (list url))
+        (insert "(?)"))
+    (insert "no recipe")))
+
 (defun epkg-insert-unsafe-warning (pkg)
   (cond
    ((epkg-wiki-package-p pkg)
