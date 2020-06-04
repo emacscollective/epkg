@@ -233,10 +233,6 @@ database."
 
 (defclass epkg-hg-package (epkg-gitish-package) ())
 
-(defclass epkg-bitbucket-package (epkg-hg-package)
-  ((url-format      :initform "hg::ssh://hg@bitbucket.org/%u/%n")
-   (repopage-format :initform "https://bitbucket.org/%u/%n")))
-
 (defclass epkg-mocking-package (epkg-package) () :abstract t)
 
 (defclass epkg-builtin-package (epkg-mocking-package)
