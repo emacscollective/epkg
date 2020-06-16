@@ -8,7 +8,7 @@
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.2.2 (v3.2.2-11-gd987af4+1)
+#+SUBTITLE: for version 3.2.2 (v3.2.2-14-ge59c554+1)
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -20,7 +20,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.2.2 (v3.2.2-11-gd987af4+1).
+This manual is for Epkg version 3.2.2 (v3.2.2-14-ge59c554+1).
 
 #+BEGIN_QUOTE
 Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
@@ -556,6 +556,21 @@ started with that function.
 [fn:6] https://emacsmirror.net/stats
 [fn:7] https://github.com/emacsmirror/epkg-reports
 
+* Command Index
+:PROPERTIES:
+:APPENDIX:   t
+:INDEX:      cp
+:END:
+* Function Index
+:PROPERTIES:
+:APPENDIX:   t
+:INDEX:      fn
+:END:
+* Variable Index
+:PROPERTIES:
+:APPENDIX:   t
+:INDEX:      vr
+:END:
 * _ Copying
 :PROPERTIES:
 :COPYING:    t
