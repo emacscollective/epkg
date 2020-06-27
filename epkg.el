@@ -40,7 +40,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 4)
+(defconst epkg-db-version 5)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
@@ -70,6 +70,9 @@ again."
 (defvar epkg--db-connection nil
   "The EmacSQL database connection.")
 
+(defvar epkg--db-prefer-binary nil
+  "Whether to prefer the binary database over the dump.")
+
 (defun epkg-db ()
   "Return the connection to the Epkg database.
 
@@ -89,8 +92,29 @@ file, does not exist yet, then first ask the user to clone it."
             (message "Cloning Epkgs repository...done")))
       (user-error "Aborted.  Epkg requires the Epkgs repository")))
   (unless (and epkg--db-connection (emacsql-live-p epkg--db-connection))
-    (closql-db 'epkg-database 'epkg--db-connection
-               (expand-file-name "epkg.sqlite" epkg-repository))
+    (let* ((default-directory epkg-repository)
+           (bin-file (expand-file-name "epkg.sqlite"))
+           (txt-file (expand-file-name "epkg.sql"))
+           (rev-file (expand-file-name "epkg.rev"))
+           (rev (car (process-lines "git" "rev-parse" "HEAD"))))
+      (when (or (not (file-exists-p bin-file))
+                (and (not epkg--db-prefer-binary)
+                     (or (not (file-exists-p rev-file))
+                         (not (equal (with-temp-buffer
+                                       (insert-file-contents rev-file)
+                                       (string-trim (buffer-string)))
+                                     rev)))))
+        (message "Initializing database from commit %s..." rev)
+        (delete-file bin-file)
+        (with-temp-buffer
+          (unless (zerop (call-process "sqlite3" nil t nil
+                                       bin-file
+                                       (format ".read %s" txt-file)))
+            (error "Failed to read %s: %s" txt-file (buffer-string))))
+        (with-temp-file rev-file
+          (insert rev ?\n))
+        (message "Initializing database from commit %s...done" rev))
+      (closql-db 'epkg-database 'epkg--db-connection bin-file))
     (let ((version (caar (emacsql epkg--db-connection "PRAGMA user_version"))))
       (cond
        ((> version epkg-db-version)
@@ -98,6 +122,13 @@ file, does not exist yet, then first ask the user to clone it."
         (user-error
          (concat "Please update the `epkg' package.  The installed "
                  "version is too old for the current database scheme.")))
+       ((and (> epkg-db-version version)
+             (= epkg-db-version 5))
+        (emacsql-close epkg--db-connection)
+        (display-warning 'epkg "\
+The database repository has been recreated from
+scratch and you have to manually clone the new incarnation.
+Please see https://github.com/emacscollective/borg/issues/91." :error))
        ((< version epkg-db-version)
         (emacsql-close epkg--db-connection)
         (if (yes-or-no-p (concat "The installed `epkg' version requires a new "
