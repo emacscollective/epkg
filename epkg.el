@@ -115,7 +115,7 @@ file, does not exist yet, then first ask the user to clone it."
           (insert rev ?\n))
         (message "Initializing database from commit %s...done" rev))
       (closql-db 'epkg-database 'epkg--db-connection bin-file))
-    (let ((version (caar (emacsql epkg--db-connection "PRAGMA user_version"))))
+    (let ((version (closql--db-get-version epkg--db-connection)))
       (cond
        ((> version epkg-db-version)
         (emacsql-close epkg--db-connection)
