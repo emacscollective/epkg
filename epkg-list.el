@@ -46,7 +46,7 @@ by using a prefix argument."
     (,(if (char-displayable-p ?\x2605) "\x2605 " "*")
      4 epkg-list-sort-by-stars (:right-align t) stars nil)
     ("Melpa"
-     6 epkg-list-sort-by-downloads (:right-align t) downloads nil)
+     7 epkg-list-sort-by-downloads (:right-align t) downloads nil)
     ("Description" 99 nil nil summary nil))
   "Slots displayed in the package menu.
 
