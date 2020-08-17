@@ -40,7 +40,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 5)
+(defconst epkg-db-version 6)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
@@ -217,16 +217,6 @@ database."
 
 (defclass epkg-file-package (epkg-mirrored-package) ())
 
-(defclass epkg-minority-package (epkg-file-package) ())
-
-;; TODO Support multi-file packages.
-;; TODO Import actual history.
-;; See https://github.com/emacscollective/borg/issues/85.
-(defclass epkg-elpa-core-package (epkg-minority-package)
-  ((url-format      :initform "https://git.savannah.gnu.org/cgit/emacs.git/plain/%l")
-   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs.git/tree/%l")
-   (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
-
 (defclass epkg-gitish-package (epkg-mirrored-package) () :abstract t)
 
 (defclass epkg-git-package (epkg-gitish-package) ())
@@ -244,6 +234,15 @@ database."
    (repopage-format :initform "https://gitlab.com/%u/%n")))
 
 (defclass epkg-subtree-package (epkg-git-package) ())
+
+(defclass epkg-subrepo-package (epkg-git-package) ())
+
+(defclass epkg-minority-package (epkg-subrepo-package) ())
+
+(defclass epkg-elpa-core-package (epkg-subrepo-package)
+  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs.git")
+   (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
 
 (defclass epkg-subset-package (epkg-git-package) () :abstract t)
 
