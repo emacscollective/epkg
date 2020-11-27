@@ -433,13 +433,19 @@ offered as completion candidates."
 
 (defvar epkg-package-history nil)
 
-(defun epkg-read-package (prompt &optional default)
+(defun epkg-read-package (prompt &optional default predicates)
   "Read the name of an Epkg package and return it as a string.
 
 A reasonable default choice is offered.  Optional DEFAULT can
-be used to provide an even better default choice, if possible."
+be used to provide an even better default choice, if possible.
+
+If optional PREDICATES is non-nil, then it has to be a list of
+package class predicate functions, or a single such function.
+Valid functions are named either `epkg-TYPE-package-p' or
+`epkg-TYPE-package--eieio-childp'.  Limit completion choices
+to packages for which one of these predicates returns non-nil."
   (completing-read
-   prompt (epkgs 'name)
+   prompt (epkgs 'name predicates)
    nil t nil 'epkg-package-history
    (save-match-data
      (or default
