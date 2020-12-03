@@ -30,6 +30,7 @@
    (closql-class-suffix  :initform "-recipe")
    (name                 :initform nil :initarg :name)
    (url                  :initform nil)
+   ;; Used to hold the subtree method (squash or merge).
    (method               :initform nil)
    (released             :initform nil)
    (epkg-package         :initform nil))
