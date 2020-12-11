@@ -37,7 +37,6 @@
   :abstract t)
 
 (defclass gelpa-core-recipe (gelpa-recipe) ())
-(defclass gelpa-subtree-recipe (gelpa-recipe) ())
 (defclass gelpa-external-recipe (gelpa-recipe) ())
 
 (defun gelpa-recipes (&optional select predicates)

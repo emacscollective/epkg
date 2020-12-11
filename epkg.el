@@ -251,11 +251,6 @@ database."
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
    (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
 
-(defclass epkg-elpa-package (epkg-subset-package)
-  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/elpa.git")
-   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/%n")
-   (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
-
 (defclass epkg-elpa-branch-package (epkg-subset-package)
   ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/elpa.git")
    (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/elpa.git/log/?h=externals/%n")
