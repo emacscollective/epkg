@@ -261,7 +261,7 @@ are nil stand for empty lines."
           (insert-button url
                          'type 'help-url
                          'help-args (list url))
-        (insert "(?)"))
+        (insert "available"))
     (insert "no recipe")))
 
 (defun epkg-insert-unsafe-warning (pkg)
