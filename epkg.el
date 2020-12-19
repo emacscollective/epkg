@@ -233,6 +233,18 @@ database."
   ((url-format      :initform "git@gitlab.com:%u/%n.git")
    (repopage-format :initform "https://gitlab.com/%u/%n")))
 
+(defclass epkg-savannah-package (epkg-git-package) () :abstact t)
+
+(defclass epkg-gnu-package (epkg-savannah-package)
+  ((url-format      :initform "https://git.savannah.gnu.org/git/%n.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/%n.git")
+   (homepage-format :initform "https://savannah.gnu.org/projects/%n")))
+
+(defclass epkg-nongnu-package (epkg-savannah-package)
+  ((url-format      :initform "https://git.savannah.nongnu.org/git/%n.git")
+   (repopage-format :initform "https://git.savannah.nongnu.org/cgit/%n.git")
+   (homepage-format :initform "https://savannah.nongnu.org/projects/%n")))
+
 (defclass epkg-subtree-package (epkg-git-package) ())
 
 (defclass epkg-subrepo-package (epkg-git-package) ())
