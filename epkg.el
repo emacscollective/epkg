@@ -233,6 +233,10 @@ database."
   ((url-format      :initform "git@gitlab.com:%u/%n.git")
    (repopage-format :initform "https://gitlab.com/%u/%n")))
 
+(defclass epkg-sourcehut-package (epkg-git-package)
+  ((url-format      :initform "https://git.sr.ht/~%u/%n")
+   (repopage-format :initform "https://git.sr.ht/~%u/%n")))
+
 (defclass epkg-savannah-package (epkg-git-package) () :abstact t)
 
 (defclass epkg-gnu-package (epkg-savannah-package)
