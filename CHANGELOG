@@ -1,4 +1,17 @@
 # -*- mode: org -*-
+* v3.3.0    UNRELEASED
+
+- The database is now being distributed as a text file instead of
+  in its binary form.  That results in more useful diffs and most
+  importantly it shrinks the size of the repository.  Users have
+  to remove the old repository and clone the new one in its place.
+
+- Add, remove and rename several package classes, adding support
+  for GNU savannah, nongnu savannah, updated GNU elpa, new nongnu
+  elpa and sourcehut.
+
+- No longer depend on ~dash~.
+
 * v3.2.2    2019/12/05
 
 - Fix and properly document ~epkg-list-matching-packages~.
