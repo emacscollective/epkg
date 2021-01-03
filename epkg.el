@@ -1,6 +1,6 @@
 ;;; epkg.el --- browse the Emacsmirror package database  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016-2020  Jonas Bernoulli
+;; Copyright (C) 2016-2021  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg

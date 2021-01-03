@@ -2,13 +2,13 @@
 :PREAMBLE:
 #+AUTHOR: Jonas Bernoulli
 #+EMAIL: jonas@bernoul.li
-#+DATE: 2018-2020
+#+DATE: 2018-2021
 #+LANGUAGE: en
 
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.2.2 (v3.2.2-14-ge59c554+1)
+#+SUBTITLE: for version 3.2.2 (v3.2.2-29-gf721e38+1)
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
@@ -20,10 +20,10 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.2.2 (v3.2.2-14-ge59c554+1).
+This manual is for Epkg version 3.2.2 (v3.2.2-29-gf721e38+1).
 
 #+BEGIN_QUOTE
-Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
+Copyright (C) 2016-2021 Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
 of the GNU General Public License as published by the Free Software
@@ -577,7 +577,7 @@ started with that function.
 :END:
 
 #+BEGIN_QUOTE
-Copyright (C) 2016-2020 Jonas Bernoulli <jonas@bernoul.li>
+Copyright (C) 2016-2021 Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
 of the GNU General Public License as published by the Free Software
