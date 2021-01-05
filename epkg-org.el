@@ -32,7 +32,11 @@
   (declare (indent defun))
   `(when-let (rows (progn ,@body))
      (let ((header ',header)
+           (sort nil)
            (n 0) prev)
+       (when (numberp (car header))
+         (setq sort (apply-partially (lambda (n r) (nth n r)) (car header)))
+         (setq header (cdr header)))
        (dolist (row rows)
          (unless (equal (car row) prev)
            (cl-incf n))
@@ -42,7 +46,9 @@
                (list 'hline)
                (mapcar (lambda (row)
                          (mapcar (lambda (elt) (or elt "")) row))
-                       rows)))))
+                       (if sort
+                           (cl-sort rows #'string< :key sort)
+                         rows))))))
 
 (defun epkg-org-link (name)
   (let ((pkg (epkg name)))
