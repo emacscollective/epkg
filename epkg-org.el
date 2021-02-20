@@ -61,8 +61,9 @@
 
 (defun melpa-org-link (name)
   (let ((rcp (melpa-get name)))
-    (when-let (repopage (oref rcp repopage))
-      (format "[[%s][%s]]" repopage (oref rcp repo)))))
+    (if-let (repopage (oref rcp repopage))
+        (format "[[%s][%s]]" repopage (oref rcp repo))
+      (oref rcp url))))
 
 ;;; _
 (provide 'epkg-org)
