@@ -15,7 +15,6 @@ ELCS  = $(ELS:.el=.elc)
 DEPS  = closql
 DEPS += dash
 DEPS += emacsql
-DEPS += finalize
 
 EMACS      ?= emacs
 EMACS_ARGS ?=
