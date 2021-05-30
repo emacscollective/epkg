@@ -5,7 +5,7 @@
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
-;; Package-Requires: ((closql "1.0.1") (emacs "25.1"))
+;; Package-Requires: ((closql "1.0.5") (emacs "25.1"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;; This file is free software; you can redistribute it and/or modify

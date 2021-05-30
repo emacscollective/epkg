@@ -1,5 +1,5 @@
 # -*- mode: org -*-
-* v3.3.0    UNRELEASED
+* v3.3.0    2021/05/30
 
 - The database is now being distributed as a text file instead of
   in its binary form.  That results in more useful diffs and most
