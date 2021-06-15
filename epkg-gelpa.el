@@ -49,4 +49,3 @@
 ;;; _
 (provide 'epkg-gelpa)
 ;;; epkg-gelpa.el ends here
-

@@ -88,13 +88,12 @@ inside the super-repository specified by `epkg-repository'."
 (defun epkg-find-file-noselect (filename:s switch &optional wildcards)
   (let ((value (find-file-noselect filename:s nil nil wildcards)))
     (if (listp value)
-	(let ((buffers (nreverse value)))
-	  (funcall switch (car buffers))
-	  (mapc #'switch-to-buffer (cdr buffers))
-	  buffers)
+        (let ((buffers (nreverse value)))
+          (funcall switch (car buffers))
+          (mapc #'switch-to-buffer (cdr buffers))
+          buffers)
       (funcall switch value))))
 
 ;;; _
 (provide 'epkg-utils)
 ;;; epkg-utils.el ends here
-
