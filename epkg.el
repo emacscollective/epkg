@@ -66,7 +66,7 @@ again."
 ;;; Database
 
 (defclass epkg-database (closql-database)
-  ((object-class :initform epkg-package)))
+  ((object-class :initform 'epkg-package)))
 
 (defvar epkg--db-connection nil
   "The EmacSQL database connection.")
@@ -169,8 +169,8 @@ database."
 (defclass epkg-package (closql-object)
   ((closql-class-prefix :initform "epkg-")
    (closql-class-suffix :initform "-package")
-   (closql-table        :initform packages)
-   (closql-primary-key  :initform name)
+   (closql-table        :initform 'packages)
+   (closql-primary-key  :initform 'name)
    (repopage-format     :initform nil :allocation :class)
    (homepage-format     :initform nil :allocation :class)
    (mirrorpage-format   :initform nil :allocation :class)

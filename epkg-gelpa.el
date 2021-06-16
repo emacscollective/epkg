@@ -24,9 +24,9 @@
 (require 'epkg)
 
 (defclass gelpa-recipe (closql-object)
-  ((closql-table         :initform gelpa-recipes)
-   (closql-primary-key   :initform name)
-   (closql-foreign-key   :initform epkg-package)
+  ((closql-table         :initform 'gelpa-recipes)
+   (closql-primary-key   :initform 'name)
+   (closql-foreign-key   :initform 'epkg-package)
    (closql-class-prefix  :initform "gelpa-")
    (closql-class-suffix  :initform "-recipe")
    (name                 :initform nil :initarg :name)

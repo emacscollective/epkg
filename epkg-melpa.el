@@ -26,9 +26,9 @@
 ;;; Superclass
 
 (defclass melpa-recipe (closql-object)
-  ((closql-table         :initform melpa-recipes)
-   (closql-primary-key   :initform name)
-   (closql-foreign-key   :initform epkg-package)
+  ((closql-table         :initform 'melpa-recipes)
+   (closql-primary-key   :initform 'name)
+   (closql-foreign-key   :initform 'epkg-package)
    (closql-class-prefix  :initform "melpa-")
    (closql-class-suffix  :initform "-recipe")
    (url-format           :initform nil :allocation :class)
