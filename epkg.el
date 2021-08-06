@@ -148,11 +148,11 @@ database."
   (interactive)
   (when epkg--db-connection
     (emacsql-close epkg--db-connection))
-  (let ((default-directory epkg-repository))
-    (message "Pulling Epkg database...")
-    (epkg--call-git "pull" "--no-recurse-submodules" "origin" "master")
-    (message "Pulling Epkg database...done"))
-  (epkg-db))
+  (prog1 (epkg-db)
+    (let ((default-directory epkg-repository))
+      (message "Pulling Epkg database...")
+      (epkg--call-git "pull" "--no-recurse-submodules" "origin" "master")
+      (message "Pulling Epkg database...done"))))
 
 (defvar magit-process-popup-time)
 (declare-function magit-call-git "magit-process" (&rest args))
