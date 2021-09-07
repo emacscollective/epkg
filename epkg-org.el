@@ -53,11 +53,18 @@
 (defun epkg-org-link (name)
   (let ((pkg (epkg name)))
     (if-let (repopage (oref pkg repopage))
-        (format "[[%s][%s/%s]]" repopage
-                (oref pkg upstream-user)
-                (oref pkg upstream-name))
+        (if-let ((user (oref pkg upstream-user))
+                 (name (oref pkg upstream-name)))
+            (format "[[%s][%s/%s]]" repopage user name)
+          (format "[[%s]]" repopage))
       (when-let (homepage (oref pkg homepage))
-        (format "[[%s]]" homepage)))))
+        (cl-typecase pkg
+          (epkg-gnu-package
+           (format "[[%s][gnu:%s]]" homepage name))
+          (epkg-nongnu-package
+           (format "[[%s][nongnu:%s]]" homepage name))
+          (t
+           (format "[[%s]]" homepage)))))))
 
 (defun melpa-org-link (name)
   (let ((rcp (melpa-get name)))
