@@ -5,7 +5,7 @@
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
-;; Package-Requires: ((closql "1.0.6") (emacs "25.1"))
+;; Package-Requires: ((closql "20210927") (emacs "25.1"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;; This file is free software; you can redistribute it and/or modify
@@ -63,10 +63,27 @@ again."
   :group 'epkg
   :type 'directory)
 
+(defcustom epkg-database-connector 'sqlite
+  "The database connector used by Forge.
+This must be set before `epkg' is loaded.  To use an alternative
+connectors you must install the respective package explicitly."
+  :package-version '(epkg . "3.4.0")
+  :group 'epkg
+  :type '(choice (const sqlite)
+                 (const libsqlite3)
+                 (symbol :tag "other")))
+
 ;;; Database
 
-(defclass epkg-database (closql-database)
-  ((object-class :initform 'epkg-package)))
+(cl-case epkg-database-connector
+  (sqlite
+   (defclass epkg-database (emacsql-sqlite-connection closql-database)
+     ((object-class :initform 'epkg-package))))
+  (libsqlite3
+   (require (quote emacsql-libsqlite3))
+   (with-no-warnings
+     (defclass epkg-database (emacsql-libsqlite3-connection closql-database)
+       ((object-class :initform 'forge-repository))))))
 
 (defvar epkg--db-connection nil
   "The EmacSQL database connection.")
