@@ -75,6 +75,7 @@ connectors you must install the respective package explicitly."
 
 ;;; Database
 
+(declare-function epkg-database--eieio-childp "epkg.el" (obj) t)
 (cl-case epkg-database-connector
   (sqlite
    (defclass epkg-database (emacsql-sqlite-connection closql-database)
