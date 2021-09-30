@@ -83,7 +83,7 @@ connectors you must install the respective package explicitly."
    (require (quote emacsql-libsqlite3))
    (with-no-warnings
      (defclass epkg-database (emacsql-libsqlite3-connection closql-database)
-       ((object-class :initform 'forge-repository))))))
+       ((object-class :initform 'epkg-package))))))
 
 (defvar epkg--db-connection nil
   "The EmacSQL database connection.")
