@@ -180,13 +180,13 @@ is used."
                           :where (= packages:name authors:package)
                           :and (= $i2 $s3)
                           :and class :in $v4]
-                         columns (if email-p 'email 'authors:name)
+                         columns (if email-p 'authors:email 'authors:name)
                          author classin)
                (epkg-sql [:select :distinct $i1 :from [packages maintainers]
                           :where (= packages:name maintainers:package)
                           :and (= $i2 $s3)
                           :and class :in $v4]
-                         columns (if email-p 'email 'maintainers:name)
+                         columns (if email-p 'maintainers:email 'maintainers:name)
                          author classin)
                :test #'equal))))
 
