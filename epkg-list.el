@@ -173,22 +173,19 @@ is used."
   (interactive (list (read-string "List packages by author: ")
                      current-prefix-arg))
   (epkg--list-packages
-   (let ((email-p (string-match-p "@" author))
-         (columns (epkg--list-columns-vector t))
-         (classin (epkg--list-where-class-in all)))
-     (cl-union (epkg-sql [:select :distinct $i1 :from [packages authors]
-                          :where (= packages:name authors:package)
-                          :and (= $i2 $s3)
-                          :and class :in $v4]
-                         columns (if email-p 'authors:email 'authors:name)
-                         author classin)
-               (epkg-sql [:select :distinct $i1 :from [packages maintainers]
-                          :where (= packages:name maintainers:package)
-                          :and (= $i2 $s3)
-                          :and class :in $v4]
-                         columns (if email-p 'maintainers:email 'maintainers:name)
-                         author classin)
-               :test #'equal))))
+   (let ((emailp (string-match-p "@" author)))
+     (epkg-sql [:select :distinct $i1
+                :from [packages authors maintainers]
+                :where (and (in class $v2)
+                            (or (and (= authors:package packages:name)
+                                     (= $i3 $s5))
+                                (and (= maintainers:package packages:name)
+                                     (= $i4 $s5))))]
+               (epkg--list-columns-vector t)
+               (epkg--list-where-class-in all)
+               (if emailp 'authors:email 'authors:name)
+               (if emailp 'maintainers:email 'maintainers:name)
+               author))))
 
 ;;;###autoload
 (defun epkg-list-packages-of-type (type)
