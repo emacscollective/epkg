@@ -2,28 +2,28 @@
 :PREAMBLE:
 #+AUTHOR: Jonas Bernoulli
 #+EMAIL: jonas@bernoul.li
-#+DATE: 2018-2021
+#+DATE: 2018-{{{year}}}
 #+LANGUAGE: en
 
 #+TEXINFO_DIR_CATEGORY: Emacs
 #+TEXINFO_DIR_TITLE: Epkg: (epkg).
 #+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version 3.3.1
+#+SUBTITLE: for version {{{version}}}
 
 #+TEXINFO_DEFFN: t
 #+OPTIONS: H:4 num:4 toc:2
 #+PROPERTY: header-args :eval never
-#+BIND: ox-texinfo+-before-export-hook ox-texinfo+-update-copyright-years
-#+BIND: ox-texinfo+-before-export-hook ox-texinfo+-update-version-strings
+#+MACRO: version (eval (ox-texinfo+-get-version 'mixed))
+#+MACRO: year (eval (format-time-string "%Y"))
 
 With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+TEXINFO: @noindent
-This manual is for Epkg version 3.3.1.
+This manual is for Epkg version {{{version}}}.
 
 #+BEGIN_QUOTE
-Copyright (C) 2016-2021 Jonas Bernoulli <jonas@bernoul.li>
+Copyright (C) 2016-{{{year}}} Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
 of the GNU General Public License as published by the Free Software
@@ -577,7 +577,7 @@ started with that function.
 :END:
 
 #+BEGIN_QUOTE
-Copyright (C) 2016-2021 Jonas Bernoulli <jonas@bernoul.li>
+Copyright (C) 2016-{{{year}}} Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
 of the GNU General Public License as published by the Free Software
