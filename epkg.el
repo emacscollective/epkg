@@ -280,7 +280,7 @@ database."
    (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
 
 (defclass epkg-wiki-package (epkg-git-package)
-  ((url-format      :initform "git@github:emacsmirror/emacswiki.org.git")
+  ((url-format      :initform "git@github.com:emacsmirror/emacswiki.org.git")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
    (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
 
