@@ -1,28 +1,28 @@
-#+TITLE: Epkg User Manual
+#+title: Epkg User Manual
 :PREAMBLE:
-#+AUTHOR: Jonas Bernoulli
-#+EMAIL: jonas@bernoul.li
-#+DATE: 2018-{{{year}}}
-#+LANGUAGE: en
+#+author: Jonas Bernoulli
+#+email: jonas@bernoul.li
+#+date: 2018-{{{year}}}
+#+language: en
 
-#+TEXINFO_DIR_CATEGORY: Emacs
-#+TEXINFO_DIR_TITLE: Epkg: (epkg).
-#+TEXINFO_DIR_DESC: Browse the Emacsmirror's database
-#+SUBTITLE: for version {{{version}}}
+#+texinfo_dir_category: Emacs
+#+texinfo_dir_title: Epkg: (epkg).
+#+texinfo_dir_desc: Browse the Emacsmirror's database
+#+subtitle: for version {{{version}}}
 
-#+TEXINFO_DEFFN: t
-#+OPTIONS: H:4 num:4 toc:2
-#+PROPERTY: header-args :eval never
-#+MACRO: version (eval (ox-texinfo+-get-version 'mixed))
-#+MACRO: year (eval (format-time-string "%Y"))
+#+texinfo_deffn: t
+#+options: H:4 num:4 toc:2
+#+property: header-args :eval never
+#+macro: version (eval (ox-texinfo+-get-version 'mixed))
+#+macro: year (eval (format-time-string "%Y"))
 
 With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
-#+TEXINFO: @noindent
+#+texinfo: @noindent
 This manual is for Epkg version {{{version}}}.
 
-#+BEGIN_QUOTE
+#+begin_quote
 Copyright (C) 2016-{{{year}}} Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
@@ -34,7 +34,7 @@ This document is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
-#+END_QUOTE
+#+end_quote
 :END:
 * Introduction
 
@@ -95,9 +95,9 @@ clone it to the location specified by the option ~epkg-repository~.  It
 isn't necessary but preferable to clone the repository manually before
 loading ~epkg~.
 
-#+BEGIN_SRC shell
+#+begin_src shell
   git clone https://github.com/emacsmirror/epkgs.git ~/.emacs.d/epkgs
-#+END_SRC
+#+end_src
 
 If you cloned the repository to a different location, then you have to
 set the value of ~epkg-repository~ accordingly.  Add the following to
@@ -105,9 +105,9 @@ your init file and don't forget to evaluate that form so that it also
 takes effect in the current session.  To do so place the cursor after
 the closing parentheses and type ~C-M-x~.
 
-#+BEGIN_SRC shell
+#+begin_src shell
   (setq epkg-repository "/path/to/epkgs/")
-#+END_SRC
+#+end_src
 
 - User Option: epkg-repository
 
@@ -576,7 +576,7 @@ started with that function.
 :COPYING:    t
 :END:
 
-#+BEGIN_QUOTE
+#+begin_quote
 Copyright (C) 2016-{{{year}}} Jonas Bernoulli <jonas@bernoul.li>
 
 You can redistribute this document and/or modify it under the terms
@@ -588,7 +588,7 @@ This document is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
-#+END_QUOTE
+#+end_quote
 
 # IMPORTANT: Also update ORG_ARGS and ORG_EVAL in the Makefile.
 # Local Variables:
