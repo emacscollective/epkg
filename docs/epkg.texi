@@ -31,7 +31,7 @@ General Public License for more details.
 @finalout
 @titlepage
 @title Epkg User Manual
-@subtitle for version 3.3.1
+@subtitle for version v3.3.1-20-g19e099e+1
 @author Jonas Bernoulli
 @page
 @vskip 0pt plus 1filll
@@ -48,7 +48,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of @code{package.el}.
 
 @noindent
-This manual is for Epkg version 3.3.1.
+This manual is for Epkg version v3.3.1-20-g19e099e+1.
 
 @quotation
 Copyright (C) 2016-2021 Jonas Bernoulli <jonas@@bernoul.li>
@@ -74,8 +74,7 @@ General Public License for more details.
 * Package Types::
 * Using Epkg Objects::
 * Querying the Database::
-* Command Index::
-* Function Index::
+* Function and Command Index::
 * Variable Index::
 @end menu
 
@@ -151,7 +150,6 @@ the closing parentheses and type @code{C-M-x}.
 @end example
 
 @defopt epkg-repository
-
 This option specifies the location of the local Emacsmirror
 repository.
 
@@ -167,9 +165,7 @@ The local clone of the Epkg repository is not updated automatically,
 so you should periodically use @code{M-x epkg-update RET} to update the
 database.
 
-@cindex epkg-update
 @deffn Command epkg-update
-
 This command updates the Epkg database by pulling the @code{master} branch
 in the @code{epkg-repository} and then reloading the Epkg database.  It
 returns the database connection.
@@ -184,7 +180,6 @@ In the buffer which lists packages, typing @code{RET} displays information
 about the package at point in another buffer.
 
 @defopt epkg-list-exclude-types
-
 The value of this option is a list of package types.  Most commands
 that list packages exclude any package whose type matches one of the
 types listed here.  The command @code{epkg-list-packages-of-type} does not
@@ -193,7 +188,6 @@ it as well by using a prefix argument.
 @end defopt
 
 @defopt epkg-list-columns
-
 This option lists the columns used in buffers that list packages.
 
 Each element has the form @code{(HEADER WIDTH SORT PROPS SLOT FORMAT)}.
@@ -201,22 +195,17 @@ Each element has the form @code{(HEADER WIDTH SORT PROPS SLOT FORMAT)}.
 @itemize
 @item
 HEADER is the string displayed in the header.
-
 @item
 WIDTH is the width of the column.
-
 @item
 SORT is a boolean or a function.  If it is t, then the column can
 be sorted alphanumerically, if it is nil then it can not.  If it
 is a function then that is used as @code{sort}'s PREDICATE@.
 
-
 @item
 PROPS is an alist, supported keys are @code{:right-align} and @code{:pad-right}.
-
 @item
 SLOT is an Epkg object slot or @code{type}.
-
 @item
 FORMAT is a function, which is called with one argument, the slot
 value, and has to return a representation of that.  If FORMAT is
@@ -229,28 +218,21 @@ respective SORT should be @code{epkg-list-sort-by-stars}.
 @end defopt
 
 @defopt epkg-list-mode-hook
-
 This hook is run after entering Epkg-List mode, the mode used in
 buffers that list packages.
 @end defopt
 
-@cindex epkg-list-packages
 @deffn Command epkg-list-packages
-
 This command displays a list of all mirrored (and possibly also
 shelved) packages.
 @end deffn
 
-@cindex epkg-list-matching-packages
 @deffn Command epkg-list-matching-packages
-
 This command displays a list of packages whose name or summary
 matches a SQLite LIKE pattern, which is read in the minibuffer.
 @end deffn
 
-@cindex epkg-list-keyworded-packages
 @deffn Command epkg-list-keyworded-packages
-
 This command displays a list of packages that have a keyword set,
 which is read in the minibuffer.
 
@@ -258,9 +240,7 @@ Only keywords that are members of @code{finder-known-keywords} are offered
 as completion candidates, but you can also enter other keywords.
 @end deffn
 
-@cindex epkg-list-packages-by-author
 @deffn Command epkg-list-packages-by-author
-
 This command displays a list of packages which are authored or
 maintained by a person.  The person, a name or email address, is
 read in the minibuffer.
@@ -272,9 +252,7 @@ packages from their output.  With a prefix argument or when
 packages.  However the following command ignores this option and
 always lists shelved packages when appropriate.
 
-@cindex epkg-list-packages-of-type
 @deffn Command epkg-list-packages-of-type
-
 This command displays a list of packages of a certain type.  The
 type is read in the minibuffer.  To list all packages of a certain
 type and its subtypes use @code{TYPE*} instead of just @code{TYPE}.
@@ -313,17 +291,13 @@ first column lists the names of packages which depend on features from
 the described package and the third column shows which of these
 libraries are required.
 
-@cindex epkg-describe-package
 @deffn Command epkg-describe-package
-
 This command displays information about a package in a separate
 buffer.  The name of the package to be displayed is read in the
 minibuffer.
 @end deffn
 
-@cindex epkg-list-describe-package
 @deffn Command epkg-list-describe-package
-
 This command displays information about the package at point in
 a separate buffer.
 
@@ -333,7 +307,6 @@ package other than the one at point use @code{epkg-describe-package}.
 @end deffn
 
 @defopt epkg-describe-package-slots
-
 The value of this option is a list of slots to be displayed when
 displaying information about an Epkg package in a help buffer.
 
@@ -346,7 +319,6 @@ empty lines.
 @end defopt
 
 @defopt epkg-describe-package-slots-width
-
 The value of this option specifies the width used to display slot
 names in buffers displaying information about an Epkg package.
 @end defopt
@@ -385,7 +357,6 @@ Packages that are available as a repository on the Emacsmirror
 
 Packages that are distributed as plain files.
 
-
 @item
 @code{gitish}
 
@@ -415,12 +386,10 @@ to be mirrored because other packages depend on them.
 Please consider adopting an orphaned package.
 @end itemize
 
-
 @item
 @code{gitlab}
 
 Packages hosted on @uref{https://gitlab.com}.
-
 
 @item
 @code{subtree}
@@ -428,7 +397,6 @@ Packages hosted on @uref{https://gitlab.com}.
 Packages that are located in a subtree of a Git repository.
 The repository on the Emacsmirror limits the history to just
 that directory using @code{git subtree}.
-
 
 @item
 @code{subset}
@@ -441,14 +409,12 @@ This is an abstract type, useful when maintaining the mirror.
 
 Packages hosted as plain files on @uref{https://emacswiki.org}.
 
-
 @item
 @code{elpa}
 
 Packages hosted in a directory inside the @code{master} branch of
 the GNU Elpa repository.  These package are available from
 @uref{https://elpa.gnu.org}.
-
 
 @item
 @code{elpa-branch}
@@ -458,7 +424,6 @@ dedicated branch.  These package are available from
 @uref{https://elpa.gnu.org}.
 @end itemize
 @end itemize
-
 
 @item
 @code{hg}
@@ -476,7 +441,6 @@ have the type @code{git}.
 @end itemize
 @end itemize
 
-
 @item
 @code{mocking}
 
@@ -493,7 +457,6 @@ Packages that are part of the latest stable GNU Emacs releases.
 @code{emacs} is one of the packages that are "part of Emacs"; it contains
 all libraries that are not explicitly declared to be part of some
 other built-in package.
-
 
 @item
 @code{shelved}
@@ -521,13 +484,11 @@ started you may just use @code{oref} to obtain information about a package,
 e.g. @code{(oref (epkg "magit") url)}.
 
 @defun epkg name
-
 This function returns an @code{epkg-package} object for the package named
 NAME@.  NAME is the name of a package, a string.
 @end defun
 
 @defun epkgs &optional select predicates
-
 This function returns a list of @code{epkg-package} objects or a list of
 database rows.  The list is ordered by the package names in
 ascending order.
@@ -564,7 +525,6 @@ features but not the packages that provide them.  The following
 functions return these values in a form that is generally more useful.
 
 @defun epkg-provided package &optional include-bundled
-
 This function returns a list of features provided by the package
 PACKAGE@.  PACKAGE is an @code{epkg-package} object or a package name, a
 string.
@@ -574,7 +534,6 @@ optional INCLUDE-BUNDLED is non-nil.
 @end defun
 
 @defun epkg-required package
-
 This function returns a list of packages and features required by
 the package PACKAGE@.  PACKAGE is an @code{epkg-package} object or a package
 name, a string.
@@ -593,13 +552,11 @@ features listed in FEATURES@.
 @end defun
 
 @defun epkg-provided-by feature
-
 Return the name of the package provided by FEATURE@.  FEATURE has
 to be a symbol.
 @end defun
 
 @defun epkg-reverse-dependencies package
-
 This function returns a list of packages that depend on PACKAGE@.
 PACKAGE is an @code{epkg-package} object or a package name, a string.
 
@@ -614,7 +571,6 @@ is an optional dependency.
 @end defun
 
 @defun epkg-type arg
-
 This function returns the type of the object or class ARG@.
 
 ARG has to be the class @code{epkg-package}, a subclass of that, an
@@ -625,7 +581,6 @@ because the latter is longer and an implementation detail.
 @end defun
 
 @defun epkg-package-types subtypes
-
 This function returns a list of all package types.
 
 If optional SUBTYPES is non-nil, then it also returns symbols of the
@@ -633,7 +588,6 @@ form @code{TYPE*}, which stands for "@code{TYPE} and its subtypes".
 @end defun
 
 @defun epkg-read-type prompt &optional default subtypes
-
 This function reads an Epkg type in the minibuffer and returns it as
 a symbol.
 
@@ -644,7 +598,6 @@ as completion candidates.
 @end defun
 
 @defun epkg-read-package prompt &optional default
-
 This function reads the name of an Epkg package in the minibuffer
 and returns it as a string.
 
@@ -670,7 +623,6 @@ tools @footnote{@uref{https://github.com/emacsmirror/epkg-reports}} used to crea
 started with that function.
 
 @defun epkg-db
-
 This function returns the connection to the Epkg database.
 
 If the @code{epkg-repository}, which contains the SQLite database file,
@@ -679,20 +631,14 @@ they want to clone the repository.
 @end defun
 
 @defun epkg-sql sql &rest args
-
 This function sends the SQL S-expression to the Epkg database and
 returns the result.  This is a wrapper around @code{emacsql} that lacks the
 CONNECTION argument.  Instead it uses the connection returned by
 @code{epkg-db}.
 @end defun
 
-@node Command Index
-@appendix Command Index
-
-@printindex cp
-
-@node Function Index
-@appendix Function Index
+@node Function and Command Index
+@appendix Function and Command Index
 
 @printindex fn
 

@@ -104,7 +104,7 @@ the closing parentheses and type ~C-M-x~.
   (setq epkg-repository "/path/to/epkgs/")
 #+end_src
 
-- User Option: epkg-repository
+- User Option: epkg-repository ::
 
   This option specifies the location of the local Emacsmirror
   repository.
@@ -120,7 +120,7 @@ The local clone of the Epkg repository is not updated automatically,
 so you should periodically use ~M-x epkg-update RET~ to update the
 database.
 
-- Command: epkg-update
+- Command: epkg-update ::
 
   This command updates the Epkg database by pulling the ~master~ branch
   in the ~epkg-repository~ and then reloading the Epkg database.  It
@@ -133,7 +133,7 @@ Epkg provides several commands for listing packages.
 In the buffer which lists packages, typing ~RET~ displays information
 about the package at point in another buffer.
 
-- User Option: epkg-list-exclude-types
+- User Option: epkg-list-exclude-types ::
 
   The value of this option is a list of package types.  Most commands
   that list packages exclude any package whose type matches one of the
@@ -141,7 +141,7 @@ about the package at point in another buffer.
   respect this option, and you can tell the other commands to ignore
   it as well by using a prefix argument.
 
-- User Option: epkg-list-columns
+- User Option: epkg-list-columns ::
 
   This option lists the columns used in buffers that list packages.
 
@@ -163,22 +163,22 @@ about the package at point in another buffer.
   ~epkg-list-sort-by-downloads~.  If an elements SLOT is ~stars~, then the
   respective SORT should be ~epkg-list-sort-by-stars~.
 
-- User Option: epkg-list-mode-hook
+- User Option: epkg-list-mode-hook ::
 
   This hook is run after entering Epkg-List mode, the mode used in
   buffers that list packages.
 
-- Command: epkg-list-packages
+- Command: epkg-list-packages ::
 
   This command displays a list of all mirrored (and possibly also
   shelved) packages.
 
-- Command: epkg-list-matching-packages
+- Command: epkg-list-matching-packages ::
 
   This command displays a list of packages whose name or summary
   matches a SQLite LIKE pattern, which is read in the minibuffer.
 
-- Command: epkg-list-keyworded-packages
+- Command: epkg-list-keyworded-packages ::
 
   This command displays a list of packages that have a keyword set,
   which is read in the minibuffer.
@@ -186,7 +186,7 @@ about the package at point in another buffer.
   Only keywords that are members of ~finder-known-keywords~ are offered
   as completion candidates, but you can also enter other keywords.
 
-- Command: epkg-list-packages-by-author
+- Command: epkg-list-packages-by-author ::
 
   This command displays a list of packages which are authored or
   maintained by a person.  The person, a name or email address, is
@@ -198,7 +198,7 @@ packages from their output.  With a prefix argument or when
 packages.  However the following command ignores this option and
 always lists shelved packages when appropriate.
 
-- Command: epkg-list-packages-of-type
+- Command: epkg-list-packages-of-type ::
 
   This command displays a list of packages of a certain type.  The
   type is read in the minibuffer.  To list all packages of a certain
@@ -236,13 +236,13 @@ first column lists the names of packages which depend on features from
 the described package and the third column shows which of these
 libraries are required.
 
-- Command: epkg-describe-package
+- Command: epkg-describe-package ::
 
   This command displays information about a package in a separate
   buffer.  The name of the package to be displayed is read in the
   minibuffer.
 
-- Command: epkg-list-describe-package
+- Command: epkg-list-describe-package ::
 
   This command displays information about the package at point in
   a separate buffer.
@@ -251,7 +251,7 @@ libraries are required.
   In other buffers, or in a list buffer when you want to display a
   package other than the one at point use ~epkg-describe-package~.
 
-- User Option: epkg-describe-package-slots
+- User Option: epkg-describe-package-slots ::
 
   The value of this option is a list of slots to be displayed when
   displaying information about an Epkg package in a help buffer.
@@ -263,7 +263,7 @@ libraries are required.
   ~nil~, then nothing is inserted.  Elements that are ~nil~ stand for
   empty lines.
 
-- User Option: epkg-describe-package-slots-width
+- User Option: epkg-describe-package-slots-width ::
 
   The value of this option specifies the width used to display slot
   names in buffers displaying information about an Epkg package.
@@ -393,12 +393,12 @@ implementation of CLOS.  It's useful to learn about that, but to get
 started you may just use ~oref~ to obtain information about a package,
 e.g. ~(oref (epkg "magit") url)~.
 
-- Function: epkg name
+- Function: epkg name ::
 
   This function returns an ~epkg-package~ object for the package named
   NAME.  NAME is the name of a package, a string.
 
-- Function: epkgs &optional select predicates
+- Function: epkgs &optional select predicates ::
 
   This function returns a list of ~epkg-package~ objects or a list of
   database rows.  The list is ordered by the package names in
@@ -434,7 +434,7 @@ Emacsmirror, but not in a client.  And the ~required~ slot only lists
 features but not the packages that provide them.  The following
 functions return these values in a form that is generally more useful.
 
-- Function: epkg-provided package &optional include-bundled
+- Function: epkg-provided package &optional include-bundled ::
 
   This function returns a list of features provided by the package
   PACKAGE.  PACKAGE is an ~epkg-package~ object or a package name, a
@@ -443,7 +443,7 @@ functions return these values in a form that is generally more useful.
   Bundled features are excluded from the returned list unless
   optional INCLUDE-BUNDLED is non-nil.
 
-- Function: epkg-required package
+- Function: epkg-required package ::
 
   This function returns a list of packages and features required by
   the package PACKAGE.  PACKAGE is an ~epkg-package~ object or a package
@@ -461,12 +461,12 @@ functions return these values in a form that is generally more useful.
   it is unknown which package or packages provide the feature or
   features listed in FEATURES.
 
-- Function: epkg-provided-by feature
+- Function: epkg-provided-by feature ::
 
   Return the name of the package provided by FEATURE.  FEATURE has
   to be a symbol.
 
-- Function: epkg-reverse-dependencies package
+- Function: epkg-reverse-dependencies package ::
 
   This function returns a list of packages that depend on PACKAGE.
   PACKAGE is an ~epkg-package~ object or a package name, a string.
@@ -480,7 +480,7 @@ functions return these values in a form that is generally more useful.
   that it is a mandatory dependency; if a string is used, then it
   is an optional dependency.
 
-- Function: epkg-type arg
+- Function: epkg-type arg ::
 
   This function returns the type of the object or class ARG.
 
@@ -490,14 +490,14 @@ functions return these values in a form that is generally more useful.
   it would be inconvenient to instead use the actual class name,
   because the latter is longer and an implementation detail.
 
-- Function: epkg-package-types subtypes
+- Function: epkg-package-types subtypes ::
 
   This function returns a list of all package types.
 
   If optional SUBTYPES is non-nil, then it also returns symbols of the
   form ~TYPE*~, which stands for "~TYPE~ and its subtypes".
 
-- Function: epkg-read-type prompt &optional default subtypes
+- Function: epkg-read-type prompt &optional default subtypes ::
 
   This function reads an Epkg type in the minibuffer and returns it as
   a symbol.
@@ -507,7 +507,7 @@ functions return these values in a form that is generally more useful.
   ~TYPE*~, which stands for "~TYPE~ and its subtypes", are also offered
   as completion candidates.
 
-- Function: epkg-read-package prompt &optional default
+- Function: epkg-read-package prompt &optional default ::
 
   This function reads the name of an Epkg package in the minibuffer
   and returns it as a string.
@@ -531,7 +531,7 @@ archives [fn:6] for the most part use ~epkg-sql~, you might find the
 tools [fn:7] used to create those statistics useful when getting
 started with that function.
 
-- Function: epkg-db
+- Function: epkg-db ::
 
   This function returns the connection to the Epkg database.
 
@@ -539,7 +539,7 @@ started with that function.
   does not exist yet, then this function first asks the user whether
   they want to clone the repository.
 
-- Function: epkg-sql sql &rest args
+- Function: epkg-sql sql &rest args ::
 
   This function sends the SQL S-expression to the Epkg database and
   returns the result.  This is a wrapper around ~emacsql~ that lacks the
@@ -551,12 +551,7 @@ started with that function.
 [fn:6] https://emacsmirror.net/stats
 [fn:7] https://github.com/emacsmirror/epkg-reports
 
-* Command Index
-:PROPERTIES:
-:APPENDIX:   t
-:INDEX:      cp
-:END:
-* Function Index
+* Function and Command Index
 :PROPERTIES:
 :APPENDIX:   t
 :INDEX:      fn
@@ -587,7 +582,6 @@ General Public License for more details.
 
 # IMPORTANT: Also update ORG_ARGS and ORG_EVAL in the Makefile.
 # Local Variables:
-# eval: (require 'ox-texinfo+ nil t)
 # indent-tabs-mode: nil
 # org-src-preserve-indentation: nil
 # End:
