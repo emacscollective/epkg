@@ -1,4 +1,14 @@
 # -*- mode: org -*-
+* v3.3.2    2022/01/01
+
+- Ensure the database is accessible before pulling.
+
+- Add support for using SQLite module via ~emacsql-libsqlite3~.
+
+- Fix listing packages by email.
+
+- Fix URLs of packages from the Emacswiki.
+
 * v3.3.1    2021/06/17
 
 - Adjusted to breaking changes in EIEIO in Emacs 28.
