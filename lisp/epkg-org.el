@@ -1,6 +1,6 @@
 ;;; epkg-org.el --- various Org mode utilities    -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016-2021  Jonas Bernoulli
+;; Copyright (C) 2016-2022  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 

@@ -1,6 +1,6 @@
 ;;; epkg-desc.el --- show Epkg descriptions       -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016-2021  Jonas Bernoulli
+;; Copyright (C) 2016-2022  Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; SPDX-License-Identifier: GPL-3.0-or-later
