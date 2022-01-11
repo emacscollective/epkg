@@ -64,7 +64,7 @@ again."
   :type 'directory)
 
 (defcustom epkg-database-connector 'sqlite
-  "The database connector used by Forge.
+  "The database connector used by Epkg.
 This must be set before `epkg' is loaded.  To use an alternative
 connectors you must install the respective package explicitly."
   :package-version '(epkg . "3.4.0")
