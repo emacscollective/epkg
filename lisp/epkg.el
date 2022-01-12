@@ -65,11 +65,27 @@ again."
 
 (defcustom epkg-database-connector 'sqlite
   "The database connector used by Epkg.
+
 This must be set before `epkg' is loaded.  To use an alternative
-connectors you must install the respective package explicitly."
+connectors you must install the respective package explicitly.
+
+When `sqlite', then use the `emacsql-sqlite' library that is
+being maintained in the same repository as `emacsql' itself.
+
+When `sqlite-builtin', then use the builtin support in Emacs 29.
+When `sqlite-module', then use a module provided by the `sqlite3'
+package.  These two backends are experimental.
+See https://github.com/skeeto/emacsql/pull/86.
+
+When `libsqlite3', then use the `emacsql-libsqlite' library,
+which itself uses a module provided by the `sqlite3' package.
+This is still experimental and likely to be deprecated in
+favor of `sqlite-module'."
   :package-version '(epkg . "3.4.0")
   :group 'epkg
   :type '(choice (const sqlite)
+                 (const sqlite-builtin)
+                 (const sqlite-module)
                  (const libsqlite3)
                  (symbol :tag "other")))
 
@@ -80,6 +96,16 @@ connectors you must install the respective package explicitly."
   (sqlite
    (defclass epkg-database (emacsql-sqlite-connection closql-database)
      ((object-class :initform 'epkg-package))))
+  (sqlite-builtin
+   (require (quote emacsql-sqlite-builtin))
+   (with-no-warnings
+     (defclass epkg-database (emacsql-sqlite-builtin-connection closql-database)
+       ((object-class :initform 'epkg-package)))))
+  (sqlite-module
+   (require (quote emacsql-sqlite-module))
+   (with-no-warnings
+     (defclass epkg-database (emacsql-sqlite-module-connection closql-database)
+       ((object-class :initform 'epkg-package)))))
   (libsqlite3
    (require (quote emacsql-libsqlite3))
    (with-no-warnings
