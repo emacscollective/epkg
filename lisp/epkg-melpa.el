@@ -50,17 +50,19 @@
 
 (defclass melpa-git-recipe (melpa-recipe) ())
 
-(defclass melpa-github-recipe (melpa-git-recipe)
+(defclass melpa--platform-recipe () ())
+
+(defclass melpa-github-recipe (melpa-git-recipe melpa--platform-recipe)
   ((url-format      :initform "git@github.com:%r.git")
    (repopage-format :initform "https://github.com/%r")))
 
-(defclass melpa-gitlab-recipe (melpa-git-recipe)
+(defclass melpa-gitlab-recipe (melpa-git-recipe melpa--platform-recipe)
   ((url-format      :initform "git@gitlab.com:%r.git")
    (repopage-format :initform "https://gitlab.com/%r")))
 
 (defclass melpa-hg-recipe (melpa-recipe) ())
 
-(defclass melpa-bitbucket-recipe (melpa-hg-recipe)
+(defclass melpa-bitbucket-recipe (melpa-hg-recipe melpa--platform-recipe)
   ((url-format      :initform "hg::ssh://hg@bitbucket.org/%r")
    (repopage-format :initform "https://bitbucket.org/%r")))
 
