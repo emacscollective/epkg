@@ -1,5 +1,5 @@
 # -*- mode: org -*-
-* v3.3.2    2022/01/01
+* v3.3.2    2022-01-01
 
 - Ensure the database is accessible before pulling.
 
@@ -9,11 +9,11 @@
 
 - Fix URLs of packages from the Emacswiki.
 
-* v3.3.1    2021/06/17
+* v3.3.1    2021-06-17
 
 - Adjusted to breaking changes in EIEIO in Emacs 28.
 
-* v3.3.0    2021/05/30
+* v3.3.0    2021-05-30
 
 - The database is now being distributed as a text file instead of
   in its binary form.  That results in more useful diffs and most
@@ -26,16 +26,16 @@
 
 - No longer depend on ~dash~.
 
-* v3.2.2    2019/12/05
+* v3.2.2    2019-12-05
 
 - Fix and properly document ~epkg-list-matching-packages~.
 
-* v3.2.1    2019/05/05
+* v3.2.1    2019-05-05
 
 - Fix values of ~url-format~ and ~repopage-format~ slots of
   ~epkg-minority-package~.
 
-* v3.2.0    2019/01/18
+* v3.2.0    2019-01-18
 
 - Add the ~epkg-elpa-core-package~ class, making it possible to mirror
   packages that GNU Elpa imports from the ~master~ branch of the Emacs
@@ -47,16 +47,16 @@
 - No longer set ~x-strech-cursor~ globally when we only intended to set
   it in an ~epkg-list-mode~ buffer.
 
-* v3.1.2    2018/11/27
+* v3.1.2    2018-11-27
 
 - Require ~subr-x~ only at compile-time.
 
-* v3.1.1    2018/10/31
+* v3.1.1    2018-10-31
 
 - Use the ~:closql-table~ slot property of ~closql-1.0.0~ instead of
   the ~:closql-columns~ property provided by older releases.
 
-* v3.1.0    2018/07/01
+* v3.1.0    2018-07-01
 
 - Added Melpa download counts and Github stars to package objects.
   By default this information is also displayed in package lists
@@ -81,7 +81,7 @@
 
 - Renamed library ~epkg-util.el~ to ~epkg-org.el~.
 
-* v3.0.0    2017/09/19
+* v3.0.0    2017-09-19
 
 - Melpa and GNU Elpa recipes are now stored as objects.  These recipes
   can still be accessed as slots of Epkg objects, but they can also be
@@ -95,7 +95,7 @@
 - The functions ~epkg-type~ and ~epkg-package-types~ were removed.
   Use ~closql--class-abbrevs~ and ~closql--list-subabbrevs~ instead.
 
-* v2.3.0    2017/03/01
+* v2.3.0    2017-03-01
 
 - The function ~epkg-provided~ no longer returns bundles libraries,
   unless its new ~include-bundled~ argument is non-nil.
@@ -106,7 +106,7 @@
 
 - Various documentation updates and improvements.
 
-* v2.2.0    2017/01/31
+* v2.2.0    2017-01-31
 
 - The new function ~epkg-provided-by~ returns the package that provides
   a given feature.  It replaces ~epkg--required~, which did the same
@@ -120,7 +120,7 @@
   due to a copy-paste error, ~epkg-provided~ was instead defined as
   such twice.
 
-* v2.1.0    2016/12/31
+* v2.1.0    2016-12-31
 
 - Repository moved to https://github.com/emacscollective/epkg.
 
@@ -130,7 +130,7 @@
 
 - The manual was updated heavily.
 
-* v2.0.0    2016/11/05
+* v2.0.0    2016-11-05
 
 - Store Melpa recipes, GNU Elpa specs and lists of built-in libraries
   which belong to a package in Epkg objects.  The respective object
@@ -148,6 +148,6 @@
 
 - Improved and extended ~make~ targets.
 
-* v1.0.0    2016/04/15
+* v1.0.0    2016-04-15
 
 - Reincarnation release.
