@@ -1,4 +1,9 @@
 # -*- mode: org -*-
+* v3.3.3    2022-02-16
+
+- Add support for the ~sqlite-builtin~ and ~sqlite-module~ backends.
+  See https://github.com/skeeto/emacsql/pull/86.
+
 * v3.3.2    2022-01-01
 
 - Ensure the database is accessible before pulling.
