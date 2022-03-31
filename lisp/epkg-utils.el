@@ -32,10 +32,10 @@ with ARG as only argument.  When ARG is t then evaluate in the
 repository specified by variable `epkg-repository'."
   (declare (indent defun))
   `(let ((default-directory
-           ,(if (eq arg t)
-                'epkg-repository
-              `(or (epkg-repository ,arg)
-                   (error "Need package or string")))))
+          ,(if (eq arg t)
+               'epkg-repository
+             `(or (epkg-repository ,arg)
+                  (error "Need package or string")))))
      ,@body))
 
 (cl-defgeneric epkg-repository (arg)
