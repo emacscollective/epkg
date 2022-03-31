@@ -69,25 +69,27 @@ again."
 This must be set before `epkg' is loaded.  To use an alternative
 connectors you must install the respective package explicitly.
 
-When `sqlite', then use the `emacsql-sqlite' library that is
-being maintained in the same repository as `emacsql' itself.
+If you are using Emacs 29, then the recommended connector is
+`sqlite-builtin', which uses the new builtin support for SQLite.
+You need to install the `emacsql-sqlite-builtin' package to use
+this connector.
 
-When `sqlite-builtin', then use the builtin support in Emacs 29.
-When `sqlite-module', then use a module provided by the `sqlite3'
-package.  These two backends are experimental.
-See https://github.com/skeeto/emacsql/pull/86.
+If you are using an older Emacs release, then the recommended
+connector is `sqlite-module', which uses the module provided by
+the `sqlite3' package.  This is very similar to the previous
+connector and the built-in support in Emacs 29 derives from this
+module.  You need to install the `emacsql-sqlite-module' package
+to use this connector.
 
-When `libsqlite3', then use the `emacsql-libsqlite' library,
-which itself uses a module provided by the `sqlite3' package.
-This is still experimental and likely to be deprecated in
-favor of `sqlite-module'."
+For the time being `libsqlight3' is still supported.  Do not use
+this, it is an older version of the `sqlite-module' connector
+from before the connector and the library were renamed."
   :package-version '(epkg . "3.4.0")
   :group 'epkg
   :type '(choice (const sqlite)
                  (const sqlite-builtin)
                  (const sqlite-module)
-                 (const libsqlite3)
-                 (symbol :tag "other")))
+                 (const :tag "libsqlite3 (OBSOLETE)" libsqlite3)))
 
 ;;; Database
 
