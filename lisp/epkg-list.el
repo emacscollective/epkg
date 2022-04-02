@@ -227,10 +227,10 @@ use `TYPE*' instead of just `TYPE'."
 (defvar epkg-list-mode-map
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map tabulated-list-mode-map)
-    (define-key map "\r" 'epkg-list-describe-package)
-    (define-key map (kbd "C-c C-f")   'epkg-find-file)
-    (define-key map (kbd "C-c 4 C-f") 'epkg-find-file-other-window)
-    (define-key map (kbd "C-c 5 C-f") 'epkg-find-file-other-frame)
+    (define-key map "\r"              #'epkg-list-describe-package)
+    (define-key map (kbd "C-c C-f")   #'epkg-find-file)
+    (define-key map (kbd "C-c 4 C-f") #'epkg-find-file-other-window)
+    (define-key map (kbd "C-c 5 C-f") #'epkg-find-file-other-frame)
     map)
   "Local keymap for Epkg-List mode buffers.")
 
@@ -251,7 +251,7 @@ use `TYPE*' instead of just `TYPE'."
   (list name
         'face 'epkg-list-name
         'follow-link t
-        'action 'epkg-list-describe-package))
+        'action #'epkg-list-describe-package))
 
 (defun epkg--list-columns-vector (&optional qualify)
   (let ((lst (mapcar (pcase-lambda (`(,_ ,_ ,_ ,_ ,slot ,_)) slot)

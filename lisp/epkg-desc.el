@@ -26,6 +26,7 @@
 
 (require 'epkg)
 (require 'find-func)
+(require 'wid-edit)
 
 ;;; Options
 
@@ -115,7 +116,7 @@ are nil stand for empty lines."
   (interactive)
   (if-let ((package (tabulated-list-get-id)))
       (epkg-describe-package package)
-    (call-interactively 'epkg-describe-package)))
+    (call-interactively #'epkg-describe-package)))
 
 ;;; Inserters
 
@@ -237,7 +238,7 @@ are nil stand for empty lines."
     (insert ?\n)
     (widget-create
      (list 'epkg-dependency-tree
-           :get-dependencies 'epkg-required
+           :get-dependencies #'epkg-required
            :open t
            :node (list 'epkg-dependency-node
                        :value (list pkg)
@@ -250,7 +251,7 @@ are nil stand for empty lines."
     (insert ?\n)
     (widget-create
      (list 'epkg-dependency-tree
-           :get-dependencies 'epkg-reverse-dependencies
+           :get-dependencies #'epkg-reverse-dependencies
            :open t
            :node (list 'epkg-dependency-node
                        :value (list pkg)
@@ -304,32 +305,32 @@ are nil stand for empty lines."
 
 (define-button-type 'epkg-menu-package
   :supertype 'help-xref
-  'help-function 'epkg-menu-describe-package
+  'help-function #'epkg-describe-package
   'help-echo (purecopy "mouse-2, RET: View package"))
 
 (define-button-type 'epkg-revision
   :supertype 'help-xref
-  'help-function 'epkg-describe-package
+  'help-function #'epkg-describe-package
   'help-echo (purecopy "mouse-2, RET: View this revision"))
 
 (define-button-type 'epkg-keyword
   :supertype 'help-xref
-  'help-function 'epkg-list-keyworded-packages
+  'help-function #'epkg-list-keyworded-packages
   'help-echo (purecopy "mouse-2, RET: List keyworded packages"))
 
 (define-button-type 'epkg-package
   :supertype 'help-xref
-  'help-function 'epkg-describe-package
+  'help-function #'epkg-describe-package
   'help-echo (purecopy "mouse-2, RET: View package"))
 
 (define-button-type 'epkg-library
   :supertype 'help-xref
-  'help-function 'find-library
+  'help-function #'find-library
   'help-echo (purecopy "mouse-2, RET: View library"))
 
 (define-button-type 'epkg-author
   :supertype 'help-xref
-  'help-function 'epkg-list-packages-by-author
+  'help-function #'epkg-list-packages-by-author
   'help-echo (purecopy "mouse-2, RET: List packages by author"))
 
 (define-button-type 'epkg-email
@@ -344,7 +345,7 @@ are nil stand for empty lines."
 
 (define-widget 'epkg-dependency-tree 'tree-widget
   "The Epkg Dependency Tree widget."
-  :expander 'epkg-dependency-tree-expander)
+  :expander #'epkg-dependency-tree-expander)
 
 (defun epkg-dependency-tree-expander (widget)
   (let ((node (widget-get widget :node))
@@ -361,8 +362,8 @@ are nil stand for empty lines."
 (define-widget 'epkg-dependency-node 'default
   "The Epkg Dependency Node widget."
   :format "%P %T %H\n"
-  :format-handler 'epkg-dependency-node-format-handler
-  :value-get 'widget-value-value-get
+  :format-handler #'epkg-dependency-node-format-handler
+  :value-get #'widget-value-value-get
   :keymap widget-keymap)
 
 (defun epkg-dependency-node-format-handler (widget escape)
