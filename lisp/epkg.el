@@ -5,7 +5,7 @@
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
-;; Package-Requires: ((closql "20210927") (emacs "25.1"))
+;; Package-Requires: ((emacs "25.1") (compat "28.1.1.0") (closql "20210927"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;; This file is free software; you can redistribute it and/or modify
@@ -34,6 +34,7 @@
 
 ;;; Code:
 
+(require 'compat)
 (require 'seq)
 (require 'subr-x)
 
