@@ -517,7 +517,7 @@ to packages for which one of these predicates returns non-nil."
                (and (derived-mode-p 'org-mode)
                     (looking-at "^[ \t]*| \\([^ ]+\\)")
                     (match-string 1))
-               (when-let ((symbol (symbol-at-point)))
+               (and-let* ((symbol (symbol-at-point)))
                  (thread-first (symbol-name symbol)
                    (string-trim-left  ".*/")
                    (string-trim-right "\\..*")))))))

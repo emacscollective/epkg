@@ -87,7 +87,7 @@
             (list :url (oref rcp url))
           (list :repo (oref rcp repo)))
       ,@(cl-mapcan (lambda (slot)
-                     (when-let ((value (eieio-oref rcp slot)))
+                     (and-let* ((value (eieio-oref rcp slot)))
                        (list (intern (format ":%s" slot)) value)))
                    '(files branch commit version-regexp old-names)))))
 
