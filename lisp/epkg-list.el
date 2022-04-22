@@ -173,7 +173,7 @@ is used."
   (interactive (list (read-string "List packages by author: ")
                      current-prefix-arg))
   (epkg--list-packages
-   (let ((emailp (string-match-p "@" author)))
+   (let ((emailp (string-search "@" author)))
      (epkg-sql [:select :distinct $i1
                 :from [packages authors maintainers]
                 :where (and (in class $v2)
