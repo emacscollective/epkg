@@ -518,9 +518,7 @@ to packages for which one of these predicates returns non-nil."
                     (looking-at "^[ \t]*| \\([^ ]+\\)")
                     (match-string 1))
                (and-let* ((symbol (symbol-at-point)))
-                 (thread-first (symbol-name symbol)
-                   (string-trim-left  ".*/")
-                   (string-trim-right "\\..*")))))))
+                 (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
     (completing-read prompt choices nil t nil 'epkg-package-history
                      (and default (member default choices) default))))
 
