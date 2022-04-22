@@ -427,7 +427,7 @@ features listed in FEATURES.")
                           (epkg-sql [:select package :from provided
                                      :where (= feature $s1)
                                      :order-by [(asc package)]] feature))))
-    (if (= (length packages) 1)
+    (if (length= packages 1)
         (car packages)
       (let ((alist (mapcar (lambda (name) (cons name (epkg name))) packages)))
         (car (or (cl-find-if (pcase-lambda (`(,_ . ,pkg))
