@@ -39,6 +39,7 @@
 ;;; Code:
 
 (require 'compat)
+(require 'compat-26)
 (require 'seq)
 (require 'subr-x)
 
