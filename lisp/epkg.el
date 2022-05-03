@@ -290,7 +290,7 @@ database."
   ((url-format      :initform "https://git.sr.ht/~%u/%n")
    (repopage-format :initform "https://git.sr.ht/~%u/%n")))
 
-(defclass epkg-savannah-package (epkg-git-package) () :abstact t)
+(defclass epkg-savannah-package (epkg-git-package) () :abstract t)
 
 (defclass epkg-gnu-package (epkg-savannah-package)
   ((url-format      :initform "https://git.savannah.gnu.org/git/%n.git")
