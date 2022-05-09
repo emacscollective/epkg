@@ -16,6 +16,8 @@ DEPS  = closql
 DEPS += compat
 DEPS += dash
 DEPS += emacsql
+# Optional:
+DEPS += magit/lisp
 
 DOMAIN      ?= emacsmirror.net
 CFRONT_DIST ?= E1IXJGPIOM4EUW
