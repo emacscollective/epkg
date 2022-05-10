@@ -506,24 +506,28 @@ package class predicate functions, or a single such function.
 Valid functions are named either `epkg-TYPE-package-p' or
 `epkg-TYPE-package--eieio-childp'.  Limit completion choices
 to packages for which one of these predicates returns non-nil."
-  (let ((choices (epkgs 'name predicates))
-        (default
-         (save-match-data
-           (or default
-               (and (derived-mode-p 'help-mode)
-                    (boundp 'help-xref-stack-item)
-                    (eq (car help-xref-stack-item) 'epkg-describe-package)
-                    (cadr help-xref-stack-item))
-               (and (derived-mode-p 'epkg-list-mode)
-                    (tabulated-list-get-id))
-               (and (derived-mode-p 'package-menu-mode)
-                    (fboundp 'package-desc-name)
-                    (symbol-name (package-desc-name (tabulated-list-get-id))))
-               (and (derived-mode-p 'org-mode)
-                    (looking-at "^[ \t]*| \\([^ ]+\\)")
-                    (match-string 1))
-               (and-let* ((symbol (symbol-at-point)))
-                 (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
+  (let* ((choices (epkgs 'name predicates))
+         (default
+          (save-match-data
+            (or default
+                (and (derived-mode-p 'help-mode)
+                     (boundp 'help-xref-stack-item)
+                     (eq (car help-xref-stack-item) 'epkg-describe-package)
+                     (cadr help-xref-stack-item))
+                (and (derived-mode-p 'epkg-list-mode)
+                     (tabulated-list-get-id))
+                (and (derived-mode-p 'package-menu-mode)
+                     (fboundp 'package-desc-name)
+                     (symbol-name (package-desc-name (tabulated-list-get-id))))
+                (and (derived-mode-p 'magit-submodule-list-mode)
+                     (car (member (file-name-nondirectory
+                                   (tabulated-list-get-id))
+                                  choices)))
+                (and (derived-mode-p 'org-mode)
+                     (looking-at "^[ \t]*| \\([^ ]+\\)")
+                     (match-string 1))
+                (and-let* ((symbol (symbol-at-point)))
+                  (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
     (completing-read prompt choices nil t nil 'epkg-package-history
                      (and default (member default choices) default))))
 
