@@ -304,7 +304,7 @@ database."
 
 (defclass epkg-subtree-package (epkg-git-package) ())
 
-(defclass epkg-subrepo-package (epkg-git-package) ())
+(defclass epkg-subrepo-package (epkg-git-package) () :abstract t)
 
 (defclass epkg-minority-package (epkg-subrepo-package) ())
 
