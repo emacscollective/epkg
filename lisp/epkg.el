@@ -345,21 +345,22 @@ database."
       (emacsql (epkg-db) (apply #'format sql args))
     (apply #'emacsql (epkg-db) sql args)))
 
-(defun epkgs (&optional select predicates)
-  "Return a list of `epkg-package' objects or a list of rows.
+(defun epkgs (&optional select types)
+  "Return a list of `epkg-package' objects, values or rows.
 
 The list is ordered by the package names in ascending order.
 
-If optional SELECT is non-nil, then it has to be a list of
-columns of the `packages' table.  In that case the returned
-value is a list of database rows.
+If optional SELECT is non-nil, then it has to be a column of the
+`packages' table or a list of such columns.  In those cases the
+returned value is a list of column values or a list of database
+rows.  If SELECT is nil, return a list of object.
 
 If optional PREDICATES is non-nil, then it has to be a list of
 package class predicate functions, or a single such function.
 Valid functions are named either `epkg-TYPE-package-p' or
 `epkg-TYPE-package--eieio-childp'.  Only packages are returned
 for which one of these predicates returns non-nil."
-  (closql-query (epkg-db) select predicates 'epkg-package))
+  (closql-query (epkg-db) select types 'epkg-package))
 
 (defun epkg (name)
   "Return an `epkg-package' object for the package named NAME.
