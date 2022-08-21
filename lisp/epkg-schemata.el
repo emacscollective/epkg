@@ -66,6 +66,7 @@
                         ;; patched
                         ;; stars
                         ;; downloads
+                        ;; upstream-state
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -153,6 +154,7 @@
       (emacsql db add-column 'patched           nil)
       (emacsql db add-column 'stars             nil)
       (emacsql db add-column 'downloads         nil)
+      (emacsql db add-column 'upstream-state    nil)
       )))
 
 ;;; _
