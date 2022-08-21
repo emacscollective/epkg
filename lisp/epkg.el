@@ -47,7 +47,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 8)
+(defconst epkg-db-version 9)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
@@ -259,7 +259,8 @@ database."
    (patched             :initform nil :initarg :patched)
    (stars               :initform nil :initarg :stars)
    (downloads           :initform nil :initarg :downloads)
-   (upstream-state      :initform nil))
+   (upstream-state      :initform nil)
+   (branch              :initform nil))
   :abstract t)
 
 ;;; Subclasses

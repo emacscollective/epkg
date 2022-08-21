@@ -67,6 +67,7 @@
                         ;; stars
                         ;; downloads
                         ;; upstream-state
+                        ;; branch
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -155,6 +156,7 @@
       (emacsql db add-column 'stars             nil)
       (emacsql db add-column 'downloads         nil)
       (emacsql db add-column 'upstream-state    nil)
+      (emacsql db add-column 'branch            nil)
       )))
 
 ;;; _
