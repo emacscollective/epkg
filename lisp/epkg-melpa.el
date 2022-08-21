@@ -62,11 +62,15 @@
   ((url-format      :initform "git@gitlab.com:%r.git")
    (repopage-format :initform "https://gitlab.com/%r")))
 
-(defclass melpa-hg-recipe (melpa-recipe) ())
+(defclass melpa-codeberg-recipe (melpa-git-recipe melpa--platform-recipe)
+  ((url-format      :initform "https://codeberg.org/%r.git")
+   (repopage-format :initform "https://codeberg.org/%r")))
 
-(defclass melpa-bitbucket-recipe (melpa-hg-recipe melpa--platform-recipe)
-  ((url-format      :initform "hg::ssh://hg@bitbucket.org/%r")
-   (repopage-format :initform "https://bitbucket.org/%r")))
+(defclass melpa-sourcehut-recipe (melpa-git-recipe melpa--platform-recipe)
+  ((url-format      :initform "https://git.sr.ht/~%r")
+   (repopage-format :initform "https://git.sr.ht/~%r")))
+
+(defclass melpa-hg-recipe (melpa-recipe) ())
 
 ;;; Interfaces
 
