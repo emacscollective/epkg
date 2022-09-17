@@ -24,6 +24,7 @@
 ;;; Code:
 
 (require 'epkg)
+(require 'json)
 
 ;;; Superclass
 
