@@ -502,6 +502,11 @@ offered as completion candidates."
 
 (defvar epkg-package-history nil)
 
+(defvar epkg--package-parent-dirs
+  (list (expand-file-name "mirror/" epkg-repository)
+        (expand-file-name "attic/" epkg-repository)
+        'borg-drones-directory))
+
 (defun epkg-read-package (prompt &optional default predicates)
   "Read the name of an Epkg package and return it as a string.
 
@@ -533,6 +538,16 @@ to packages for which one of these predicates returns non-nil."
                 (and (derived-mode-p 'org-mode)
                      (looking-at "^[ \t]*| \\([^ ]+\\)")
                      (match-string 1))
+                (and-let* ((dir (seq-find
+                                 (lambda (dir)
+                                   (and (or (stringp dir)
+                                            (and (boundp dir)
+                                                 (setq dir (symbol-value dir))))
+                                        (file-in-directory-p default-directory
+                                                             dir)))
+                                 epkg--package-parent-dirs)))
+                  (car (file-name-split
+                        (file-relative-name default-directory dir))))
                 (and-let* ((symbol (symbol-at-point)))
                   (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
     (completing-read prompt choices nil t nil 'epkg-package-history
