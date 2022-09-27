@@ -547,7 +547,9 @@ to packages for which one of these predicates returns non-nil."
                                                              dir)))
                                  epkg--package-parent-dirs)))
                   (car (file-name-split
-                        (file-relative-name default-directory dir))))
+                        (file-relative-name
+                         default-directory
+                         (if (stringp dir) dir (symbol-value dir))))))
                 (and-let* ((symbol (symbol-at-point)))
                   (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
     (completing-read prompt choices nil t nil 'epkg-package-history
