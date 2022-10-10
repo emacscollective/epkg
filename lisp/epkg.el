@@ -387,11 +387,13 @@ optional INCLUDE-BUNDLED is non-nil.
   (mapcar #'car (if include-bundled
                     (epkg-sql [:select feature :from provided
                                :where (= package $s1)
-                               :order-by [(asc feature)]] package)
+                               :order-by [(asc feature)]]
+                              package)
                   (epkg-sql [:select feature :from provided
                              :where (and (= package $s1)
                                          (isnull drop))
-                             :order-by [(asc feature)]] package))))
+                             :order-by [(asc feature)]]
+                            package))))
 
 (cl-defgeneric epkg-required (package)
   "Return a list of packages and features required by PACKAGE.
