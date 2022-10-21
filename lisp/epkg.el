@@ -548,7 +548,7 @@ to packages for which one of these predicates returns non-nil."
                                         (file-in-directory-p default-directory
                                                              dir)))
                                  epkg--package-parent-dirs)))
-                  (car (file-name-split
+                  (car (epkg--file-name-split
                         (file-relative-name
                          default-directory
                          (if (stringp dir) dir (symbol-value dir))))))
@@ -556,6 +556,27 @@ to packages for which one of these predicates returns non-nil."
                   (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
     (completing-read prompt choices nil t nil 'epkg-package-history
                      (and default (member default choices) default))))
+
+;;; Compatibility
+
+(defalias 'epkg--file-name-split
+  (if (fboundp 'file-name-split)
+       'file-name-split
+    (lambda (filename)
+      (let ((components nil))
+        (when (directory-name-p filename)
+          (push "" components)
+          (setq filename (directory-file-name filename)))
+        (while (length> filename 0)
+          (push (file-name-nondirectory filename) components)
+          (let ((dir (file-name-directory filename)))
+            (setq filename (and dir (directory-file-name dir)))
+            (when (and dir (equal dir filename))
+              (push (if (equal dir "") ""
+                      (substring dir 0 -1))
+                    components)
+              (setq filename nil))))
+        components))))
 
 ;;; _
 (provide 'epkg)
