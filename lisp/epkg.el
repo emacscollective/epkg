@@ -81,29 +81,24 @@ You need to install the `emacsql-sqlite-builtin' package to use
 this connector.
 
 If you are using an older Emacs release, then the recommended
-connector is `sqlite-module', which uses the module provided by
-the `sqlite3' package.  This is very similar to the previous
-connector and the built-in support in Emacs 29 derives from this
-module.  You need to install the `emacsql-sqlite-module' package
-to use this connector.
-
-For the time being `libsqlight3' is still supported.  Do not use
-this, it is an older version of the `sqlite-module' connector
-from before the connector and the library were renamed."
+connector is `sqlite-module', which uses the module provided
+by the `sqlite3' package.  You need to install the
+`emacsql-sqlite-module' package to use this connector."
   :package-version '(epkg . "3.4.0")
   :group 'epkg
   :type '(choice (const sqlite)
                  (const sqlite-builtin)
-                 (const sqlite-module)
-                 (const :tag "libsqlite3 (OBSOLETE)" libsqlite3)))
+                 (const sqlite-module)))
 
 ;;; Database
 
 (declare-function epkg-database--eieio-childp "epkg.el" (obj) t)
 (cl-ecase epkg-database-connector
   (sqlite
-   (defclass epkg-database (emacsql-sqlite-connection closql-database)
-     ((object-class :initform 'epkg-package))))
+   (require (quote emacsql-sqlite))
+   (with-no-warnings
+     (defclass epkg-database (emacsql-sqlite-connection closql-database)
+       ((object-class :initform 'epkg-package)))))
   (sqlite-builtin
    (require (quote emacsql-sqlite-builtin))
    (with-no-warnings
@@ -113,11 +108,6 @@ from before the connector and the library were renamed."
    (require (quote emacsql-sqlite-module))
    (with-no-warnings
      (defclass epkg-database (emacsql-sqlite-module-connection closql-database)
-       ((object-class :initform 'epkg-package)))))
-  (libsqlite3
-   (require (quote emacsql-libsqlite3))
-   (with-no-warnings
-     (defclass epkg-database (emacsql-libsqlite3-connection closql-database)
        ((object-class :initform 'epkg-package))))))
 
 (defvar epkg--db-connection nil
