@@ -56,15 +56,15 @@
 (defclass melpa--platform-recipe () ())
 
 (defclass melpa-github-recipe (melpa-git-recipe melpa--platform-recipe)
-  ((url-format      :initform "git@github.com:%r.git")
+  ((url-format      :initform "https://github.com/%r")
    (repopage-format :initform "https://github.com/%r")))
 
 (defclass melpa-gitlab-recipe (melpa-git-recipe melpa--platform-recipe)
-  ((url-format      :initform "git@gitlab.com:%r.git")
+  ((url-format      :initform "https://gitlab.com/%r")
    (repopage-format :initform "https://gitlab.com/%r")))
 
 (defclass melpa-codeberg-recipe (melpa-git-recipe melpa--platform-recipe)
-  ((url-format      :initform "https://codeberg.org/%r.git")
+  ((url-format      :initform "https://codeberg.org/%r")
    (repopage-format :initform "https://codeberg.org/%r")))
 
 (defclass melpa-sourcehut-recipe (melpa-git-recipe melpa--platform-recipe)

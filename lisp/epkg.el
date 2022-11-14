@@ -257,7 +257,7 @@ database."
 
 (defclass epkg-mirrored-package (epkg-package)
   ((mirrorpage-format :initform "https://github.com/emacsmirror/%m")
-   (mirror-url-format :initform "git@github.com:emacsmirror/%m.git"))
+   (mirror-url-format :initform "https://github.com/emacsmirror/%m"))
   :abstract t)
 
 (defclass epkg-file-package (epkg-mirrored-package) ())
@@ -267,19 +267,19 @@ database."
 (defclass epkg-git-package (epkg-gitish-package) ())
 
 (defclass epkg-github-package (epkg-git-package)
-  ((url-format      :initform "git@github.com:%u/%n.git")
+  ((url-format      :initform "https://github.com/%u/%n")
    (repopage-format :initform "https://github.com/%u/%n")))
 
 (defclass epkg-orphaned-package (epkg-github-package)
-  ((url-format      :initform "git@github.com:emacsorphanage/%n.git")
+  ((url-format      :initform "https://github.com/emacsorphanage/%n")
    (repopage-format :initform "https://github.com/emacsorphanage/%n")))
 
 (defclass epkg-gitlab-package (epkg-git-package)
-  ((url-format      :initform "git@gitlab.com:%u/%n.git")
+  ((url-format      :initform "https://gitlab.com/%u/%n")
    (repopage-format :initform "https://gitlab.com/%u/%n")))
 
 (defclass epkg-codeberg-package (epkg-git-package)
-  ((url-format      :initform "https://codeberg.org/%u/%n.git")
+  ((url-format      :initform "https://codeberg.org/%u/%n")
    (repopage-format :initform "https://codeberg.org/%u/%n")))
 
 (defclass epkg-sourcehut-package (epkg-git-package)
@@ -310,7 +310,7 @@ database."
    (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
 
 (defclass epkg-wiki-package (epkg-git-package)
-  ((url-format      :initform "git@github.com:emacsmirror/emacswiki.org.git")
+  ((url-format      :initform "https://github.com:emacsmirror/emacswiki.org")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
    (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
 
@@ -330,7 +330,7 @@ database."
 
 (defclass epkg-shelved-package (epkg-mocking-package)
   ((mirrorpage-format :initform "https://github.com/emacsattic/%m")
-   (mirror-url-format :initform "git@github.com:emacsattic/%m.git")))
+   (mirror-url-format :initform "https://github.com/emacsattic/%m")))
 
 ;;; Interfaces
 
