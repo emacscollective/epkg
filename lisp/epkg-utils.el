@@ -80,8 +80,7 @@ inside the super-repository specified by `epkg-repository'."
   (let* ((pkg  (epkg (epkg-read-package "Find file of package: ")))
          (repo (epkg-repository pkg)))
     (unless (file-exists-p (expand-file-name ".git" repo))
-      (if (y-or-n-p (format "Submodule %s isn't checked out.  Check out?"
-                            default-directory))
+      (if (y-or-n-p (format "Submodule %s isn't checked out.  Check out?" repo))
           (epkg--call-git "submodule" "update" "--init" repo)
         (user-error "Abort")))
     (let ((default-directory repo))
