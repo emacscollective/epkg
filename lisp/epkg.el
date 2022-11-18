@@ -340,16 +340,18 @@ database."
 
 The list is ordered by the package names in ascending order.
 
-If optional SELECT is non-nil, then it has to be a column of the
-`packages' table or a list of such columns.  In those cases the
-returned value is a list of column values or a list of database
-rows.  If SELECT is nil, return a list of object.
+If optional SELECT is non-nil, then it has to be symbol naming
+a column in the `packages' table or a vector of such columns.
+In those cases the returned value is a list of column values
+or a list of database rows.  If SELECT is nil, return a list
+of objects.
 
-If optional PREDICATES is non-nil, then it has to be a list of
-package class predicate functions, or a single such function.
-Valid functions are named either `epkg-TYPE-package-p' or
-`epkg-TYPE-package--eieio-childp'.  Only packages are returned
-for which one of these predicates returns non-nil."
+If optional TYPES is non-nil, then it has to be a vector of
+package types, such as `github'.  To include subtypes, add an
+asterisk to the symbol name, e.g., `mirrored*'.  For backward
+compatibility, TYPES can also be a list of predicate functions
+`epkg-TYPE-package-p' or `epkg-TYPE-package--eieio-childp', or
+a single such function."
   (closql-query (epkg-db) select types 'epkg-package))
 
 (defun epkg (name)

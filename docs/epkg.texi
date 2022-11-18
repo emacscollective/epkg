@@ -476,22 +476,25 @@ NAME@.  NAME is the name of a package, a string.
 @end defun
 
 @defun epkgs &optional select predicates
-This function returns a list of @code{epkg-package} objects or a list of
-database rows.  The list is ordered by the package names in
-ascending order.
+This function returns a list of @code{epkg-package} objects, column
+values or database rows.  The list is ordered by the package
+names in ascending order.
 
-If optional SELECT is non-nil, then it has to be a list of columns
-of the @code{packages} table.  In that case the returned value is a list of
-database rows.
+If optional SELECT is non-nil, then it has to be symbol naming
+a column in the `packages' table or a vector of such columns.
+In those cases the returned value is a list of column values
+or a list of database rows.  If SELECT is nil, return a list
+of objects.
 
-If optional PREDICATES is non-nil, then it has to be a list of
-package class predicate functions, or a single such function.
-Valid functions are named either @code{epkg-TYPE-package-p} or
-@code{epkg-TYPE-package--eieio-childp}.  Only packages are returned
-for which one of these predicates returns non-nil.
+If optional TYPES is non-nil, then it has to be a vector of
+package types, such as @code{github}.  To include subtypes, add an
+asterisk to the symbol name, e.g., @code{mirrored*}.  For backward
+compatibility, TYPES can also be a list of predicate functions
+@code{epkg-TYPE-package-p} or @code{epkg-TYPE-package--eieio-childp}, or
+a single such function.
 
-This function is more limited than @code{epkg-sql} but it's often much less
-verbose.  For example @code{(epkgs nil 'epkg-gitlab-package-p)} returns the
+This function is more limited than @code{epkg-sql} but it's often much
+less verbose.  For example @code{(epkgs nil [gitlab])} returns the
 same value as:
 
 @lisp
@@ -500,7 +503,7 @@ same value as:
         (epkg-sql [:select * :from packages
                    :where class :in $v1
                    :order-by [(asc name)]]
-                  (closql-where-class-in 'epkg-gitlab-package)))
+                  (closql-where-class-in 'gitlab)))
 @end lisp
 @end defun
 
