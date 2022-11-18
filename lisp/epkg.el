@@ -304,11 +304,6 @@ database."
 
 (defclass epkg-minority-package (epkg-subrepo-package) ())
 
-(defclass epkg-core-package (epkg-subrepo-package)
-  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs.git")
-   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs.git")
-   (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
-
 (defclass epkg-wiki-package (epkg-git-package)
   ((url-format      :initform "https://github.com:emacsmirror/emacswiki.org")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
