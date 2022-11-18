@@ -47,7 +47,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 9)
+(defconst epkg-db-version 10)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
@@ -243,14 +243,15 @@ database."
    (keywords            :closql-table keywords)
    (authors             :closql-table authors)
    (maintainers         :closql-table maintainers)
-   (melpa-recipes       :closql-class melpa-recipe)
-   (gelpa-recipes       :closql-class gelpa-recipe)
+   (melpa-recipes       :closql-class epkg-melpa-recipe)
+   (gnu-elpa-recipes    :closql-class epkg-gnu-elpa-recipe)
    (builtin-libraries   :closql-table builtin_libraries)
    (patched             :initform nil :initarg :patched)
    (stars               :initform nil :initarg :stars)
    (downloads           :initform nil :initarg :downloads)
    (upstream-state      :initform nil)
-   (branch              :initform nil))
+   (branch              :initform nil)
+   (nongnu-elpa-recipes :closql-class epkg-nongnu-elpa-recipe))
   :abstract t)
 
 ;;; Subclasses
@@ -308,6 +309,11 @@ database."
   ((url-format      :initform "https://github.com:emacsmirror/emacswiki.org")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
    (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
+
+(defclass epkg-nongnu-elpa-package (epkg-git-package)
+  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/nongnu.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/nongnu.git/log/?h=elpa/%n")
+   (homepage-format :initform "https://elpa.nongnu.org/nongnu/%n.html")))
 
 (defclass epkg-gnu-elpa-package (epkg-git-package)
   ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/elpa.git")
@@ -570,6 +576,5 @@ to packages for which one of these predicates returns non-nil."
 (require 'epkg-desc)
 (require 'epkg-list)
 (require 'epkg-utils)
-(require 'epkg-gelpa)
-(require 'epkg-melpa)
+(require 'epkg-elpa)
 ;;; epkg.el ends here

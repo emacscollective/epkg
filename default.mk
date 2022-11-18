@@ -4,9 +4,8 @@ PKG = epkg
 
 ELS   = $(PKG).el
 ELS  += $(PKG)-desc.el
-ELS  += $(PKG)-gelpa.el
+ELS  += $(PKG)-elpa.el
 ELS  += $(PKG)-list.el
-ELS  += $(PKG)-melpa.el
 ELS  += $(PKG)-org.el
 ELS  += $(PKG)-schemata.el
 ELS  += $(PKG)-utils.el

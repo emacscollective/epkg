@@ -7,9 +7,8 @@ loaddefs: $(PKG)-autoloads.el
 
 $(PKG).elc:
 $(PKG)-desc.elc: $(PKG).elc
-$(PKG)-gelpa.elc: $(PKG).elc
+$(PKG)-elpa.elc: $(PKG).elc
 $(PKG)-list.elc: $(PKG).elc $(PKG)-desc.elc
-$(PKG)-melpa.elc: $(PKG).elc
 $(PKG)-org.elc: $(PKG).elc
 $(PKG)-schemata.elc: $(PKG).elc
 $(PKG)-utils.elc: $(PKG).elc

@@ -262,7 +262,7 @@ are nil stand for empty lines."
 
 (defun epkg-insert-melpa-info (pkg)
   (epkg--insert-slot 'melpa)
-  (if-let ((rcp (melpa-get (oref pkg name))))
+  (if-let ((rcp (epkg-get-recipe 'melpa (oref pkg name))))
       (if-let ((url (oref rcp repopage)))
           (insert-button url
                          'type 'help-url

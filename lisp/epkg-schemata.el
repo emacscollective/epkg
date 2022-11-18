@@ -61,13 +61,14 @@
                         ;; `:default', so `closql--db-init' adds
                         ;; these columns using `:alter-table'.
                         ;; (melpa-recipes :default eieio-unbound)
-                        ;; (gelpa-recipes :default eieio-unbound)
+                        ;; (gnu-elpa-recipes :default eieio-unbound)
                         ;; (builtin-libraries :default eieio-unbound)
                         ;; patched
                         ;; stars
                         ;; downloads
                         ;; upstream-state
                         ;; branch
+                        ;; (nongnu-elpa-recipes :default eieio-unbound)
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -112,33 +113,48 @@
                        (:foreign-key
                         [package] :references packages [name]
                         :on-delete :cascade))
-    (melpa-recipes     [(class :not-null)
-                        (name :not-null :primary-key)
-                        url
-                        repo
-                        repopage
-                        files
-                        branch
-                        commit
-                        module
-                        version-regexp
-                        old-names
-                        epkg-package]
-                       (:foreign-key
-                        [epkg-package] :references packages [name]
-                        :on-delete :set-null))
-    (gelpa-recipes     [(class :not-null)
-                        (name :not-null :primary-key)
-                        url method released epkg-package]
-                       (:foreign-key
-                        [epkg-package] :references packages [name]
-                        :on-delete :set-null))
-    (builtin-libraries [(package :not-null)
-                        (library :not-null)
-                        feature]
-                       (:foreign-key
-                        [package] :references packages [name]
-                        :on-delete :cascade))
+    (melpa-recipes       [(class :not-null)
+                          (name :not-null :primary-key)
+                          url
+                          repo
+                          repopage
+                          files
+                          branch
+                          commit
+                          version-regexp
+                          old-names
+                          epkg-package]
+                         (:foreign-key
+                          [epkg-package] :references packages [name]
+                          :on-delete :set-null))
+    (nongnu-elpa-recipes [(class :not-null)
+                          (name :not-null :primary-key)
+                          released url
+                          main-file lisp-dir ignored-files excludes
+                          renames doc readme news shell-command make
+                          texinfo auto-sync merge branch release-branch
+                          rolling-release version-map
+                          epkg-package]
+                         (:foreign-key
+                          [epkg-package] :references packages [name]
+                          :on-delete :set-null))
+    (gnu-elpa-recipes    [(class :not-null)
+                          (name :not-null :primary-key)
+                          released url core
+                          main-file lisp-dir ignored-files excludes
+                          renames doc readme news shell-command make
+                          texinfo auto-sync merge branch release-branch
+                          rolling-release version-map
+                          epkg-package]
+                         (:foreign-key
+                          [epkg-package] :references packages [name]
+                          :on-delete :set-null))
+    (builtin-libraries   [(package :not-null)
+                          (library :not-null)
+                          feature]
+                         (:foreign-key
+                          [package] :references packages [name]
+                          :on-delete :cascade))
     ))
 
 (cl-defmethod closql--db-init ((db epkg-database))
@@ -150,13 +166,14 @@
       (emacsql db [:create-table $i1 $S2] table schema))
     (let ((add-column [:alter-table packages :add-column $i1 :default $s2]))
       (emacsql db add-column 'melpa-recipes     'eieio-unbound)
-      (emacsql db add-column 'gelpa-recipes     'eieio-unbound)
+      (emacsql db add-column 'gnu-elpa-recipes  'eieio-unbound)
       (emacsql db add-column 'builtin-libraries 'eieio-unbound)
       (emacsql db add-column 'patched           nil)
       (emacsql db add-column 'stars             nil)
       (emacsql db add-column 'downloads         nil)
       (emacsql db add-column 'upstream-state    nil)
       (emacsql db add-column 'branch            nil)
+      (emacsql db add-column 'nongnu-elpa-recipes 'eieio-unbound)
       )))
 
 ;;; _

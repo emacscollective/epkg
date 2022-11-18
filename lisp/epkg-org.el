@@ -88,7 +88,7 @@ Usage:
            (format "[[%s]]" homepage)))))))
 
 (defun melpa-org-link (name)
-  (let ((rcp (melpa-get name)))
+  (let ((rcp (epkg-get-recipe 'melpa name)))
     (if-let (repopage (oref rcp repopage))
         (format "[[%s][%s]]" repopage (oref rcp repo))
       (oref rcp url))))
