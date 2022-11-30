@@ -280,14 +280,6 @@ are nil stand for empty lines."
          "WARNING: Anyone can edit any packages on the Emacswiki by\n"
          "         design, making it trivial to inject malicious code.\n\n")
         'face 'error)))
-     ((epkg-orphaned-package-p pkg)
-      (insert
-       (propertize
-        (concat
-         "WARNING: The Emacsorphanage might import this package over an\n"
-         "         insecure connection, in which case an attacker could\n"
-         "         inject malicious code.\n\n")
-        'face 'warning)))
      ((and (epkg-shelved-package-p pkg)
            (or (not url)
                (not (or (string-prefix-p "git@" url)
