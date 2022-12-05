@@ -265,6 +265,19 @@ NAME is the name of a package, a string.  ELPA is one of `gnu',
 
 ;;; Utilities
 
+(defun epkg-recipe-to-package (rcp)
+  (epkg (caar
+         (epkg-sql
+          [:select [packages:name]
+           :from [packages (as $i1 recipes)]
+           :where (and (= recipes:name $s2)
+                       (= recipes:epkg-package
+                          packages:name))]
+          (cond ((cl-typep rcp 'epkg-gnu-elpa-recipe)    'gnu-elpa-recipes)
+                ((cl-typep rcp 'epkg-nongnu-elpa-recipe) 'nongnu-elpa-recipes)
+                ((cl-typep rcp 'epkg-melpa-recipe)       'melpa-recipes))
+          (oref rcp name)))))
+
 (defun epkg-melpa-json-recipes ()
   (json-encode (mapcar #'epkg-melpa--recipe-plist (epkg-list-recipes 'melpa))))
 
