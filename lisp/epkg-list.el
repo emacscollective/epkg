@@ -41,8 +41,7 @@ and you can tell the other commands to ignore it as well
 by using a prefix argument."
   :group 'epkg
   :type `(repeat (choice :tag "Type"
-                         ,@(mapcar (lambda (abbr)
-                                     (list 'const abbr))
+                         ,@(mapcar (##list 'const %)
                                    (closql--list-subabbrevs 'epkg-package)))))
 
 (defcustom epkg-list-columns
@@ -262,15 +261,14 @@ use `TYPE*' instead of just `TYPE'."
   (let ((lst (mapcar (pcase-lambda (`(,_ ,_ ,_ ,_ ,slot ,_)) slot)
                      epkg-list-columns)))
     (vconcat (if qualify
-                 (mapcar (lambda (e) (if (eq e 'name) 'packages:name e)) lst)
+                 (mapcar (##if (eq % 'name) 'packages:name %) lst)
                lst))))
 
 (defun epkg--list-where-class-in (all)
   (closql-where-class-in
    (if all
        'epkg-package--eieio-childp
-     (mapcar (lambda (abbr)
-               (closql--expand-abbrev 'epkg-package abbr))
+     (mapcar (##closql--expand-abbrev 'epkg-package %)
              (cl-set-difference (closql--list-subabbrevs 'epkg-package)
                                 epkg-list-exclude-types)))))
 
@@ -280,7 +278,7 @@ use `TYPE*' instead of just `TYPE'."
   (let ((col (or epkg-list--download-column
                  (setq epkg-list--download-column
                        (cl-position-if
-                        (lambda (e) (eq (nth 2 e) 'epkg-list-sort-by-downloads))
+                        (##eq (nth 2 %) 'epkg-list-sort-by-downloads)
                         (append tabulated-list-format nil))))))
     (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
        (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))
@@ -291,7 +289,7 @@ use `TYPE*' instead of just `TYPE'."
   (let ((col (or epkg-list--stars-column
                  (setq epkg-list--stars-column
                        (cl-position-if
-                        (lambda (e) (eq (nth 2 e) 'epkg-list-sort-by-stars))
+                        (##eq (nth 2 %) 'epkg-list-sort-by-stars)
                         (append tabulated-list-format nil))))))
     (> (or (ignore-errors (string-to-number (aref (cadr a) col))) 0)
        (or (ignore-errors (string-to-number (aref (cadr b) col))) 0))))

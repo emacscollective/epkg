@@ -66,7 +66,7 @@ Usage:
                           (cdr header)))
               (list 'hline)
               (mapcar (lambda (row)
-                        (mapcar (lambda (elt) (or elt "")) row))
+                        (mapcar (##or % "") row))
                       (if sort
                           (cl-sort rows #'string< :key sort)
                         rows)))))))

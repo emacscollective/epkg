@@ -9,7 +9,8 @@
 ;; Package-Requires: (
 ;;     (emacs "25.1")
 ;;     (compat "28.1.1.0")
-;;     (closql "20210927"))
+;;     (closql "20210927")
+;;     (llama "0.2.0"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -40,6 +41,7 @@
 
 (require 'compat)
 (require 'compat-26)
+(require 'llama)
 (require 'seq)
 (require 'subr-x)
 
@@ -436,7 +438,7 @@ features listed in FEATURES.")
                                      :order-by [(asc package)]] feature))))
     (if (length= packages 1)
         (car packages)
-      (let ((alist (mapcar (lambda (name) (cons name (epkg name))) packages)))
+      (let ((alist (mapcar (##cons % (epkg %)) packages)))
         (car (or (cl-find-if (pcase-lambda (`(,_ . ,pkg))
                                (cl-typep pkg 'epkg-builtin-package))
                              alist)
