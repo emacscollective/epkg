@@ -13,7 +13,6 @@ ELCS  = $(ELS:.el=.elc)
 
 DEPS  = closql
 DEPS += compat
-DEPS += dash
 DEPS += emacsql
 # Optional:
 DEPS += magit/lisp
