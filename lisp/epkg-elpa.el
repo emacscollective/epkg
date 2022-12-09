@@ -277,7 +277,11 @@ NAME is the name of a package, a string.  ELPA is one of `gnu',
                 ((cl-typep rcp 'epkg-nongnu-elpa-recipe) 'nongnu-elpa-recipes)
                 ((cl-typep rcp 'epkg-melpa-recipe)       'melpa-recipes)
                 ;; This table stores a different, but equivalent object.
-                ((cl-typep rcp 'package-recipe)          'melpa-recipes))
+                ;; Cannot use cl-typep because the type is unknown when
+                ;; compiling this
+                ((and (fboundp 'package-recipe--eieio-childp)
+                      (package-recipe--eieio-childp rcp))
+                 'melpa-recipes))
           (oref rcp name)))))
 
 (defun epkg-melpa-json-recipes ()
