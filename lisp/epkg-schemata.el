@@ -69,6 +69,7 @@
                         ;; upstream-state
                         ;; branch
                         ;; (nongnu-elpa-recipes :default eieio-unbound)
+                        ;; (mirrored :default t)
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -174,6 +175,7 @@
       (emacsql db add-column 'upstream-state    nil)
       (emacsql db add-column 'branch            nil)
       (emacsql db add-column 'nongnu-elpa-recipes 'eieio-unbound)
+      (emacsql db add-column 'mirrored          t)
       )))
 
 ;;; _

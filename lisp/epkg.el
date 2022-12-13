@@ -49,7 +49,7 @@
 
 ;;; Options
 
-(defconst epkg-db-version 10)
+(defconst epkg-db-version 11)
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
@@ -253,7 +253,9 @@ database."
    (downloads           :initform nil :initarg :downloads)
    (upstream-state      :initform nil)
    (branch              :initform nil)
-   (nongnu-elpa-recipes :closql-class epkg-nongnu-elpa-recipe))
+   (nongnu-elpa-recipes :closql-class epkg-nongnu-elpa-recipe)
+   (mirrored            :initform t)
+   )
   :abstract t)
 
 ;;; Subclasses
