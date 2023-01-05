@@ -550,7 +550,9 @@ to packages for which one of these predicates returns non-nil."
                          default-directory
                          (if (stringp dir) dir (symbol-value dir))))))
                 (and-let* ((symbol (symbol-at-point)))
-                  (compat-string-trim (symbol-name symbol) ".*/" "\\..*"))))))
+                  (compat-call string-trim
+                               (symbol-name symbol)
+                               ".*/" "\\..*"))))))
     (completing-read prompt choices nil t nil 'epkg-package-history
                      (and default (member default choices) default))))
 
