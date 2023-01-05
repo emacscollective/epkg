@@ -1,6 +1,6 @@
 ;;; epkg-list.el --- List Epkg packages  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2016-2022 Jonas Bernoulli
+;; Copyright (C) 2016-2023 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Homepage: https://github.com/emacscollective/epkg
@@ -22,7 +22,7 @@
 ;; along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 ;; This file contains code taken from GNU Emacs, which is
-;; Copyright (C) 1976-2022 Free Software Foundation, Inc.
+;; Copyright (C) 1976-2023 Free Software Foundation, Inc.
 
 ;;; Code:
 
