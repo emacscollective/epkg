@@ -240,8 +240,9 @@ use `TYPE*' instead of just `TYPE'."
 
 (define-derived-mode epkg-list-mode tabulated-list-mode "Epkgs"
   "Major mode for browsing a list of packages."
-  (setq-local x-stretch-cursor  nil)
-  (setq tabulated-list-padding  0)
+  (when (boundp 'x-stretch-cursor)
+    (setq-local x-stretch-cursor nil))
+  (setq tabulated-list-padding 0)
   (setq tabulated-list-sort-key (cons "Package" nil))
   (setq tabulated-list-format
         (vconcat (mapcar (pcase-lambda (`(,label ,width ,pred ,props ,_ ,_))
