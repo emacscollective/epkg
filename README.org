@@ -19,6 +19,6 @@ For more information see the [[https://emacsmirror.net/manual/epkg][manual]] and
 
 #+html: <br><br>
 #+html: <a href="https://github.com/emacscollective/epkg/actions/workflows/compile.yml"><img alt="Compile" src="https://github.com/emacscollective/epkg/actions/workflows/compile.yml/badge.svg"/></a>
-#+html: <a href="https://github.com/emacscollective/epkg/actions/workflows/manual.yml"><img alt="Compile" src="https://github.com/emacscollective/epkg/actions/workflows/manual.yml/badge.svg"/></a>
+#+html: <a href="https://github.com/emacscollective/epkg/actions/workflows/manual.yml"><img alt="Manual" src="https://github.com/emacscollective/epkg/actions/workflows/manual.yml/badge.svg"/></a>
 #+html: <a href="https://stable.melpa.org/#/epkg"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/epkg-badge.svg"/></a>
 #+html: <a href="https://melpa.org/#/epkg"><img alt="MELPA" src="https://melpa.org/packages/epkg-badge.svg"/></a>
