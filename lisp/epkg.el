@@ -40,7 +40,6 @@
 ;;; Code:
 
 (require 'compat)
-(require 'compat-26)
 (require 'llama)
 (require 'seq)
 (require 'subr-x)
