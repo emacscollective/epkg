@@ -39,7 +39,9 @@
      main-file lisp-dir ignored-files excludes renames
      doc readme news
      shell-command make texinfo
-     auto-sync merge branch release-branch rolling-release version-map))
+     auto-sync merge branch release-branch rolling-release version-map
+     maintainer ; used for a single package
+     ))
 
 ;;; GNU Elpa
 
