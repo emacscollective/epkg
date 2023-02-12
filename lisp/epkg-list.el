@@ -228,15 +228,13 @@ use `TYPE*' instead of just `TYPE'."
 
 ;;; Mode
 
-(defvar epkg-list-mode-map
-  (let ((map (make-sparse-keymap)))
-    (set-keymap-parent map tabulated-list-mode-map)
-    (define-key map "\r"              #'epkg-list-describe-package)
-    (define-key map (kbd "C-c C-f")   #'epkg-find-file)
-    (define-key map (kbd "C-c 4 C-f") #'epkg-find-file-other-window)
-    (define-key map (kbd "C-c 5 C-f") #'epkg-find-file-other-frame)
-    map)
-  "Local keymap for Epkg-List mode buffers.")
+(defvar-keymap epkg-list-mode-map
+  :doc "Local keymap for Epkg-List mode buffers."
+  :parent tabulated-list-mode-map
+  "RET"       #'epkg-list-describe-package
+  "C-c C-f"   #'epkg-find-file
+  "C-c 4 C-f" #'epkg-find-file-other-window
+  "C-c 5 C-f" #'epkg-find-file-other-frame)
 
 (define-derived-mode epkg-list-mode tabulated-list-mode "Epkgs"
   "Major mode for browsing a list of packages."
