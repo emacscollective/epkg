@@ -41,6 +41,7 @@
      shell-command make texinfo
      auto-sync merge branch release-branch rolling-release version-map
      maintainer ; used for a single package
+     manual-sync ; whether the package is synced manually
      ))
 
 ;;; GNU Elpa
