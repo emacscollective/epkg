@@ -49,11 +49,6 @@
 
 ;;; Options
 
-(defconst epkg-db-version 11)
-
-(defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
-  "The url of the remote Emacsmirror repository.")
-
 (defgroup epkg nil
   "Browse the Emacsmirror package database."
   :group 'applications)
@@ -92,6 +87,14 @@ by the `sqlite3' package.  You need to install the
                  (const sqlite-builtin)
                  (const sqlite-module)))
 
+(defvar epkg--db-prefer-binary nil
+  "Whether to prefer the binary database over the dump.")
+
+(defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
+  "The url of the remote Emacsmirror repository.")
+
+(defconst epkg-db-version 11)
+
 ;;; Database
 
 (declare-function epkg-database--eieio-childp "epkg.el" (obj) t)
@@ -114,9 +117,6 @@ by the `sqlite3' package.  You need to install the
 
 (defvar epkg--db-connection nil
   "The EmacSQL database connection.")
-
-(defvar epkg--db-prefer-binary nil
-  "Whether to prefer the binary database over the dump.")
 
 (defun epkg-db ()
   "Return the connection to the Epkg database.
