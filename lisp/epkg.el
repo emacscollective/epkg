@@ -124,9 +124,7 @@ by the `sqlite3' package.  You need to install the
 If the `epkg-repository', which contains the SQLite database
 file, does not exist yet, then first ask the user to clone it."
   (unless (file-exists-p epkg-repository)
-    (if (yes-or-no-p (format "Clone %s to %s? "
-                             epkg-origin-url
-                             epkg-repository))
+    (if (y-or-n-p (format "Clone %s to %s? " epkg-origin-url epkg-repository))
         (let ((dir (file-name-directory (directory-file-name epkg-repository))))
           (make-directory dir t)
           (let ((default-directory dir))
