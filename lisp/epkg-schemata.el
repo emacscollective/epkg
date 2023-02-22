@@ -158,13 +158,9 @@
                           :on-delete :cascade))
     ))
 
-(cl-defmethod closql--db-init ((db epkg-database))
-  (emacsql-enable-debugging db)
-  (emacsql-with-transaction db
-    (emacsql db (format "PRAGMA user_version = %s" epkg-db-version))
-    (pcase-dolist (`(,table . ,schema)
-                   epkg--db-table-schemata)
-      (emacsql db [:create-table $i1 $S2] table schema))
+(cl-defmethod closql--db-create-schema ((db epkg-database))
+  (closql-with-transaction db
+    (cl-call-next-method)
     (let ((add-column [:alter-table packages :add-column $i1 :default $s2]))
       (emacsql db add-column 'melpa-recipes     'eieio-unbound)
       (emacsql db add-column 'gnu-elpa-recipes  'eieio-unbound)

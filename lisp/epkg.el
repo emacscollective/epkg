@@ -66,63 +66,31 @@ again."
   :group 'epkg
   :type 'directory)
 
-(defcustom epkg-database-connector 'sqlite
-  "The database connector used by Epkg.
-
-This must be set before `epkg' is loaded.  To use an alternative
-connectors you must install the respective package explicitly.
-
-If you are using Emacs 29, then the recommended connector is
-`sqlite-builtin', which uses the new builtin support for SQLite.
-You need to install the `emacsql-sqlite-builtin' package to use
-this connector.
-
-If you are using an older Emacs release, then the recommended
-connector is `sqlite-module', which uses the module provided
-by the `sqlite3' package.  You need to install the
-`emacsql-sqlite-module' package to use this connector."
-  :package-version '(epkg . "3.4.0")
-  :group 'epkg
-  :type '(choice (const sqlite)
-                 (const sqlite-builtin)
-                 (const sqlite-module)))
-
 (defvar epkg--db-prefer-binary nil
   "Whether to prefer the binary database over the dump.")
 
 (defconst epkg-origin-url "https://github.com/emacsmirror/epkgs.git"
   "The url of the remote Emacsmirror repository.")
 
-(defconst epkg-db-version 11)
-
 ;;; Database
 
-(declare-function epkg-database--eieio-childp "epkg.el" (obj) t)
-(cl-ecase epkg-database-connector
-  (sqlite
-   (require (quote emacsql-sqlite))
-   (with-no-warnings
-     (defclass epkg-database (emacsql-sqlite-connection closql-database)
-       ((object-class :initform 'epkg-package)))))
-  (sqlite-builtin
-   (require (quote emacsql-sqlite-builtin))
-   (with-no-warnings
-     (defclass epkg-database (emacsql-sqlite-builtin-connection closql-database)
-       ((object-class :initform 'epkg-package)))))
-  (sqlite-module
-   (require (quote emacsql-sqlite-module))
-   (with-no-warnings
-     (defclass epkg-database (emacsql-sqlite-module-connection closql-database)
-       ((object-class :initform 'epkg-package))))))
+(defclass epkg-database (closql-database)
+  ((name         :initform "Epkg")
+   (object-class :initform 'epkg-package)
+   (schemata     :initform 'epkg--db-table-schemata)
+   (version      :initform 11)))
 
-(defvar epkg--db-connection nil
-  "The EmacSQL database connection.")
+(defun epkg-db (&optional livep)
+  "Return the Epkg database object.
 
-(defun epkg-db ()
-  "Return the connection to the Epkg database.
+If optional LIVEP is non-nil, then only return the object if
+the connection to the database is live already.
 
 If the `epkg-repository', which contains the SQLite database
 file, does not exist yet, then first ask the user to clone it."
+  (closql-db 'epkg-database livep))
+
+(cl-defmethod closql--db-prepare-storage ((_class (subclass epkg-database)))
   (unless (file-exists-p epkg-repository)
     (if (y-or-n-p (format "Clone %s to %s? " epkg-origin-url epkg-repository))
         (let ((dir (file-name-directory (directory-file-name epkg-repository))))
@@ -132,51 +100,35 @@ file, does not exist yet, then first ask the user to clone it."
             (epkg--call-git "clone" epkg-origin-url epkg-repository)
             (message "Cloning Epkgs repository...done")))
       (user-error "Aborted.  Epkg requires the Epkgs repository")))
-  (unless (and epkg--db-connection (emacsql-live-p epkg--db-connection))
-    (let* ((default-directory epkg-repository)
-           (bin-file (expand-file-name "epkg.sqlite"))
-           (txt-file (expand-file-name "epkg.sql"))
-           (rev-file (expand-file-name "epkg.rev"))
-           (rev (car (process-lines "git" "rev-parse" "HEAD"))))
-      (when (or (not (file-exists-p bin-file))
-                (and (not epkg--db-prefer-binary)
-                     (or (not (file-exists-p rev-file))
-                         (not (equal (with-temp-buffer
-                                       (insert-file-contents rev-file)
-                                       (string-trim (buffer-string)))
-                                     rev)))))
-        (message "Initializing database from commit %s..." rev)
-        (delete-file bin-file)
-        (with-temp-buffer
-          (unless (zerop (call-process "sqlite3" nil t nil
-                                       bin-file
-                                       (format ".read %s" txt-file)))
-            (error "Failed to read %s: %s" txt-file (buffer-string))))
-        (with-temp-file rev-file
-          (insert rev ?\n))
-        (message "Initializing database from commit %s...done" rev))
-      (closql-db 'epkg-database 'epkg--db-connection bin-file))
-    (let ((version (closql--db-get-version epkg--db-connection)))
-      (cond
-       ((> version epkg-db-version)
-        (emacsql-close epkg--db-connection)
-        (user-error
-         (concat "Please update the `epkg' package.  The installed "
-                 "version is too old for the current database scheme.")))
-       ((and (> epkg-db-version version)
-             (= epkg-db-version 5))
-        (emacsql-close epkg--db-connection)
-        (display-warning 'epkg "\
-The database repository has been recreated from
-scratch and you have to manually clone the new incarnation.
-Please see https://github.com/emacscollective/borg/issues/91." :error))
-       ((< version epkg-db-version)
-        (emacsql-close epkg--db-connection)
-        (if (yes-or-no-p (concat "The installed `epkg' version requires a new "
-                                 "database scheme.  Update database now? "))
-            (epkg-update)
-          (user-error "Aborted.  A database update is required"))))))
-  epkg--db-connection)
+  (let* ((default-directory epkg-repository)
+         (bin-file (expand-file-name "epkg.sqlite"))
+         (txt-file (expand-file-name "epkg.sql"))
+         (rev-file (expand-file-name "epkg.rev"))
+         (rev (car (process-lines "git" "rev-parse" "HEAD"))))
+    (when (or (not (file-exists-p bin-file))
+              (and (not epkg--db-prefer-binary)
+                   (or (not (file-exists-p rev-file))
+                       (not (equal (with-temp-buffer
+                                     (insert-file-contents rev-file)
+                                     (string-trim (buffer-string)))
+                                   rev)))))
+      (message "Initializing database from commit %s..." rev)
+      (delete-file bin-file)
+      (with-temp-buffer
+        (unless (zerop (call-process "sqlite3" nil t nil
+                                     bin-file
+                                     (format ".read %s" txt-file)))
+          (error "Failed to read %s: %s" txt-file (buffer-string))))
+      (with-temp-file rev-file
+        (insert rev ?\n))
+      (message "Initializing database from commit %s...done" rev))
+    bin-file))
+
+(cl-defmethod closql--db-update-schema ((db epkg-database))
+  (when (< (closql--db-get-version db)
+           (oref-default db version))
+    (epkg-update))
+  (cl-call-next-method))
 
 ;;;###autoload
 (defun epkg-update ()
@@ -186,8 +138,8 @@ In the `epkg-repository', pull the master branch and reload
 the Epkg database.  Return a connection to the updated Epkg
 database."
   (interactive)
-  (when epkg--db-connection
-    (emacsql-close epkg--db-connection))
+  (when-let ((db (epkg-db t)))
+    (emacsql-close db))
   (let ((default-directory epkg-repository))
     (message "Pulling Epkg database...")
     (epkg--call-git "pull" "--no-recurse-submodules" "origin" "master")
