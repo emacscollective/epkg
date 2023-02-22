@@ -131,9 +131,7 @@ file, does not exist yet, then first ask the user to clone it."
           (make-directory dir t)
           (let ((default-directory dir))
             (message "Cloning Epkgs repository...")
-            (epkg--call-git "clone"
-                            epkg-origin-url
-                            epkg-repository)
+            (epkg--call-git "clone" epkg-origin-url epkg-repository)
             (message "Cloning Epkgs repository...done")))
       (user-error "Aborted.  Epkg requires the Epkgs repository")))
   (unless (and epkg--db-connection (emacsql-live-p epkg--db-connection))
