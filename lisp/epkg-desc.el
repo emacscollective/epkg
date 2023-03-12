@@ -104,11 +104,11 @@ are nil stand for empty lines."
 ;;; Commands
 
 ;;;###autoload
-(defun epkg-describe-package (package)
-  "Display the full documentation of PACKAGE."
-  (interactive (list (epkg-read-package "Describe package: ")))
-  (help-setup-xref (list #'epkg-describe-package package)
-                   (called-interactively-p 'interactive))
+(defun epkg-describe-package (package &optional interactive)
+  "Display the full documentation of PACKAGE.
+\n(fn PACKAGE)"
+  (interactive (list (epkg-read-package "Describe package: ") t))
+  (help-setup-xref (list #'epkg-describe-package package) interactive)
   (with-help-window (help-buffer)
     (with-current-buffer standard-output
       (epkg-describe-package-1 (epkg package)))))
