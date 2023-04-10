@@ -9,8 +9,8 @@
 ;; Package-Requires: (
 ;;     (emacs "25.1")
 ;;     (compat "29.1.3.4")
-;;     (closql "20230220")
-;;     (emacsql "20230220")
+;;     (closql "20230407")
+;;     (emacsql "20230409")
 ;;     (llama "0.2.0"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
