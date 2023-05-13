@@ -8,7 +8,7 @@
 
 ;; Package-Requires: (
 ;;     (emacs "25.1")
-;;     (compat "29.1.3.4")
+;;     (compat "29.1.4.1")
 ;;     (closql "20230407")
 ;;     (emacsql "20230409")
 ;;     (llama "0.2.0"))
