@@ -258,7 +258,7 @@ database."
 (defclass epkg-minority-package (epkg-subrepo-package) ())
 
 (defclass epkg-wiki-package (epkg-git-package)
-  ((url-format      :initform "https://github.com:emacsmirror/emacswiki.org")
+  ((url-format      :initform "https://github.com/emacsmirror/emacswiki.org")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
    (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
 
