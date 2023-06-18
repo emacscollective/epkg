@@ -41,12 +41,12 @@
 Usage:
 
 #+name: addheader
-#+header: :var rows=\"\" :var header=\"\"
+#+header: :var header=\"\" :var rows=\"\"
 #+begin_src elisp :hlines yes :results none
   (epkg-add-org-header rows header)
 #+end_src
 
-#+begin_src emacs-lisp :post addheader(*this*,\\='(\"Column 1\" ...))
+#+begin_src emacs-lisp :post addheader(\\='(\"Column 1\" ...),*this*)
   (epkg-sql [:select ...])
 #+end_src"
   (cond
