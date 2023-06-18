@@ -36,7 +36,7 @@
            (obsolete epkg-add-org-header "Epkg 3.3.3"))
   `(epkg-add-org-header (progn ,@body) ',header))
 
-(defun epkg-add-org-header (rows header)
+(defun epkg-add-org-header (rows header &optional nocount)
   "Prepend HEADER to ROWS if the latter is non-nil.
 Usage:
 
@@ -63,8 +63,10 @@ Usage:
           (unless (equal (car row) prev)
             (cl-incf n))
           (setq prev (car row))))
-      (append (list (cons (format "%s (%s)" (car header) n)
-                          (cdr header)))
+      (append (if nocount
+                  (list header)
+                (list (cons (format "%s (%s)" (car header) n)
+                            (cdr header))))
               (list 'hline)
               (mapcar (lambda (row)
                         (if (eq row 'hline)
