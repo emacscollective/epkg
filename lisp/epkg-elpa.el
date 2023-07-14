@@ -23,7 +23,7 @@
 
 ;;; Commentary:
 
-;; Support for quering GNU Elpa, NonGNU Elpa and Melpa recipes.
+;; Support for querying GNU Elpa, NonGNU Elpa and Melpa recipes.
 
 ;;; Code:
 
