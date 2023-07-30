@@ -385,7 +385,8 @@ features listed in FEATURES.")
   (let ((packages (mapcar #'car
                           (epkg-sql [:select package :from provided
                                      :where (= feature $s1)
-                                     :order-by [(asc package)]] feature))))
+                                     :order-by [(asc package)]]
+                                    feature))))
     (if (length= packages 1)
         (car packages)
       (let ((alist (mapcar (##cons % (epkg %)) packages)))
