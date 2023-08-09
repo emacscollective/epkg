@@ -253,10 +253,6 @@ database."
 
 (defclass epkg-subtree-package (epkg-git-package) ())
 
-(defclass epkg-subrepo-package (epkg-git-package) () :abstract t)
-
-(defclass epkg-minority-package (epkg-subrepo-package) ())
-
 (defclass epkg-wiki-package (epkg-git-package)
   ((url-format      :initform "https://github.com/emacsmirror/emacswiki.org")
    (repopage-format :initform "https://github.com/emacsmirror/emacswiki.org")
