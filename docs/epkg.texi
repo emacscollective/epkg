@@ -332,7 +332,7 @@ browse the packages.
 @code{mirrored}
 
 This is an abstract type.  Unlike other abstract types it is also
-useful on the client side, e.g. when you want to list mirrored
+useful on the client side, e.g., when you want to list mirrored
 packages, but not built-in and shelved packages.
 
 Packages that are available as a repository on the Emacsmirror
@@ -468,7 +468,7 @@ functions.
 Epkg objects are implemented using Eieio, which more or less is an
 implementation of CLOS@.  It's useful to learn about that, but to get
 started you may just use @code{oref} to obtain information about a package,
-e.g. @code{(oref (epkg "magit") url)}.
+e.g., @code{(oref (epkg "magit") url)}.
 
 @defun epkg name
 This function returns an @code{epkg-package} object for the package named
