@@ -248,7 +248,7 @@ use `TYPE*' instead of just `TYPE'."
                          epkg-list-columns)))
   (tabulated-list-init-header))
 
-;; Utilities
+;;; Utilities
 
 (defun epkg-list-format-name (name)
   (list name
