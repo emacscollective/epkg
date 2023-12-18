@@ -1,4 +1,44 @@
 # -*- mode: org -*-
+* v4.0.0    UNRELEASED
+
+- Use EmacSQL v4.0.0, which automatically picks the best available
+  SQLite back-end (likely one of the new back-ends using Emacs 29.1
+  new built-in support for SQLite, or a module).
+
+- Removed support for the problematic third-party "libsqlite3"
+  back-end.  dbb2d65
+
+- For repositories that can be accessed over https or ssh, prefer the
+  https url.  If that has an optional ".git" suffix, then drop it.
+  This has the benefit that the same url can be used with Git and in
+  browsers, and makes access issues less likely.  0349dfb
+
+- Addressed many false-positives when warning that a package may have
+  been mirrored from an insecure source.  474d028 1161cb9
+
+- Use dedicated classes for packages from NonGNU Elpa and Codeberg and
+  remove some classed that are no longer used.  541344a e46cf3d 73806fa
+
+- Track NonGNU Elpa recipes and track more information from recipes of
+  all ELPAs, essentially recording complete recipes in the database.
+  40bb1f5
+
+- Track when an upstream repository has been archived or removed.
+  22426b9
+
+- Support adding a package to the database without actually mirroring
+  the respective repository in the ~emacsmirror~ organization on Github.
+  This become necessary because some authors don't want their code to
+  appear on Github.  cfdc4fc
+
+- ~epkg-read-package~ now provides the appropriate default choice in
+  ~magit-submodule-list-mode~ and falls back to provide a default based
+  on ~default-directory~.  4524f9a ce2c7b9
+
+- f4dc72d epkg-update not calling epkg-db mutually recursively
+- a7bc263 epkg-find-file-read-args: Fix secondary prompt
+- a72903c epkg-wiki-package: Fix url-format
+
 * v3.3.3    2022-02-16
 
 - Add support for the ~sqlite-builtin~ and ~sqlite-module~ backends.
