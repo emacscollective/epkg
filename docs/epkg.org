@@ -386,14 +386,14 @@ e.g., ~(oref (epkg "magit") url)~.
   This function returns an ~epkg-package~ object for the package named
   NAME.  NAME is the name of a package, a string.
 
-- Function: epkgs &optional select predicates ::
+- Function: epkgs &optional select types ::
 
   This function returns a list of ~epkg-package~ objects, column
   values or database rows.  The list is ordered by the package
   names in ascending order.
 
   If optional SELECT is non-nil, then it has to be symbol naming
-  a column in the `packages' table or a vector of such columns.
+  a column in the ~packages~ table or a vector of such columns.
   In those cases the returned value is a list of column values
   or a list of database rows.  If SELECT is nil, return a list
   of objects.
