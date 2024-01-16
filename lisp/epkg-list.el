@@ -81,18 +81,18 @@ should be `epkg-list-sort-by-stars'."
                 (choice  :tag "Sort predicate"
                          (const :tag "don't sort" nil)
                          (const :tag "default" t)
-                         (function))
-                (repeat  :tag "Properties"
-                         (list (choice :tag "Property"
-                                       (const :right-align)
-                                       (const :pad-right)
-                                       (symbol))
-                               (sexp   :tag "Value")))
+                         function)
+                (plist :tag "Properties"
+                       :key-type (choice :tag "Property"
+                                         (const :right-align)
+                                         (const :pad-right)
+                                         (symbol))
+                       :value-type (sexp :tag "Value"))
                 (choice  :tag "Slot symbol" ,@epkg--custom-slot-choices)
                 (choice  :tag "Format value"
                          (const :tag "as is" nil)
                          (const epkg-list-format-name)
-                         (function)))))
+                         function))))
 
 (defcustom epkg-list-mode-hook '(hl-line-mode)
   "Hook run after entering Epkg-List mode."
