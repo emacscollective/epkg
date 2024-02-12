@@ -487,6 +487,9 @@ to packages for which one of these predicates returns non-nil."
                 (and (derived-mode-p 'org-mode)
                      (looking-at "^[ \t]*| \\([^ ]+\\)")
                      (match-string 1))
+                (and (derived-mode-p 'magit-status-mode)
+                     (looking-at "^[ \t]*[-+]| \\([^ ]+\\)")
+                     (match-string 1))
                 (and-let* ((dir (seq-find
                                  (lambda (dir)
                                    (and (or (stringp dir)
