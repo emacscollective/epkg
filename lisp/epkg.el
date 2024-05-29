@@ -200,7 +200,7 @@ database."
    (maintainers         :closql-table maintainers)
    (melpa-recipes       :closql-class epkg-melpa-recipe)
    (gnu-elpa-recipes    :closql-class epkg-gnu-elpa-recipe)
-   (builtin-libraries   :closql-table builtin_libraries)
+   (builtin-libraries   :closql-table builtin-libraries)
    (patched             :initform nil :initarg :patched)
    (stars               :initform nil :initarg :stars)
    (downloads           :initform nil :initarg :downloads)
