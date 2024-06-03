@@ -8,10 +8,10 @@
 
 ;; Package-Requires: (
 ;;     (emacs "26.1")
-;;     (compat "29.1.4.1")
-;;     (closql "20230407")
-;;     (emacsql "20230409")
-;;     (llama "0.2.0"))
+;;     (compat "29.1.4.5")
+;;     (closql "20240601")
+;;     (emacsql "20240415")
+;;     (llama "0.3.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
