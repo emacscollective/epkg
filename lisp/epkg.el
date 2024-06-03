@@ -7,7 +7,7 @@
 ;; Keywords: tools
 
 ;; Package-Requires: (
-;;     (emacs "25.1")
+;;     (emacs "26.1")
 ;;     (compat "29.1.4.1")
 ;;     (closql "20230407")
 ;;     (emacsql "20230409")
