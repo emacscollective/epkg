@@ -513,7 +513,7 @@ to packages for which one of these predicates returns non-nil."
 
 (defalias 'epkg--file-name-split
   (if (fboundp 'file-name-split)
-       'file-name-split
+      'file-name-split
     (lambda (filename)
       (let ((components nil))
         (when (directory-name-p filename)
