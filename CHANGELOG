@@ -1,6 +1,8 @@
 # -*- mode: org -*-
 * v4.0.0    UNRELEASED
 
+- Dropped support for Emacs 25.
+
 - Use EmacSQL v4.0.0, which automatically picks the best available
   SQLite back-end (likely one of the new back-ends using Emacs 29.1
   new built-in support for SQLite, or a module).
@@ -32,12 +34,14 @@
   appear on Github.  cfdc4fc
 
 - ~epkg-read-package~ now provides the appropriate default choice in
-  ~magit-submodule-list-mode~ and falls back to provide a default based
-  on ~default-directory~.  4524f9a ce2c7b9
+  ~magit-submodule-list-mode~ and inside diffs in ~magit-status-mode~, and
+  falls back to provide a default based on ~default-directory~.  4524f9a
+  ce2c7b9 4a24534
 
 - f4dc72d epkg-update not calling epkg-db mutually recursively
 - a7bc263 epkg-find-file-read-args: Fix secondary prompt
 - a72903c epkg-wiki-package: Fix url-format
+- 7f7137e epkg-list-columns: Fix custom type  #45
 
 * v3.3.3    2022-02-16
 
