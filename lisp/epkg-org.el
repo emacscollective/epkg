@@ -98,6 +98,16 @@ Usage:
         (format "[[%s][%s]]" repopage (oref rcp repo))
       (oref rcp url))))
 
+(defmacro epkg--sql-keep (form sql &rest args)
+  `(seq-keep (lambda (row)
+               (cl-destructuring-bind
+                   ,(append (aref sql (1+ (or (seq-position sql :distinct)
+                                              (seq-position sql :select))))
+                            nil)
+                   row
+                 ,form))
+             (epkg-sql ,sql ,@args)))
+
 ;;; _
 (provide 'epkg-org)
 ;;; epkg-org.el ends here
