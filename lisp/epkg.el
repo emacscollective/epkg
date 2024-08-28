@@ -81,6 +81,8 @@ again."
    (schemata     :initform 'epkg--db-table-schemata)
    (version      :initform 11)))
 
+(defvar epkg--override-connection-class nil)
+
 (defun epkg-db (&optional livep)
   "Return the Epkg database object.
 
@@ -89,7 +91,7 @@ the connection to the database is live already.
 
 If the `epkg-repository', which contains the SQLite database
 file, does not exist yet, then first ask the user to clone it."
-  (closql-db 'epkg-database livep))
+  (closql-db 'epkg-database livep epkg--override-connection-class))
 
 (cl-defmethod closql--db-prepare-storage ((_class (subclass epkg-database)))
   (unless (file-exists-p epkg-repository)
