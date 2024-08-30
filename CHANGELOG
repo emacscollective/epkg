@@ -1,4 +1,12 @@
 # -*- mode: org -*-
+* v4.0.1    UNRELEASED
+
+- Added new variable ~epkg--override-connection-class~.  Users should
+  only very seldom have to set this, but it may come in handy when
+  investigating issues.  7f7553f
+
+- Updated tooling.
+
 * v4.0.0    2024-08-08
 
 - Dropped support for Emacs 25.
