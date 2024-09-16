@@ -236,7 +236,8 @@ are nil stand for empty lines."
 
 (defun epkg-insert-dependencies (pkg)
   (require 'tree-widget)
-  (when (oref pkg required)
+  (when (and (not (equal (oref pkg name) "emacs"))
+             (oref pkg required))
     (insert ?\n)
     (widget-create
      (list 'epkg-dependency-tree
@@ -249,7 +250,8 @@ are nil stand for empty lines."
 
 (defun epkg-insert-reverse-dependencies (pkg)
   (require 'tree-widget)
-  (when (epkg-reverse-dependencies pkg)
+  (when (and (not (equal (oref pkg name) "emacs"))
+             (epkg-reverse-dependencies pkg))
     (insert ?\n)
     (widget-create
      (list 'epkg-dependency-tree
