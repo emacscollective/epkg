@@ -68,10 +68,9 @@ This manual is for Epkg version 4.0.2.
 @node Introduction
 @chapter Introduction
 
-Epkg is a package that provides access to a local copy of the
-Emacsmirror package database.  It provides low-level functions for
-querying the database and a @code{package.el}-like user interface for
-browsing the database.
+Epkg provides access to a local copy of the Emacsmirror package
+database.  It provides low-level functions for querying the database
+and a @code{package.el}-like user interface for browsing the database.
 
 Epkg itself is not a package manager, but the closely related
 Borg @footnote{@uref{https://emacsair.me/2016/05/17/assimilate-emacs-packages-as-git-submodules}} package manager makes use of it.
