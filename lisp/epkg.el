@@ -1,18 +1,18 @@
 ;;; epkg.el --- Browse the Emacsmirror package database  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2016-2024 Jonas Bernoulli
+;; Copyright (C) 2016-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.epkg@jonas.bernoulli.dev>
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
 
-;; Package-Version: 4.0.2
+;; Package-Version: 4.0.3
 ;; Package-Requires: (
 ;;     (emacs "26.1")
-;;     (compat "30.0.0.0")
-;;     (closql "2.0.0")
-;;     (emacsql "4.0.2")
-;;     (llama "0.3.1"))
+;;     (compat "30.0.1.0")
+;;     (closql "2.1.0")
+;;     (emacsql "4.1.0")
+;;     (llama "0.4.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 

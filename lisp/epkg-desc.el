@@ -1,6 +1,6 @@
 ;;; epkg-desc.el --- Show Epkg descriptions  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2016-2024 Jonas Bernoulli
+;; Copyright (C) 2016-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.epkg@jonas.bernoulli.dev>
 ;; Homepage: https://github.com/emacscollective/epkg
