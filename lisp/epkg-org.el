@@ -56,7 +56,7 @@ Usage:
           (prev nil)
           (n 0))
       (when (numberp (car header))
-        (setq sort (apply-partially (lambda (n r) (nth n r)) (car header)))
+        (setq sort (partial #'nth (car header)))
         (setq header (cdr header)))
       (dolist (row rows)
         (unless (eq row 'hline)
