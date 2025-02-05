@@ -35,8 +35,7 @@
 (defconst epkg--custom-slot-choices
   (nconc (list (list 'const 'type)
                (list 'const 'class))
-         (mapcar (lambda (slot)
-                   (list 'const (cl--slot-descriptor-name slot)))
+         (mapcar (##list 'const (cl--slot-descriptor-name %))
                  (eieio-class-slots (cl--find-class 'epkg-package)))))
 
 (defcustom epkg-describe-package-slots
