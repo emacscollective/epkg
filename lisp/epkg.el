@@ -9,10 +9,10 @@
 ;; Package-Version: 4.0.3
 ;; Package-Requires: (
 ;;     (emacs "26.1")
-;;     (compat "30.0.1.0")
-;;     (closql "2.1.0")
+;;     (compat "30.0.2.0")
+;;     (closql "2.2.0")
 ;;     (emacsql "4.1.0")
-;;     (llama "0.4.1"))
+;;     (llama "0.6.0"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
