@@ -21,6 +21,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
+;;; Commentary:
+
+;; The library implements auxiliary functions and commands.
+
 ;;; Code:
 
 (require 'epkg)

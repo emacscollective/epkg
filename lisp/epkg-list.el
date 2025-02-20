@@ -24,6 +24,10 @@
 ;; This file contains code taken from GNU Emacs, which is
 ;; Copyright (C) 1976-2023 Free Software Foundation, Inc.
 
+;;; Commentary:
+
+;; The library implements support for listing packages in a buffer.
+
 ;;; Code:
 
 (require 'epkg)
