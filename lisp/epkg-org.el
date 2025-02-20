@@ -110,4 +110,9 @@ Usage:
 
 ;;; _
 (provide 'epkg-org)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg-org.el ends here

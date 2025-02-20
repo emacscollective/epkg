@@ -295,4 +295,9 @@ use `TYPE*' instead of just `TYPE'."
 
 ;;; _
 (provide 'epkg-list)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg-list.el ends here

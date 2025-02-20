@@ -97,4 +97,9 @@ inside the super-repository specified by `epkg-repository'."
 
 ;;; _
 (provide 'epkg-utils)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg-utils.el ends here

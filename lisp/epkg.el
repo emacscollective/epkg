@@ -539,4 +539,9 @@ to packages for which one of these predicates returns non-nil."
 (require 'epkg-list)
 (require 'epkg-utils)
 (require 'epkg-elpa)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg.el ends here

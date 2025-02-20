@@ -176,4 +176,9 @@
 
 ;;; _
 (provide 'epkg-schemata)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg-schemata.el ends here

@@ -307,4 +307,9 @@ NAME is the name of a package, a string.  ELPA is one of `gnu',
 
 ;;; _
 (provide 'epkg-elpa)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg-elpa.el ends here

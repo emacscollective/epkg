@@ -403,5 +403,11 @@ are nil stand for empty lines."
             (when features (insert ", "))))
       (_  (widget-default-format-handler widget escape)))))
 
+;;; _
 (provide 'epkg-desc)
+;; Local Variables:
+;; read-symbol-shorthands: (
+;;   ("partial" . "llama--left-apply-partially")
+;;   ("rpartial" . "llama--right-apply-partially"))
+;; End:
 ;;; epkg-desc.el ends here
