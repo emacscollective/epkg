@@ -6,7 +6,7 @@
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
 
-;; Package-Version: 4.0.3
+;; Package-Version: 4.0.4
 ;; Package-Requires: (
 ;;     (emacs "26.1")
 ;;     (compat "30.0.2.0")
