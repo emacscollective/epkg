@@ -8,7 +8,7 @@
 
 ;; Package-Version: 4.0.4
 ;; Package-Requires: (
-;;     (emacs "26.1")
+;;     (emacs "28.1")
 ;;     (compat "30.0.2.0")
 ;;     (closql "2.2.1")
 ;;     (emacsql "4.2.0")
