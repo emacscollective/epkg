@@ -36,13 +36,14 @@
 
 (defconst epkg--elpa-recipe-slots
   '( url core
-     main-file lisp-dir ignored-files excludes renames
+     lisp-dir ignored-files excludes renames
      doc readme news
-     shell-command make texinfo
+     shell-command make
      auto-sync merge branch release-branch rolling-release version-map
-     maintainer ; used for a single package
-     manual-sync ; whether the package is synced manually
-     ))
+     ;; Removed by upstream:
+     main-file texinfo
+     ;; Unused, see `emir-gelpa--import-recipe':
+     doc-files maintainer manual-sync))
 
 ;;; GNU Elpa
 
