@@ -7,7 +7,7 @@
 #+texinfo_dir_category: Emacs
 #+texinfo_dir_title: Epkg: (epkg).
 #+texinfo_dir_desc: Browse the Emacsmirror's database
-#+subtitle: for version 4.0.5
+#+subtitle: for version 4.0.6
 
 #+setupfile: .orgconfig
 
@@ -15,7 +15,7 @@ With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of ~package.el~.
 
 #+texinfo: @noindent
-This manual is for Epkg version 4.0.5.
+This manual is for Epkg version 4.0.6.
 
 #+texinfo: @insertcopying
 :END:

@@ -1,4 +1,8 @@
 # -*- mode: org -*-
+* v4.0.6    2025-04-22
+
+- Adapt to changes in [Non]GNU ELPA recipe format.
+
 * v4.0.5    2025-03-02
 
 - At least Emacs 28.1 is required now.
