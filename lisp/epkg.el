@@ -6,13 +6,13 @@
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
 
-;; Package-Version: 4.0.6
+;; Package-Version: 4.0.7
 ;; Package-Requires: (
 ;;     (emacs "28.1")
-;;     (compat "30.1.0.0")
-;;     (closql "2.2.1")
-;;     (emacsql "4.3.0")
-;;     (llama "0.6.2"))
+;;     (compat "30.1")
+;;     (closql "2.2.2")
+;;     (emacsql "4.3.1")
+;;     (llama "0.6.3"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
