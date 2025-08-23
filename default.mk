@@ -16,6 +16,7 @@ DEPS += compat
 DEPS += emacsql
 DEPS += llama
 # Optional:
+DEPS += cond-let
 DEPS += magit/lisp
 
 DOMAIN      ?= emacsmirror.net
