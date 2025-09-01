@@ -8,11 +8,11 @@
 
 ;; Package-Version: 4.0.7
 ;; Package-Requires: (
-;;     (emacs "28.1")
+;;     (emacs  "28.1")
 ;;     (compat "30.1")
-;;     (closql "2.2.2")
-;;     (emacsql "4.3.1")
-;;     (llama "0.6.3"))
+;;     (closql  "2.3")
+;;     (emacsql "4.3")
+;;     (llama   "1.0"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
