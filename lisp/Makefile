@@ -1,9 +1,9 @@
 -include ../config.mk
 include ../default.mk
 
-lisp: $(ELCS) loaddefs check-declare
+lisp: $(ELCS) autoloads check-declare
 
-loaddefs: $(PKG)-autoloads.el
+autoloads: $(PKG)-autoloads.el
 
 $(PKG).elc:
 $(PKG)-desc.elc: $(PKG).elc
@@ -30,7 +30,7 @@ clean:
 
 $(PKG)-autoloads.el: $(ELS)
 	@printf " Creating $@\n"
-	@$(EMACS) -Q --batch -l autoload -l cl-lib --eval "\
+	@$(EMACS) -Q --batch -l autoload --eval "\
 (let* ((file (expand-file-name \"$@\"))\
        (generated-autoload-file file)\
        (coding-system-for-write 'utf-8-emacs-unix)\
