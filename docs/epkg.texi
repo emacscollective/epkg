@@ -44,10 +44,11 @@ General Public License for more details.
 @node Top
 @top Epkg User Manual
 
+@paragraphindent none
+
 With Epkg you can browse the Emacsmirror package database using an
 interface similar to that of @code{package.el}.
 
-@noindent
 This manual is for Epkg version 4.1.0.
 
 @insertcopying
