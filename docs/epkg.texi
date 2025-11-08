@@ -185,8 +185,8 @@ HEADER is the string displayed in the header.
 @item
 WIDTH is the width of the column.
 @item
-SORT is a boolean or a function.  If it is t, then the column can
-be sorted alphanumerically, if it is nil then it can not.  If it
+SORT is a boolean or a function.  If it is @code{t}, then the column can
+be sorted alphanumerically, if it is @code{nil} then it can not.  If it
 is a function then that is used as @code{sort}'s PREDICATE@.
 
 @item
@@ -300,7 +300,7 @@ displaying information about an Epkg package in a help buffer.
 Each element of the list can be a function, a slot symbol, or @code{nil}.
 Functions are called with one argument, the Epkg object, and should
 insert a representation of the value at point.  Raw slot symbols
-cause its non-nil value to be inserted as-is.  If a slot's value is
+cause its non-@code{nil} value to be inserted as-is.  If a slot's value is
 @code{nil}, then nothing is inserted.  Elements that are @code{nil} stand for
 empty lines.
 @end defopt
@@ -480,13 +480,13 @@ This function returns a list of @code{epkg-package} objects, column
 values or database rows.  The list is ordered by the package
 names in ascending order.
 
-If optional SELECT is non-nil, then it has to be symbol naming
+If optional SELECT is non-@code{nil}, then it has to be symbol naming
 a column in the @code{packages} table or a vector of such columns.
 In those cases the returned value is a list of column values
-or a list of database rows.  If SELECT is nil, return a list
+or a list of database rows.  If SELECT is @code{nil}, return a list
 of objects.
 
-If optional TYPES is non-nil, then it has to be a vector of
+If optional TYPES is non-@code{nil}, then it has to be a vector of
 package types, such as @code{github}.  To include subtypes, add an
 asterisk to the symbol name, e.g., @code{mirrored*}.  For backward
 compatibility, TYPES can also be a list of predicate functions
@@ -520,7 +520,7 @@ PACKAGE@.  PACKAGE is an @code{epkg-package} object or a package name, a
 string.
 
 Bundled features are excluded from the returned list unless
-optional INCLUDE-BUNDLED is non-nil.
+optional INCLUDE-BUNDLED is non-@code{nil}.
 @end defun
 
 @defun epkg-required package
@@ -573,7 +573,7 @@ because the latter is longer and an implementation detail.
 @defun epkg-package-types subtypes
 This function returns a list of all package types.
 
-If optional SUBTYPES is non-nil, then it also returns symbols of the
+If optional SUBTYPES is non-@code{nil}, then it also returns symbols of the
 form @code{TYPE*}, which stands for "@code{TYPE} and its subtypes".
 @end defun
 
@@ -581,8 +581,8 @@ form @code{TYPE*}, which stands for "@code{TYPE} and its subtypes".
 This function reads an Epkg type in the minibuffer and returns it as
 a symbol.
 
-If optional DEFAULT is non-nil, then that is offered as default
-choice.  If optional CHILDP is non-nil, then entries of the form
+If optional DEFAULT is non-@code{nil}, then that is offered as default
+choice.  If optional CHILDP is non-@code{nil}, then entries of the form
 @code{TYPE*}, which stands for "@code{TYPE} and its subtypes", are also offered
 as completion candidates.
 @end defun
@@ -591,7 +591,7 @@ as completion candidates.
 This function reads the name of an Epkg package in the minibuffer
 and returns it as a string.
 
-Optional DEFAULT, if non-nil, is offered as default choice.
+Optional DEFAULT, if non-@code{nil}, is offered as default choice.
 @end defun
 
 @node Querying the Database
