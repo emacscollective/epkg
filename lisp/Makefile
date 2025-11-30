@@ -15,12 +15,11 @@ $(PKG)-utils.elc: $(PKG).elc
 
 %.elc: %.el
 	@printf "Compiling $<\n"
-	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) -f batch-byte-compile $<
+	@$(EMACS_BATCH) --funcall batch-byte-compile $<
 
 check-declare:
 	@printf " Checking function declarations\n"
-	@$(EMACS) -Q --batch $(EMACS_ARGS) $(LOAD_PATH) \
-	--eval "(check-declare-directory default-directory)"
+	@$(EMACS_BATCH) --eval "(check-declare-directory default-directory)"
 
 CLEAN = $(ELCS) $(PKG)-autoloads.el
 
@@ -30,7 +29,7 @@ clean:
 
 $(PKG)-autoloads.el: $(ELS)
 	@printf " Creating $@\n"
-	@$(EMACS) -Q --batch -l autoload --eval "\
+	@$(EMACS_BATCH) --load autoload --eval "\
 (let* ((file (expand-file-name \"$@\"))\
        (generated-autoload-file file)\
        (coding-system-for-write 'utf-8-emacs-unix)\
