@@ -50,31 +50,31 @@ Usage:
   (epkg-sql [:select ...])
 #+end_src"
   (cond
-   ((equal rows "") nil)
-   (rows
-    (let ((sort nil)
-          (prev nil)
-          (n 0))
-      (when (numberp (car header))
-        (setq sort (partial #'nth (car header)))
-        (setq header (cdr header)))
-      (dolist (row rows)
-        (unless (eq row 'hline)
-          (unless (equal (car row) prev)
-            (cl-incf n))
-          (setq prev (car row))))
-      (append (if nocount
-                  (list header)
-                (list (cons (format "%s (%s)" (car header) n)
-                            (cdr header))))
-              (list 'hline)
-              (mapcar (lambda (row)
-                        (if (eq row 'hline)
-                            'hline
-                          (mapcar (##or % "") row)))
-                      (if sort
-                          (cl-sort rows #'string< :key sort)
-                        rows)))))))
+    ((equal rows "") nil)
+    (rows
+     (let ((sort nil)
+           (prev nil)
+           (n 0))
+       (when (numberp (car header))
+         (setq sort (partial #'nth (car header)))
+         (setq header (cdr header)))
+       (dolist (row rows)
+         (unless (eq row 'hline)
+           (unless (equal (car row) prev)
+             (cl-incf n))
+           (setq prev (car row))))
+       (append (if nocount
+                   (list header)
+                 (list (cons (format "%s (%s)" (car header) n)
+                             (cdr header))))
+               (list 'hline)
+               (mapcar (lambda (row)
+                         (if (eq row 'hline)
+                             'hline
+                           (mapcar (##or % "") row)))
+                       (if sort
+                           (cl-sort rows #'string< :key sort)
+                         rows)))))))
 
 (defun epkg-org-link (name)
   (let ((pkg (epkg name)))

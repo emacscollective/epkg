@@ -279,34 +279,34 @@ are nil stand for empty lines."
 (defun epkg-insert-unsafe-warning (pkg)
   (let ((url (oref pkg url)))
     (cond
-     ((epkg-wiki-package-p pkg)
-      (insert
-       (propertize
-        (concat
-         "WARNING: Anyone can edit any packages on the Emacswiki by\n"
-         "         design, making it trivial to inject malicious code.\n\n")
-        'face 'error)))
-     ((and (epkg-shelved-package-p pkg)
-           (or (not url)
-               (not (or (string-prefix-p "git@" url)
-                        (string-prefix-p "https://" url)))
-               (string-match-p
-                "github.com[:/]emacs\\(attic\\|janitor\\|mirror\\|orphanage\\)"
-                url)))
-      (insert
-       (propertize
-        (concat
-         "WARNING: This shelved package might have been imported over an\n"
-         "         insecure connection or from an insecure source before\n"
-         "         it was moved to the Emacsattic.\n\n")
-        'face 'warning)))
-     ((and url (string-match-p "\\`\\(http\\|git\\)://" url))
-      (insert
-       (propertize
-        (concat
-         "WARNING: This package is being mirrored over an insecure\n"
-         "         connection.  An attacker could inject malicious code.\n\n")
-        'face 'warning))))))
+      ((epkg-wiki-package-p pkg)
+       (insert
+        (propertize
+         (concat
+          "WARNING: Anyone can edit any packages on the Emacswiki by\n"
+          "         design, making it trivial to inject malicious code.\n\n")
+         'face 'error)))
+      ((and (epkg-shelved-package-p pkg)
+            (or (not url)
+                (not (or (string-prefix-p "git@" url)
+                         (string-prefix-p "https://" url)))
+                (string-match-p
+                 "github.com[:/]emacs\\(attic\\|janitor\\|mirror\\|orphanage\\)"
+                 url)))
+       (insert
+        (propertize
+         (concat
+          "WARNING: This shelved package might have been imported over an\n"
+          "         insecure connection or from an insecure source before\n"
+          "         it was moved to the Emacsattic.\n\n")
+         'face 'warning)))
+      ((and url (string-match-p "\\`\\(http\\|git\\)://" url))
+       (insert
+        (propertize
+         (concat
+          "WARNING: This package is being mirrored over an insecure\n"
+          "         connection.  An attacker could inject malicious code.\n\n")
+         'face 'warning))))))
 
 ;;; Buttons
 
