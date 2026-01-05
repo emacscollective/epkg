@@ -267,13 +267,13 @@ database."
    (homepage-format :initform "https://emacswiki.org/emacs/download/%n.el")))
 
 (defclass epkg-nongnu-elpa-package (epkg-git-package)
-  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/nongnu.git")
-   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/nongnu.git/log/?h=elpa/%n")
+  ((url-format      :initform "https://https.git.savannah.gnu.org/git/elpa/nongnu.git")
+   (repopage-format :initform "https://cgit.git.savannah.gnu.org/cgit/elpa/nongnu.git/?h=elpa/%n")
    (homepage-format :initform "https://elpa.nongnu.org/nongnu/%n.html")))
 
 (defclass epkg-gnu-elpa-package (epkg-git-package)
-  ((url-format      :initform "https://git.savannah.gnu.org/git/emacs/elpa.git")
-   (repopage-format :initform "https://git.savannah.gnu.org/cgit/emacs/elpa.git/log/?h=externals/%n")
+  ((url-format      :initform "https://https.git.savannah.gnu.org/git/elpa/gnu.git")
+   (repopage-format :initform "https://cgit.git.savannah.gnu.org/cgit/elpa/gnu.git/?h=externals/%n")
    (homepage-format :initform "https://elpa.gnu.org/packages/%n.html")))
 
 (defclass epkg-hg-package (epkg-gitish-package) ())
