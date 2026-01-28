@@ -1,6 +1,6 @@
 * Browse the Emacsmirror package database
 
-This package provides access to a local copy of the [[https://emacsmirror.net][Emacsmirror]]
+This package provides access to a local copy of the [[https://emacsmirror.org][Emacsmirror]]
 package database.  It provides low-level functions for querying the
 database and a ~package.el~-like user interface for browsing the
 available packages.
@@ -15,7 +15,7 @@ One primary purpose of the Emacsmirror is to provide a comprehensive
 list of available Emacs packages, including packages which have gone
 out of fashion (but might later prove to be useful still).
 
-For more information see the [[https://emacsmirror.net/manual/epkg][manual]] and the [[https://emacsmirror.net][Emacsmirror]].
+For more information see the [[https://docs.emacsmirror.org/epkg][manual]] and the [[https://emacsmirror.org][Emacsmirror]].
 
 #+html: <br><br>
 #+html: <a href="https://github.com/emacscollective/epkg/actions/workflows/compile.yml"><img alt="Compile" src="https://github.com/emacscollective/epkg/actions/workflows/compile.yml/badge.svg"/></a>
