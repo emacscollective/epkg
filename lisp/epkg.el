@@ -250,14 +250,14 @@ database."
 (defclass epkg-savannah-package (epkg-git-package) () :abstract t)
 
 (defclass epkg-gnu-package (epkg-savannah-package)
-  ((url-format      :initform "https://git.savannah.gnu.org/git/%n.git")
-   (repopage-format :initform "https://git.savannah.gnu.org/cgit/%n.git")
-   (homepage-format :initform "https://savannah.gnu.org/projects/%n")))
+  ((url-format      :initform "https://git.savannah.gnu.org/git/%r.git")
+   (repopage-format :initform "https://git.savannah.gnu.org/cgit/%r.git")
+   (homepage-format :initform "https://savannah.gnu.org/projects/%r")))
 
 (defclass epkg-nongnu-package (epkg-savannah-package)
-  ((url-format      :initform "https://git.savannah.nongnu.org/git/%n.git")
-   (repopage-format :initform "https://git.savannah.nongnu.org/cgit/%n.git")
-   (homepage-format :initform "https://savannah.nongnu.org/projects/%n")))
+  ((url-format      :initform "https://git.savannah.nongnu.org/git/%r.git")
+   (repopage-format :initform "https://git.savannah.nongnu.org/cgit/%r.git")
+   (homepage-format :initform "https://savannah.nongnu.org/projects/%r")))
 
 (defclass epkg-subtree-package (epkg-git-package) ())
 
