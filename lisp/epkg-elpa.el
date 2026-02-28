@@ -43,7 +43,7 @@
      ;; Removed by upstream:
      main-file texinfo
      ;; Unused, see `emir-gelpa--import-recipe':
-     doc-files maintainer manual-sync))
+     doc-files maintainer manual-sync pdf))
 
 ;;; GNU Elpa
 
