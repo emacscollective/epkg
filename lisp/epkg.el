@@ -512,6 +512,14 @@ to packages for which one of these predicates returns non-nil."
     (completing-read prompt choices nil t nil 'epkg-package-history
                      (and default (member default choices) default))))
 
+(defun epkg--borg-clone-url (pkg)
+  (cl-typecase pkg
+    ((or epkg-subtree-package
+         epkg-wiki-package)
+     (oref pkg mirror-url))
+    (epkg-git-package (oref pkg url))
+    (epkg-package (oref pkg mirror-url))))
+
 ;;; _
 (provide 'epkg)
 (require 'epkg-desc)

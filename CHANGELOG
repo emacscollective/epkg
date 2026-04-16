@@ -1,4 +1,8 @@
 # -*- mode: org -*-
+* v4.2.0    UNRELEASED
+
+- Added ~epkg--borg-clone-url~ for use in Borg.
+
 * v4.1.4    2026-03-01
 
 Thoughts and whitespace.
