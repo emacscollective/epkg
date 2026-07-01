@@ -1,4 +1,10 @@
 # -*- mode: org -*-
+* v4.2.2    2026-07-01
+
+- ~epkg-list-packages-by-author~ is now faster.
+
+- ~epkg-list-package-of-type~ now excludes orphaned packages by default.
+
 * v4.2.1    2026-06-01
 
 - Began using Cond-Let.
