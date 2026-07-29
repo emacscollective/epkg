@@ -57,6 +57,7 @@
     downloads
     epkg-insert-authors
     epkg-insert-maintainers
+    epkg-insert-assisted-by
     nil
     epkg-insert-provided
     epkg-insert-keywords
@@ -147,10 +148,10 @@ are nil stand for empty lines."
              (epkg--insert-slot slot)
              (insert (format "%s\n" value))))))))
 
-(defun epkg--insert-slot (slot)
+(defun epkg--insert-slot (slot &optional face)
   (insert (format (format "%%%ss: " epkg-describe-package-slots-width)
                   (propertize (capitalize (symbol-name slot))
-                              'face 'epkg-help-slot))))
+                              'face (or face 'epkg-help-slot)))))
 
 (defun epkg-insert-person (value)
   (indent-to (+ epkg-describe-package-slots-width 2))
@@ -175,6 +176,11 @@ are nil stand for empty lines."
   (when$ (oref pkg maintainers)
     (epkg--insert-slot 'maintainers)
     (mapc #'epkg-insert-person $)))
+
+(defun epkg-insert-assisted-by (pkg)
+  (when$ (oref pkg assisted-by)
+    (epkg--insert-slot 'assisted-by 'error)
+    (insert $ ?\n)))
 
 (defun epkg-insert-keywords (pkg)
   (when-let ((keywords (oref pkg keywords)))

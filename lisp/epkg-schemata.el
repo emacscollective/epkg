@@ -70,6 +70,7 @@
                         ;; branch
                         ;; (nongnu-elpa-recipes :default eieio-unbound)
                         ;; (mirrored :default t)
+                        ;; assisted-by
                         ])
     (libraries         [(package :not-null)
                         (library :not-null)]
@@ -172,6 +173,7 @@
       (emacsql db add-column 'branch            nil)
       (emacsql db add-column 'nongnu-elpa-recipes 'eieio-unbound)
       (emacsql db add-column 'mirrored          t)
+      (emacsql db add-column 'assisted-by       t)
       )))
 
 ;;; _

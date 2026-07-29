@@ -81,7 +81,7 @@ again."
   ((name         :initform "Epkg")
    (object-class :initform 'epkg-package)
    (schemata     :initform 'epkg--db-table-schemata)
-   (version      :initform 11)))
+   (version      :initform 12)))
 
 (defvar epkg--override-connection-class nil)
 
@@ -213,6 +213,7 @@ database."
    (branch              :initform nil)
    (nongnu-elpa-recipes :closql-class epkg-nongnu-elpa-recipe)
    (mirrored            :initform t)
+   (assisted-by         :initform t)
    )
   :abstract t)
 
