@@ -1,4 +1,8 @@
 # -*- mode: org -*-
+* v4.2.3    2026-08-01
+
+- Started tracking value of ~Assisted-by~ library header.
+
 * v4.2.2    2026-07-01
 
 - ~epkg-list-packages-by-author~ is now faster.
