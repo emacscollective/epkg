@@ -61,6 +61,10 @@
     nil
     epkg-insert-provided
     epkg-insert-keywords
+    nil
+    hash
+    url
+    epkg-insert-melpa-info
     epkg-insert-commentary
     epkg-insert-dependencies
     epkg-insert-reverse-dependencies)
