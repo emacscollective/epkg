@@ -46,7 +46,6 @@
 (require 'cond-let)
 (require 'llama)
 (require 'seq)
-(require 'subr-x)
 
 (require 'closql)
 
