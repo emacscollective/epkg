@@ -22,3 +22,4 @@ For more information see the [[https://docs.emacsmirror.org/epkg][manual]] and t
 #+html: <a href="https://github.com/emacscollective/epkg/actions/workflows/manual.yml"><img alt="Manual" src="https://github.com/emacscollective/epkg/actions/workflows/manual.yml/badge.svg"/></a>
 #+html: <a href="https://snapshots.melpa.org/#/epkg"><img alt="MELPA Snapshots" src="https://snapshots.melpa.org/packages/epkg-badge.svg"/></a>
 #+html: <a href="https://releases.melpa.org/#/epkg"><img alt="MELPA Releases" src="https://releases.melpa.org/packages/epkg-badge.svg"/></a>
+#+html: <a href="https://emacsair.me/human"><img alt="human made" src="https://emacsair.me/assets/badges/human.svg"/></a>
