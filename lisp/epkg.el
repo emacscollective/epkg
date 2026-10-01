@@ -6,10 +6,10 @@
 ;; Homepage: https://github.com/emacscollective/epkg
 ;; Keywords: tools
 
-;; Package-Version: 4.2.4
+;; Package-Version: 4.2.5
 ;; Package-Requires: (
 ;;     (emacs   "28.1")
-;;     (compat  "31.0")
+;;     (compat  "31.1")
 ;;     (closql   "2.4")
 ;;     (cond-let "1.1")
 ;;     (emacsql  "4.4")
