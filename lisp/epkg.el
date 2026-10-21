@@ -96,7 +96,7 @@ file, does not exist yet, then first ask the user to clone it."
 (cl-defmethod closql--db-prepare-storage ((_class (subclass epkg-database)))
   (unless (file-exists-p epkg-repository)
     (if (y-or-n-p (format "Clone %s to %s? " epkg-origin-url epkg-repository))
-        (let ((dir (file-name-directory (directory-file-name epkg-repository))))
+        (let ((dir (file-name-parent-directory epkg-repository)))
           (make-directory dir t)
           (let ((default-directory dir))
             (message "Cloning Epkgs repository...")
